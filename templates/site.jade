@@ -1,0 +1,8 @@
+extends base.jade
+block title
+  title #{data.title}
+  
+block content
+  div!=markdown(data.content)
+  //- h1 some sample content here
+  //- p #{data.content}

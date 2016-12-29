@@ -1,0 +1,16 @@
+{
+  "name": "my_site",
+  "version": "1.0.0",
+  "description": "my personal site",
+  "main": "gen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Qin Yongliang",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "commonmark": "^0.27.0",
+    "jade": "^1.11.0",
+    "moment": "^2.17.1"
+  }
+}
