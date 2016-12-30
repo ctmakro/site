@@ -1,62 +1,99 @@
 require('./global_env.js')
 
-const fs = require('fs');
+const fs = require('fs.extra');
 var jr = require('./jaderender')
+var colors = require('colors')
 
-var print = console.log
+// var print = console.log
+var range = (n)=>{var a =[];for(var i=0;i<n;i++){a.push(i)}return a}
 var pr = __projectroot
 
 var contentdir = pr + './content/'
-var template_path = pr + './templates/site.jade'
-var destdir = pr + './generated/'
 
-function get_content_files(){
+function get_files_in(contentdir){
   return fs.readdirSync(contentdir)
 }
 
-function gen(data){
-  print('generating HTML...')
-  var html = jr(template_path,data)
-  print('generated. length:',html.length)
+function indir(pathpad,printpad){
+  printpad = printpad||['']
 
-  return html
-}
-
-function load_data_from_file(fname){
-  f = fs.readFileSync(`${contentdir}${fname}`,'utf8')
-  return {
-    filename:fname,
-    content:f
-  }
-}
-
-function loop(){
-  print('scanning dir...')
-  cf = get_content_files()
-
-  print('we got',cf.length,'files to process')
-  for(i in cf){
-    fname = cf[i]
-    print('----------------',i)
-
-    print('loading from',fname)
-    data = load_data_from_file(fname)
-
-    match = data.content.match(/!(.*)/)
-    if(match){
-      data.content = data.content.slice(match[0].length)
+  var print = function(){
+    var a = printpad.join('')
+    process.stdout.write(a.green)
+    var args = []
+    for(var i in range(arguments.length)){
+      args.push(arguments[i])
     }
-    data.title = match?match[1]:'no title'
-    print(`title is:"${data.title}"`)
+    console.log.apply(this,args)
+  }
 
-    html = gen(data)
+  var push = str=>printpad.push(str)
+  var pop = ()=>printpad.pop()
 
-    fname = fname.split('.')[0]+'.html'
+  push('> ')
 
-    print(`writing file ${fname}...`)
-    fs.writeFileSync(destdir+fname,html)
-    print('file written.')
+  pathpad+='/'
+  var workingdir = contentdir +'/'+ pathpad
+
+  var env={}
+  env.print = print; env.push = push
+  env.pop = pop
+  env.workingdir = workingdir
+  env.pathpad = pathpad
+
+  print('into',pathpad,'...')
+  var cf = get_files_in(workingdir)
+
+  print('got',cf.length,'file/folders to process')
+  print('they are',cf.toString().yellow)
+
+  push('- ')
+
+  for(var i=0;i<cf.length;i++){
+    var fname = cf[i]
+    env.fname = fname
+    print('- item',i,(pathpad+fname).cyan)
+
+    if(fs.lstatSync(workingdir+fname).isDirectory()){
+      push('|')
+      indir(pathpad+fname,printpad)
+      pop()
+    }else{
+      //is file
+
+      var ext = fname.split('.')
+      var fname_without_ext = ext[0]
+      ext = ext.length==1?'':ext.pop()
+
+      env.ext = ext
+      env.fname_without_ext = fname_without_ext
+      env.printpad = printpad
+      forfile(env,ext)
+    }
+  }
+  pop()
+  pop()
+
+  //
+}
+
+var filehandlers={}
+function register(ext,processor){
+  filehandlers[ext] = processor
+}
+
+function forfile(env,ext){
+  if(filehandlers[ext]){
+    filehandlers[ext].call(env,function(){
+      for(i in env){
+        this[i]=env[i]
+      }
+    })
+  }else{
+    env.print('ignoring')
   }
 }
 
-loop()
+require('./handling')(register)
+
+indir('')
