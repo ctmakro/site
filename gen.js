@@ -42,7 +42,7 @@ function loop(){
     print('loading from',fname)
     data = load_data_from_file(fname)
 
-    match = data.content.match(/@(.*)/)
+    match = data.content.match(/!(.*)/)
     if(match){
       data.content = data.content.slice(match[0].length)
     }
