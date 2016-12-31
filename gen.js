@@ -1,103 +1,163 @@
 require('./global_env.js')
-
+var util = require('util');
 const fs = require('fs.extra');
 var jr = require('./jaderender')
 var colors = require('colors')
 
-// var print = console.log
+var print = console.log
 var range = (n)=>{var a =[];for(var i=0;i<n;i++){a.push(i)}return a}
 var pr = __projectroot
 
-var contentdir = pr + './content/'
-
-function get_files_in(contentdir){
-  return fs.readdirSync(contentdir)
+function jade(data){
+  var html = jr(templdir,data)
+  return html
 }
 
-function indir(pathpad,depth,printpad){
+var contentdir = pr + './content/'
+var destdir = pr + './generated/'
+destdir = process.argv[2]||destdir
+
+var templdir = pr + './templates/site.jade'
+
+function readfile(fpath){
+  f = fs.readFileSync(fpath,'utf8')
+  return f
+}
+function savefile(fpath,string){
+  fs.writeFileSync(fpath,string)
+}
+
+function listdir(path){
+  return fs.readdirSync(path)
+}
+
+function build_tree_from(pathpad,depth){
   depth = depth||0
-  printpad = printpad||['']
-
-  var print = function(){
-    var a = printpad.join('')
-    process.stdout.write(a.green)
-    var args = []
-    for(var i in range(arguments.length)){
-      args.push(arguments[i])
-    }
-    console.log.apply(this,args)
+  var tree = {
+    path:pathpad,
+    nodes:[],
   }
-
-  var push = str=>printpad.push(str)
-  var pop = ()=>printpad.pop()
-
-  push('> ')
-
   pathpad+='/'
   var workingdir = contentdir +'/'+ pathpad
-
-  var env={}
-  env.print = print; env.push = push
-  env.pop = pop
-  env.workingdir = workingdir
-  env.pathpad = pathpad
-
-  env.relative_root = '../'.repeat(depth)
-
-  print('into',pathpad,'...')
-  var cf = get_files_in(workingdir)
-
-  print('got',cf.length,'file/folders to process')
-  print('they are',cf.toString().yellow)
-
-  push('- ')
+  var cf = listdir(workingdir)
 
   for(var i=0;i<cf.length;i++){
     var fname = cf[i]
-    env.fname = fname
-    print('- item',i,(pathpad+fname).cyan)
-
     if(fs.lstatSync(workingdir+fname).isDirectory()){
-      push('|')
-      indir(pathpad+fname,depth+1,printpad)
-      pop()
+      var subtree = build_tree_from(pathpad+fname,depth+1)
+      tree.nodes.push(subtree)
     }else{
-      //is file
-
       var ext = fname.split('.')
       var fname_without_ext = ext[0]
       ext = ext.length==1?'':ext.pop()
 
-      env.ext = ext
-      env.fname_without_ext = fname_without_ext
-      env.printpad = printpad
-
-      forfile(env,ext)
+      var leaf = {}
+      leaf.workingdir = workingdir
+      leaf.pathpad = pathpad
+      leaf.depth = depth
+      leaf.fname = fname
+      leaf.fname_without_ext = fname_without_ext
+      leaf.ext = ext
+      tree.nodes.push(leaf);
     }
   }
-  pop()
-  pop()
-
-  //
+  return tree
 }
 
-var filehandlers={}
-function register(ext,processor){
-  filehandlers[ext] = processor
-}
-
-function forfile(env,ext){
-  if(filehandlers[ext]){
-    filehandlers[ext].call(env,function(){
-      for(i in env){
-        this[i]=env[i]
-      }
-    })
-  }else{
-    env.print('ignoring')
+var treewalker = (tree,filter)=>{
+  var newtree = {
+    path:tree.path,
+    nodes:[]
   }
+  newtree.nodes = tree.nodes.map(node=>{
+    if(node.ext){
+      //file node object
+      return filter(node)
+    }else{
+      // got subtree as node
+      return treewalker(node,filter)
+    }
+  })
+  .filter(n=>n!==null&&n!==undefined)
+  return newtree
 }
 
-require('./handling')(register)
+var ui = o=>util.inspect(o,{ depth: null })
 
-indir('')
+print('building tree...'.cyan)
+var filetree = build_tree_from('')
+
+print('filetree:'.red, ui(filetree))
+
+var process_markdown =(leaf)=>{
+  var content = readfile(leaf.workingdir+leaf.fname)
+  var match = content.match(/!(.*)/)
+  if(match){
+    content = content.slice(match[0].length)
+  }
+
+  var title = match?match[1]:'no title'
+  print(`title is:`,title.red)
+
+  var extract_plot = function(content){
+    var plot = require('./plot.js')
+
+    var plotcounter = 0
+    // extract plot commands
+    print('extracting plots...')
+
+    content = content.replace(/<plot([\s\S]*?)\/>/gi,function(matching,p1,offset){
+      // for each replaced plot, generate one svg
+      var suffix = (plotcounter++).toString()
+      var destfilename = leaf.fname_without_ext+'_plot_'+suffix+'.svg'
+      print('generating',destfilename.cyan)
+      var command = p1
+      plot.intosvg(command, destdir+leaf.pathpad+destfilename)
+
+      var tag = 'plot '+suffix
+      return `<img class="plot" src="${destfilename}" title="${tag}" />`
+    })
+
+    return content
+  }
+
+  fs.mkdirpSync(destdir+leaf.pathpad)
+
+  content = extract_plot(content)
+
+  leaf.content = content
+  leaf.title = title
+  leaf.relative_rendered_path = leaf.pathpad+leaf.fname_without_ext+'.html'
+  leaf.relative_root = '../'.repeat(leaf.depth)
+
+  print('generating HTML...')
+  var html = jade(leaf)
+  print('generated. length:',html.length)
+
+  leaf.output_fname = leaf.fname_without_ext+'.html'
+
+  print(`writing file ${leaf.pathpad}${leaf.output_fname}...`)
+  fs.writeFileSync(destdir+leaf.pathpad+leaf.output_fname,html)
+  print('file written.')
+
+  return leaf
+}
+
+var mdtree = treewalker(filetree,leaf=>leaf.ext=='md'?process_markdown(leaf):null)
+
+var copytree = treewalker(filetree,leaf=>{
+  if('py.html.htm.js.css.png.jpg.gif'.split('.').indexOf(leaf.ext)>=0){
+    print('justCopy:'.green,leaf.fname.red)
+    var fr = contentdir+leaf.pathpad+leaf.fname
+    var to = destdir+leaf.pathpad+leaf.fname
+    fs.copy(fr,to,{
+      replace: true
+    }, err=>err?console.error(err):null)
+
+    return leaf
+  }
+})
+
+print('copytree:'.red, ui(copytree))
+
+print('done'.cyan)
