@@ -80,6 +80,8 @@ function handle(register){
       return content
     }
 
+    fs.mkdirpSync(destdir+pathpad)
+
     data.content = mdcoolify(data.content)
 
     print('generating HTML...')
@@ -89,7 +91,6 @@ function handle(register){
     fname_without_ext += '.html'
 
     print(`writing file ${pathpad}${fname_without_ext}...`)
-    fs.mkdirpSync(destdir+pathpad)
     fs.writeFileSync(destdir+pathpad+fname_without_ext,html)
     print('file written.')
 
