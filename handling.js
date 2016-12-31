@@ -1,12 +1,14 @@
 var fs = require('fs.extra')
 require('colors')
 var jr = require('./jaderender')
-
+var plot = require('./plot.js')
 var pr = __projectroot
 
 var contentdir = pr + './content/'
 var templdir = pr + './templates/site.jade'
 var destdir = pr + './generated/'
+
+destdir = process.argv[2]||destdir
 
 function jade(data){
   var html = jr(templdir,data)
@@ -18,6 +20,10 @@ function load_data_from_file(fpath){
   return {
     content:f
   }
+}
+
+function savefile(fpath,string){
+  fs.writeFileSync(fpath,string)
 }
 
 var justcopy = function(r){
@@ -32,14 +38,14 @@ var justcopy = function(r){
 }
 
 function handle(register){
-  
+
   'py.html.htm.js.css.png.jpg.gif'.split('.')
   .map((ext)=>{
     register(ext,justcopy)
   })
 
-  register('md',function(r){
-    r()
+  register('md',function(init){
+    init()
     push('md2html:'.yellow)
 
     var data = load_data_from_file(workingdir+fname)
@@ -52,6 +58,29 @@ function handle(register){
 
     data.title = match?match[1]:'no title'
     print(`title is:`,data.title.red)
+
+    var mdcoolify = function(content){
+      var plotcounter = 0
+      // extract plot commands
+      print('extracting plots...')
+
+      content = content.replace(/<plot([\s\S]*?)\/>/gi,function(matching,p1,offset){
+        // for each replaced plot, generate one svg
+        var suffix = (plotcounter++).toString()
+        var destfilename = fname_without_ext+'_plot_'+suffix+'.svg'
+        print('generating',destfilename.cyan)
+        var command = p1
+        plot.intosvg(command, destdir+pathpad+destfilename)
+
+        var tag = `plot ${suffix}: ${command.trim().split('\n').join(' ')}`
+        tag = tag.replace(/\"/g,'&quot;')
+        return `<img class="plot" src="${destfilename}" title="${tag}" />`
+      })
+
+      return content
+    }
+
+    data.content = mdcoolify(data.content)
 
     print('generating HTML...')
     var html = jade(data)

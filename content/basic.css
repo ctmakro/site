@@ -1,0 +1,37 @@
+.markdown_content{margin-left: 5%;margin-right: 5%;}
+
+p{
+
+}
+pre{background-color: #d6ead6;padding: 10px;margin: 10px 0 10px 0;font-size: 14px;}
+ul,ol{
+
+}
+ul{
+
+}
+ul li{
+
+}
+ol{
+
+}
+
+.plot {
+  max-height: 400px;
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e8e8e8;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 6px;
+}
+
+pre code{/* background-color: #c6e4c1; *//* padding: 10px; */}
+
+blockquote{background-color: #f9eec6;text-align: center;display: block;padding: 1px;margin: 10px 0 10px 0;}
+
+h1,h2,h3{
+  display: block;
+  text-align: center;
+}
