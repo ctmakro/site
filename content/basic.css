@@ -4,6 +4,7 @@ p{
 
 }
 pre{background-color: #d6ead6;padding: 10px;margin: 10px 0 10px 0;font-size: 14px;}
+
 ul,ol{
 
 }
@@ -16,7 +17,23 @@ ul li{
 ol{
 
 }
-
+.navnode{
+    padding: 3px 3px 3px 20px;
+    display: block;
+    vertical-align: top;
+    /* border-style: solid; */
+    border-radius: 3px;
+    background-color: rgba(183, 183, 183, 0.15);
+    margin: 1px;
+}
+.navnode a{
+  text-decoration: none;
+}
+.navigation_area{
+    display: inline-block;
+    font-size: 10px;
+}
+  .navnode_title{}
 .plot {
   max-height: 400px;
   display: inline-block;
@@ -25,10 +42,14 @@ ol{
   border-color: #e8e8e8;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.09) 2px 2px 6px;
+  margin: 10px;
 }
 
-pre code{/* background-color: #c6e4c1; *//* padding: 10px; */}
-
+:not(pre) code{
+  background-color: #d2eccd;
+  padding: 3px;
+  color: #0b3e0b;
+}
 blockquote{background-color: #f9eec6;text-align: center;display: block;padding: 1px;margin: 10px 0 10px 0;}
 
 h1,h2,h3{

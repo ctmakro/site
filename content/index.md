@@ -1,8 +1,20 @@
 !Index
 
-# 大标题
+# My Personal Site (Experimental)
 
-一些简单的内容。
+This site was generated offline using JavaScript.
 
-- 列表项
-- 列表项2
+source: <https://github.com/ctmakro/site>
+
+dependencies:
+
+- `npm install`
+- GNUPlot (for SVG graphics)
+
+<div align=center>
+<plot
+unset key
+set title "sinc(x)"
+plot [-10:10][-.5:1.2] sinc(x)=sin(pi*x)/(pi*x), sinc(x)
+/>
+</div>

@@ -43,25 +43,42 @@ function build_tree_from(pathpad,depth){
 
   for(var i=0;i<cf.length;i++){
     var fname = cf[i]
+
     if(fs.lstatSync(workingdir+fname).isDirectory()){
       var subtree = build_tree_from(pathpad+fname,depth+1)
       tree.nodes.push(subtree)
     }else{
+      var leaf = {}
+
       var ext = fname.split('.')
       var fname_without_ext = ext[0]
       ext = ext.length==1?'':ext.pop()
 
-      var leaf = {}
+      leaf.fname = fname
       leaf.workingdir = workingdir
       leaf.pathpad = pathpad
       leaf.depth = depth
-      leaf.fname = fname
+
       leaf.fname_without_ext = fname_without_ext
       leaf.ext = ext
+
       tree.nodes.push(leaf);
     }
   }
+
   return tree
+}
+
+var rank = leaf=>{
+  if(leaf.nodes){
+    return -1
+  }
+
+  if(leaf.fname_without_ext=='index'){
+    return 1
+  }
+
+  return 0
 }
 
 var treewalker = (tree,filter)=>{
@@ -79,6 +96,9 @@ var treewalker = (tree,filter)=>{
     }
   })
   .filter(n=>n!==null&&n!==undefined)
+  .sort((i1,i2)=>{
+    return rank(i2)-rank(i1)
+  })
   return newtree
 }
 
@@ -86,10 +106,9 @@ var ui = o=>util.inspect(o,{ depth: null })
 
 print('building tree...'.cyan)
 var filetree = build_tree_from('')
-
 print('filetree:'.red, ui(filetree))
 
-var process_markdown =(leaf)=>{
+var preprocess_markdown = leaf=>{
   var content = readfile(leaf.workingdir+leaf.fname)
   var match = content.match(/!(.*)/)
   if(match){
@@ -98,6 +117,15 @@ var process_markdown =(leaf)=>{
 
   var title = match?match[1]:'no title'
   print(`title is:`,title.red)
+
+  leaf.content = content
+  leaf.title = title
+  leaf.link = leaf.fname_without_ext + '.html'
+
+  return leaf
+}
+
+var process_markdown =(leaf)=>{
 
   var extract_plot = function(content){
     var plot = require('./plot.js')
@@ -123,18 +151,18 @@ var process_markdown =(leaf)=>{
 
   fs.mkdirpSync(destdir+leaf.pathpad)
 
-  content = extract_plot(content)
+  leaf.content = extract_plot(leaf.content)
 
-  leaf.content = content
-  leaf.title = title
   leaf.relative_rendered_path = leaf.pathpad+leaf.fname_without_ext+'.html'
   leaf.relative_root = '../'.repeat(leaf.depth)
+  leaf.sitemap = preproc_mdtree
+
+  leaf.output_fname = leaf.fname_without_ext+'.html'
 
   print('generating HTML...')
   var html = jade(leaf)
   print('generated. length:',html.length)
 
-  leaf.output_fname = leaf.fname_without_ext+'.html'
 
   print(`writing file ${leaf.pathpad}${leaf.output_fname}...`)
   fs.writeFileSync(destdir+leaf.pathpad+leaf.output_fname,html)
@@ -143,7 +171,9 @@ var process_markdown =(leaf)=>{
   return leaf
 }
 
-var mdtree = treewalker(filetree,leaf=>leaf.ext=='md'?process_markdown(leaf):null)
+var preproc_mdtree = treewalker(filetree,leaf=>leaf.ext=='md'?preprocess_markdown(leaf):null)
+
+var mdtree = treewalker(preproc_mdtree,process_markdown)
 
 var copytree = treewalker(filetree,leaf=>{
   if('py.html.htm.js.css.png.jpg.gif'.split('.').indexOf(leaf.ext)>=0){

@@ -15,7 +15,6 @@
 
 ## CS
 
-- C, JavaScript, Python and sometimes Java
 - Computer Graphics
 - Computer Vision
 - Machine Learning
@@ -33,13 +32,14 @@
 
 ## SE
 
+- C, JavaScript, Python and sometimes Java
 - Web/ Mobile development
 - Desktop GUI Application development
 - Misc
 
 ## Math
 
-- Above average
+- Just fine
 
 ## ME
 
