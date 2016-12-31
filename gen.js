@@ -41,6 +41,8 @@ function indir(pathpad,printpad){
   env.workingdir = workingdir
   env.pathpad = pathpad
 
+  env.relative_root = '../'.repeat(printpad.length-1)
+
   print('into',pathpad,'...')
   var cf = get_files_in(workingdir)
 
@@ -68,6 +70,7 @@ function indir(pathpad,printpad){
       env.ext = ext
       env.fname_without_ext = fname_without_ext
       env.printpad = printpad
+      
       forfile(env,ext)
     }
   }

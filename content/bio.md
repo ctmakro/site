@@ -1,5 +1,12 @@
 !Bio
 
+<style>p,ul {
+  text-align: center;
+  list-style-type: none;
+  padding:0px;
+  }
+</style>
+
 # Qin Yongliang 覃永良
 
 1993, Guangzhou

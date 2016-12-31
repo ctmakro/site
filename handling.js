@@ -59,6 +59,8 @@ function handle(register){
     data.title = match?match[1]:'no title'
     print(`title is:`,data.title.red)
 
+    data.relative_root = relative_root
+
     var mdcoolify = function(content){
       var plotcounter = 0
       // extract plot commands
