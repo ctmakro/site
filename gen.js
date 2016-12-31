@@ -14,7 +14,8 @@ function get_files_in(contentdir){
   return fs.readdirSync(contentdir)
 }
 
-function indir(pathpad,printpad){
+function indir(pathpad,depth,printpad){
+  depth = depth||0
   printpad = printpad||['']
 
   var print = function(){
@@ -41,7 +42,7 @@ function indir(pathpad,printpad){
   env.workingdir = workingdir
   env.pathpad = pathpad
 
-  env.relative_root = '../'.repeat(printpad.length-1)
+  env.relative_root = '../'.repeat(depth)
 
   print('into',pathpad,'...')
   var cf = get_files_in(workingdir)
@@ -58,7 +59,7 @@ function indir(pathpad,printpad){
 
     if(fs.lstatSync(workingdir+fname).isDirectory()){
       push('|')
-      indir(pathpad+fname,printpad)
+      indir(pathpad+fname,depth+1,printpad)
       pop()
     }else{
       //is file
@@ -70,7 +71,7 @@ function indir(pathpad,printpad){
       env.ext = ext
       env.fname_without_ext = fname_without_ext
       env.printpad = printpad
-      
+
       forfile(env,ext)
     }
   }
