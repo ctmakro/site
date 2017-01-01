@@ -154,7 +154,7 @@ var process_markdown =(leaf)=>{
   leaf.content = extract_plot(leaf.content)
 
   leaf.relative_rendered_path = leaf.pathpad+leaf.fname_without_ext+'.html'
-  leaf.relative_root = '../'.repeat(leaf.depth)
+  leaf.relative_root = './'+'../'.repeat(leaf.depth)
   leaf.sitemap = preproc_mdtree
 
   leaf.output_fname = leaf.fname_without_ext+'.html'

@@ -10,7 +10,7 @@ block content
         .navnode
           if n.ext
             - var ln = (data.relative_root+n.pathpad+n.link).replace('//','/')
-            a(href=ln) #{n.title}
+            a(href="#{ln}") #{n.title}
           else
             +tree(n)
         
