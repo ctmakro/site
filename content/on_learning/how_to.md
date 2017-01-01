@@ -28,7 +28,7 @@ plot 0
 
 对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如[这样](https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view)）。
 
-> If you want to solve Computer Vision, you better first master Computer Graphics. -- Geoffrey Hinton
+> If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton
 
 ## 3. 最小化 Mnistification
 
