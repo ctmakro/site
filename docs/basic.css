@@ -1,4 +1,4 @@
-.markdown_content{margin-left: 5%;margin-right: 5%;}
+.markdown_content{margin-left: 5%;margin-right: 5%;max-width: 768px;}
 
 p{
 
@@ -45,7 +45,7 @@ ol{
   margin: 10px;
 }
 
-:not(pre) code{
+:not(pre)>code{
   background-color: #d2eccd;
   padding: 3px;
   color: #0b3e0b;

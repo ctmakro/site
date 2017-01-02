@@ -46,6 +46,8 @@
                       </div>
                       <div class="navnode"><a href="./../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
                       </div>
+                      <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
               </div>
       </div>
     </div>
@@ -231,11 +233,11 @@ x = 0.539285, 1.137937, problem(x) = -0.000000
 <p data-sourcepos="241:3-241:14">Θ := Θ - α▽Θ</p>
 </blockquote>
 <p data-sourcepos="243:1-243:43">在python中，如果使用numpy库，把梯度作为矢量进行运算，之前的代码可以简写为：</p>
-<pre><code data-sourcepos="245:1-247:24" class="language-py">x = x - gradient * alpha
+<pre><code data-sourcepos="245:1-247:24" class="language-python">x = x - gradient * alpha
 </code></pre>
 <h2 data-sourcepos="249:1-249:17">例3 numpy库梯度下降法</h2>
-<blockquote data-sourcepos="251:1-251:82">
-<p data-sourcepos="251:2-251:82">已知 x0<em>x1 + x0</em>x2^2 + x1 + x1^3 + x2 + x2^5 + x3 + x3^7 - 15 = 0, 求 x0, x1, x2和x3.</p>
+<blockquote data-sourcepos="251:1-251:86">
+<p data-sourcepos="251:2-251:86">已知 x0 * x1 + x0 * x2^2 + x1 + x1^3 + x2 + x2^5 + x3 + x3^7 - 15 = 0, 求 x0, x1, x2和x3.</p>
 </blockquote>
 <p data-sourcepos="253:1-253:22">numpy是Python最重要的函数库之一。</p>
 <p data-sourcepos="255:1-255:41">有了numpy库，我们就可以用简洁的代码（用一个矢量代表多个变量）实现梯度下降法。</p>

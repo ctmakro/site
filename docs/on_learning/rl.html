@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title>Rectified Linear Unit 整流线性单元</title>
+    <title>RL is progressing rapidly</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -51,21 +51,23 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:37">Rectified Linear Unit (ReLU) 整流线性单元</h1>
-<img class="plot" src="relu_plot_0.svg" title="plot 0" />
-<p data-sourcepos="7:1-7:61">Rectification 是指电子学中的“整流”，即利用具有单向导通特性的电路元件（比如二极管），将交流电转变为直流电。</p>
-<p data-sourcepos="9:1-9:25">如果给一个电阻R两端通上电压U，通过电阻的电流为：</p>
-<blockquote data-sourcepos="11:1-11:13">
-<p data-sourcepos="11:3-11:13">I = U * 1/R</p>
-</blockquote>
-<p data-sourcepos="13:1-13:15">设电阻为1欧，U-I图像如下：</p>
-<img class="plot" src="relu_plot_1.svg" title="plot 1" />
-<p data-sourcepos="17:1-17:26">若电阻两端电压为正，则通过电阻的电流为正；反之亦然。</p>
-<p data-sourcepos="19:1-19:34">如果在电阻的一端串个二极管，那么电流就只能正向流动，不能反向流动了。</p>
-<blockquote data-sourcepos="21:1-21:21">
-<p data-sourcepos="21:3-21:21">I = max(U * 1/R, 0)</p>
-</blockquote>
-<img class="plot" src="relu_plot_2.svg" title="plot 2" />
+    <div class="markdown_content"><p data-sourcepos="3:1-3:34">大概半年前的时候跟我的一个朋友聊起，说有没有供人工智能比赛的竞技场？</p>
+<p data-sourcepos="5:1-5:33">他说kaggle，我说kaggle比的是error%，没有观赏性。</p>
+<p data-sourcepos="7:1-7:11">我当时的设想是这样的：</p>
+<ul data-sourcepos="9:1-14:0">
+<li data-sourcepos="9:1-10:0">
+<p data-sourcepos="9:3-9:34">服务器上举行一场比赛，由A和B两位 RL agent 轮流出招。</p>
+</li>
+<li data-sourcepos="11:1-12:0">
+<p data-sourcepos="11:3-11:64">首先服务器通知A出招，A通过网络向服务器发送它下一步的招数。服务器收到招数后，计算state，并将state返回给 A和B。</p>
+</li>
+<li data-sourcepos="13:1-14:0">
+<p data-sourcepos="13:3-13:51">然后服务器通知B，B接到通知后，同样计算下一步的招数并发给服务器。如此轮流往复，直到产生胜者为止。</p>
+</li>
+</ul>
+<p data-sourcepos="15:1-15:160">最近OpenAI开源了Gym。Gym是一个【让大家可以通过几行代码将agent通过VNC连接到网络上某个用docker虚拟的训练环境进行训练】的python库。借助Gym，大家可以方便地用单步方法训练agent玩上千种游戏、跑上千种RL Benchmark了。可以预见从此RL领域的玄学会越来越少（类似比武大会的作用）。</p>
+<p data-sourcepos="17:1-17:34">很快就会出现AI拳皇争霸赛、AI极品飞车、AI FIFA之类的比赛。</p>
+<p data-sourcepos="19:1-19:58">这样的进步速度是令人欣喜的。短短十几年，我们就从一帮人挤在游戏厅里打机，进化到了一帮人挤在实验室里看agent打机。</p>
 </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}
