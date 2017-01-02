@@ -1,4 +1,4 @@
-!Bio
+!About
 
 <style>p,ul {
   text-align: center;
