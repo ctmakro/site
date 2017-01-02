@@ -55,41 +55,44 @@
 <p data-sourcepos="5:1-5:27">梯度下降法可以帮助我们找到某个函数的极小值或者最小值。</p>
 <p data-sourcepos="7:1-7:37">对于一般问题，梯度下降法的好处是不需要进行公式推导，这是许多工程师的福音。</p>
 <p data-sourcepos="9:1-9:41">对于高维(&gt;1000维)问题，梯度下降法（以及其衍生方法）是最常用的一类优化方法。</p>
-<h2 data-sourcepos="11:1-11:30">例1 导数下降法 Derivative Descent</h2>
-<blockquote data-sourcepos="13:1-13:30">
-<p data-sourcepos="13:2-13:30">已知 x^3 + 2x + e^x - 3 = 0，求x。</p>
+<blockquote data-sourcepos="11:1-11:21">
+<p data-sourcepos="11:2-11:21">本页演示代码都在<a href="gd.py">这里</a>。</p>
 </blockquote>
-<p data-sourcepos="15:1-15:47">这个题目实际上是要我们找到一个数x，使得等号左边的式子，尽量接近等号右边的零（如果相等最好）。</p>
-<p data-sourcepos="17:1-17:27">直接求解析解需要进行痛苦的数学推导，令很多人望而却步。</p>
-<p data-sourcepos="19:1-19:30">这时我们可以用导数下降法求数值解。下面以Python作演示。</p>
-<p data-sourcepos="21:1-21:35">首先我们编写一个函数，用于计算 x^3 + 2x + e^x - 3：</p>
-<pre><code data-sourcepos="23:1-27:32" class="language-python">def problem(x):
+<h2 data-sourcepos="13:1-13:30">例1 导数下降法 Derivative Descent</h2>
+<blockquote data-sourcepos="15:1-15:30">
+<p data-sourcepos="15:2-15:30">已知 x^3 + 2x + e^x - 3 = 0，求x。</p>
+</blockquote>
+<p data-sourcepos="17:1-17:47">这个题目实际上是要我们找到一个数x，使得等号左边的式子，尽量接近等号右边的零（如果相等最好）。</p>
+<p data-sourcepos="19:1-19:27">直接求解析解需要进行痛苦的数学推导，令很多人望而却步。</p>
+<p data-sourcepos="21:1-21:30">这时我们可以用导数下降法求数值解。下面以Python作演示。</p>
+<p data-sourcepos="23:1-23:35">首先我们编写一个函数，用于计算 x^3 + 2x + e^x - 3：</p>
+<pre><code data-sourcepos="25:1-29:32" class="language-python">def problem(x):
     e = 2.71828182845904590
     return x**3 + 2*x + e**x - 3
 </code></pre>
 <img class="plot" src="gd_plot_0.svg" title="plot 0" />
-<p data-sourcepos="31:1-31:45">我们称上面的函数为problem。我们的目的就是找到数x，令problem(x) = 0。</p>
-<p data-sourcepos="33:1-33:52">接着，我们设计误差函数error。error(x) 计算的是 problem(x) 与 0 的差的平方：</p>
-<pre><code data-sourcepos="35:1-38:28" class="language-python">def error(x):
+<p data-sourcepos="33:1-33:45">我们称上面的函数为problem。我们的目的就是找到数x，令problem(x) = 0。</p>
+<p data-sourcepos="35:1-35:52">接着，我们设计误差函数error。error(x) 计算的是 problem(x) 与 0 的差的平方：</p>
+<pre><code data-sourcepos="37:1-40:28" class="language-python">def error(x):
     return (problem(x)-0)**2
 </code></pre>
 <img class="plot" src="gd_plot_1.svg" title="plot 1" />
-<p data-sourcepos="42:1-42:67">error函数的图像，看上去像个碗一样，中间是凹的，两边翘起。这个碗的最低点，也就是 error(x) 的最小值，就是我们要寻找的点。</p>
-<p data-sourcepos="44:1-44:5">我们发现:</p>
-<ul data-sourcepos="46:1-49:0">
-<li data-sourcepos="46:1-46:32">当x在最小值左边的时候，error函数的导数（斜率）是负的；</li>
-<li data-sourcepos="47:1-47:20">当x在最小值右边的时候，导数是正的；</li>
-<li data-sourcepos="48:1-49:0">当x在最小值附近的时候，导数接近0.</li>
+<p data-sourcepos="44:1-44:67">error函数的图像，看上去像个碗一样，中间是凹的，两边翘起。这个碗的最低点，也就是 error(x) 的最小值，就是我们要寻找的点。</p>
+<p data-sourcepos="46:1-46:5">我们发现:</p>
+<ul data-sourcepos="48:1-51:0">
+<li data-sourcepos="48:1-48:32">当x在最小值左边的时候，error函数的导数（斜率）是负的；</li>
+<li data-sourcepos="49:1-49:20">当x在最小值右边的时候，导数是正的；</li>
+<li data-sourcepos="50:1-51:0">当x在最小值附近的时候，导数接近0.</li>
 </ul>
-<p data-sourcepos="50:1-50:9">因此，如果我们在：</p>
-<ul data-sourcepos="52:1-54:0">
-<li data-sourcepos="52:1-52:13">导数为负的时候增加x；</li>
-<li data-sourcepos="53:1-54:0">导数为正的时候减小x；</li>
+<p data-sourcepos="52:1-52:9">因此，如果我们在：</p>
+<ul data-sourcepos="54:1-56:0">
+<li data-sourcepos="54:1-54:13">导数为负的时候增加x；</li>
+<li data-sourcepos="55:1-56:0">导数为正的时候减小x；</li>
 </ul>
 <img class="plot" src="gd_plot_2.svg" title="plot 2" />
-<p data-sourcepos="57:1-57:63">就可以逐渐让 x 到达 error 函数的最小值点，使得error(x) = 0，同时也就使得 problem(x) = 0。</p>
-<p data-sourcepos="61:1-61:61">为了实现上面的过程，我们可以先求 error 函数在 x 处的导数，然后将 x 减去这个导数。下面给出“导数下降”的过程：</p>
-<pre><code data-sourcepos="63:1-71:12" class="language-python">def derivative_descent(x):
+<p data-sourcepos="59:1-59:63">就可以逐渐让 x 到达 error 函数的最小值点，使得error(x) = 0，同时也就使得 problem(x) = 0。</p>
+<p data-sourcepos="63:1-63:61">为了实现上面的过程，我们可以先求 error 函数在 x 处的导数，然后将 x 减去这个导数。下面给出“导数下降”的过程：</p>
+<pre><code data-sourcepos="65:1-73:12" class="language-python">def derivative_descent(x):
     delta = 0.00000001
     derivative = (error(x + delta) - error(x - delta)) / (delta * 2)
 
@@ -97,20 +100,20 @@
     x = x - derivative * alpha
     return x
 </code></pre>
-<p data-sourcepos="73:1-73:3">解释：</p>
-<ul data-sourcepos="75:1-78:0">
-<li data-sourcepos="75:1-75:42">derivative 是 error 在 x 处的导数，这里是用导数的定义求的。</li>
-<li data-sourcepos="76:1-76:59">x = x - derivative 这就是“导数下降”名称的由来。通过不断地减去导数，x最终会到达函数的最低点。</li>
-<li data-sourcepos="77:1-78:0">alpha 参数控制的是点 x 逆着导数下降的距离，alpha 越大，x 就会下降得越多。alpha 太小会导致下降缓慢，alpha 太大会导致 x 冲得太远，令函数无法收敛。</li>
+<p data-sourcepos="75:1-75:3">解释：</p>
+<ul data-sourcepos="77:1-80:0">
+<li data-sourcepos="77:1-77:42">derivative 是 error 在 x 处的导数，这里是用导数的定义求的。</li>
+<li data-sourcepos="78:1-78:59">x = x - derivative 这就是“导数下降”名称的由来。通过不断地减去导数，x最终会到达函数的最低点。</li>
+<li data-sourcepos="79:1-80:0">alpha 参数控制的是点 x 逆着导数下降的距离，alpha 越大，x 就会下降得越多。alpha 太小会导致下降缓慢，alpha 太大会导致 x 冲得太远，令函数无法收敛。</li>
 </ul>
-<p data-sourcepos="79:1-79:37">我们可以先给x设定一个初始值（比如x = 0），然后重复运行这个下降过程。</p>
-<pre><code data-sourcepos="81:1-86:63" class="language-python">x = 0.0
+<p data-sourcepos="81:1-81:37">我们可以先给x设定一个初始值（比如x = 0），然后重复运行这个下降过程。</p>
+<pre><code data-sourcepos="83:1-88:63" class="language-python">x = 0.0
 for i in range(50):
     x = derivative_descent(x)
     print('x = {:6f}, problem(x) = {:6f}'.format(x,problem(x)))
 </code></pre>
-<p data-sourcepos="88:1-88:3">结果：</p>
-<pre><code data-sourcepos="90:1-125:3" class="language-text">x = 0.120000, problem(x) = -1.630775
+<p data-sourcepos="90:1-90:3">结果：</p>
+<pre><code data-sourcepos="92:1-127:3" class="language-text">x = 0.120000, problem(x) = -1.630775
 x = 0.223414, problem(x) = -1.291683
 x = 0.311250, problem(x) = -0.982215
 x = 0.383065, problem(x) = -0.710885
@@ -145,18 +148,18 @@ x = 0.550080, problem(x) = -0.000000
 
 ...
 </code></pre>
-<p data-sourcepos="127:1-127:91">可以看到，导数下降法很快就找到了 x = 0.550080，使得 error(x) = 0，进而使得 problem(x) 也等于 0。如果运行的步数足够多，可以得到非常高精度的x。</p>
+<p data-sourcepos="129:1-129:91">可以看到，导数下降法很快就找到了 x = 0.550080，使得 error(x) = 0，进而使得 problem(x) 也等于 0。如果运行的步数足够多，可以得到非常高精度的x。</p>
 <img class="plot" src="gd_plot_3.svg" title="plot 3" />
-<p data-sourcepos="132:1-132:26">最重要的是，在这个过程中我们不需要推导任何数学公式。</p>
-<p data-sourcepos="134:1-134:60">如果原函数很容易计算，我们可以向上面那样用定义法求导数，即 f'(x) = (f(x+d)-f(x-d)) / 2d .</p>
-<p data-sourcepos="136:1-136:48">如果计算原函数很困难，但原函数的导数很好计算，那么我们也可以用解析法求导数，然后应用导数下降法。</p>
-<h2 data-sourcepos="138:1-138:28">例2 梯度下降法 Gradient Descent</h2>
-<p data-sourcepos="140:1-140:48">上面我们介绍的导数下降法，可以求一元函数 error(x) 的最小值。如果待求函数是多元函数呢？</p>
-<blockquote data-sourcepos="142:1-142:50">
-<p data-sourcepos="142:2-142:50">已知 x0^5 + e^x1 + x0^3 + x0 + x1 - 5 = 0, 求 x0和x1.</p>
+<p data-sourcepos="134:1-134:26">最重要的是，在这个过程中我们不需要推导任何数学公式。</p>
+<p data-sourcepos="136:1-136:60">如果原函数很容易计算，我们可以向上面那样用定义法求导数，即 f'(x) = (f(x+d)-f(x-d)) / 2d .</p>
+<p data-sourcepos="138:1-138:48">如果计算原函数很困难，但原函数的导数很好计算，那么我们也可以用解析法求导数，然后应用导数下降法。</p>
+<h2 data-sourcepos="140:1-140:28">例2 梯度下降法 Gradient Descent</h2>
+<p data-sourcepos="142:1-142:48">上面我们介绍的导数下降法，可以求一元函数 error(x) 的最小值。如果待求函数是多元函数呢？</p>
+<blockquote data-sourcepos="144:1-144:50">
+<p data-sourcepos="144:2-144:50">已知 x0^5 + e^x1 + x0^3 + x0 + x1 - 5 = 0, 求 x0和x1.</p>
 </blockquote>
-<p data-sourcepos="144:1-144:53">首先定义problem(x)，其中x是2维矢量（即x0和x1）。下面用x[0]代表x0，x[1]代表x1.</p>
-<pre><code data-sourcepos="146:1-153:28" class="language-Python">def problem(x):
+<p data-sourcepos="146:1-146:53">首先定义problem(x)，其中x是2维矢量（即x0和x1）。下面用x[0]代表x0，x[1]代表x1.</p>
+<pre><code data-sourcepos="148:1-155:28" class="language-Python">def problem(x):
     e = 2.71828182845904590
     return x[0]**5 + e**x[1] + x[0]**3 + x[0] + x[1] - 5
 
@@ -164,11 +167,11 @@ def error(x):
     return (problem(x)-0)**2
 </code></pre>
 <img class="plot" src="gd_plot_4.svg" title="plot 4" />
-<p data-sourcepos="156:1-156:34">图中可以看到，由于x是2维矢量，problem(x)形成了一个曲面。</p>
-<p data-sourcepos="158:1-158:56">下图的error函数则是一个2维的山谷，谷底是最低点，那里是函数的解。利用梯度下降法，我们可以让x逐渐靠近谷底。</p>
+<p data-sourcepos="158:1-158:34">图中可以看到，由于x是2维矢量，problem(x)形成了一个曲面。</p>
+<p data-sourcepos="160:1-160:56">下图的error函数则是一个2维的山谷，谷底是最低点，那里是函数的解。利用梯度下降法，我们可以让x逐渐靠近谷底。</p>
 <img class="plot" src="gd_plot_5.svg" title="plot 5" />
-<p data-sourcepos="162:1-162:13">下面是“梯度下降”的过程：</p>
-<pre><code data-sourcepos="164:1-175:22" class="language-Python">def gradient_descent(x):
+<p data-sourcepos="164:1-164:13">下面是“梯度下降”的过程：</p>
+<pre><code data-sourcepos="166:1-177:22" class="language-Python">def gradient_descent(x):
     delta = 0.00000001
 
     derivative_x0 = (error([x[0] + delta, x[1]]) - error([x[0] - delta, x[1]])) / (delta * 2)
@@ -179,16 +182,16 @@ def error(x):
     x[1] = x[1] - derivative_x1 * alpha
     return [x[0],x[1]]
 </code></pre>
-<p data-sourcepos="177:1-177:120">因为待求变量有两个，因此这里的导数也有两个，分别是error对x0的偏导数和error对x1的偏导数。什么是偏导数？举个例子，error对x0的偏导数，就是当其他变量(比如x1, x2, x3...)保持不变的时候，x0对error的导数。</p>
-<p data-sourcepos="179:1-179:26">除此之外，梯度下降法和导数下降法的过程是完全一样的。</p>
-<p data-sourcepos="181:1-181:26">我们给x设定一个初始值，并重复运行这个梯度下降过程：</p>
-<pre><code data-sourcepos="183:1-188:77" class="language-python">x = [0.0, 0.0]
+<p data-sourcepos="179:1-179:120">因为待求变量有两个，因此这里的导数也有两个，分别是error对x0的偏导数和error对x1的偏导数。什么是偏导数？举个例子，error对x0的偏导数，就是当其他变量(比如x1, x2, x3...)保持不变的时候，x0对error的导数。</p>
+<p data-sourcepos="181:1-181:26">除此之外，梯度下降法和导数下降法的过程是完全一样的。</p>
+<p data-sourcepos="183:1-183:26">我们给x设定一个初始值，并重复运行这个梯度下降过程：</p>
+<pre><code data-sourcepos="185:1-190:77" class="language-python">x = [0.0, 0.0]
 for i in range(50):
     x = gradient_descent(x)
     print('x = {:6f},{:6f}, problem(x) = {:6f}'.format(x[0],x[1],problem(x)))
 </code></pre>
-<p data-sourcepos="190:1-190:3">结果：</p>
-<pre><code data-sourcepos="192:1-227:46" class="language-text">x = 0.080000, 0.160000, problem(x) = -3.585974
+<p data-sourcepos="192:1-192:3">结果：</p>
+<pre><code data-sourcepos="194:1-229:46" class="language-text">x = 0.080000, 0.160000, problem(x) = -3.585974
 x = 0.153111, 0.315883, problem(x) = -3.155862
 x = 0.220841, 0.465564, problem(x) = -2.709388
 x = 0.283601, 0.606068, problem(x) = -2.252478
@@ -223,25 +226,25 @@ x = 0.539285, 1.137937, problem(x) = -0.000001
 x = 0.539285, 1.137937, problem(x) = -0.000000
 x = 0.539285, 1.137937, problem(x) = -0.000000
 </code></pre>
-<p data-sourcepos="229:1-229:15">可以看到，这次我们也成功求解。</p>
-<h2 data-sourcepos="231:1-231:9">什么是梯度？</h2>
-<p data-sourcepos="233:1-233:25">一元函数f(x)在点x处的导数，称为f对x的导数；</p>
-<p data-sourcepos="235:1-235:77">而N元函数f(x0,x1,x2...xn)在点x = [x0,x1,x2...xn] 处，共有N个偏导数，分别是f在该点对x0的偏导数，对x1的偏导数……</p>
-<p data-sourcepos="237:1-237:31">把这N个偏导数，组合成一个N维矢量，称为函数f在点x处的梯度。</p>
-<p data-sourcepos="239:1-239:30">在教科书中，梯度一般记为倒三角，因此梯度下降法，通常这么写：</p>
-<blockquote data-sourcepos="241:1-241:14">
-<p data-sourcepos="241:3-241:14">Θ := Θ - α▽Θ</p>
+<p data-sourcepos="231:1-231:15">可以看到，这次我们也成功求解。</p>
+<h2 data-sourcepos="233:1-233:9">什么是梯度？</h2>
+<p data-sourcepos="235:1-235:25">一元函数f(x)在点x处的导数，称为f对x的导数；</p>
+<p data-sourcepos="237:1-237:77">而N元函数f(x0,x1,x2...xn)在点x = [x0,x1,x2...xn] 处，共有N个偏导数，分别是f在该点对x0的偏导数，对x1的偏导数……</p>
+<p data-sourcepos="239:1-239:31">把这N个偏导数，组合成一个N维矢量，称为函数f在点x处的梯度。</p>
+<p data-sourcepos="241:1-241:30">在教科书中，梯度一般记为倒三角，因此梯度下降法，通常这么写：</p>
+<blockquote data-sourcepos="243:1-243:14">
+<p data-sourcepos="243:3-243:14">Θ := Θ - α▽Θ</p>
 </blockquote>
-<p data-sourcepos="243:1-243:43">在python中，如果使用numpy库，把梯度作为矢量进行运算，之前的代码可以简写为：</p>
-<pre><code data-sourcepos="245:1-247:24" class="language-python">x = x - gradient * alpha
+<p data-sourcepos="245:1-245:43">在python中，如果使用numpy库，把梯度作为矢量进行运算，之前的代码可以简写为：</p>
+<pre><code data-sourcepos="247:1-249:24" class="language-python">x = x - gradient * alpha
 </code></pre>
-<h2 data-sourcepos="249:1-249:17">例3 numpy库梯度下降法</h2>
-<blockquote data-sourcepos="251:1-251:86">
-<p data-sourcepos="251:2-251:86">已知 x0 * x1 + x0 * x2^2 + x1 + x1^3 + x2 + x2^5 + x3 + x3^7 - 15 = 0, 求 x0, x1, x2和x3.</p>
+<h2 data-sourcepos="251:1-251:17">例3 numpy库梯度下降法</h2>
+<blockquote data-sourcepos="253:1-253:86">
+<p data-sourcepos="253:2-253:86">已知 x0 * x1 + x0 * x2^2 + x1 + x1^3 + x2 + x2^5 + x3 + x3^7 - 15 = 0, 求 x0, x1, x2和x3.</p>
 </blockquote>
-<p data-sourcepos="253:1-253:22">numpy是Python最重要的函数库之一。</p>
-<p data-sourcepos="255:1-255:41">有了numpy库，我们就可以用简洁的代码（用一个矢量代表多个变量）实现梯度下降法。</p>
-<pre><code data-sourcepos="257:1-283:60" class="language-python">import numpy as np
+<p data-sourcepos="255:1-255:22">numpy是Python最重要的函数库之一。</p>
+<p data-sourcepos="257:1-257:41">有了numpy库，我们就可以用简洁的代码（用一个矢量代表多个变量）实现梯度下降法。</p>
+<pre><code data-sourcepos="259:1-285:60" class="language-python">import numpy as np
 def problem(x):
     return x[0]*x[1] + x[0]*(x[2]**2) + x[1] + x[1]**3 + x[2] + x[2]**5 + x[3] + x[3]**7 - 15
 
@@ -267,8 +270,8 @@ for i in range(50):
     x = gradient_descent(x)
     print('x = {}, problem(x) = {:6f}'.format(x,problem(x)))
 </code></pre>
-<p data-sourcepos="285:1-285:3">结果：</p>
-<pre><code data-sourcepos="287:1-324:76" class="language-text">x = [ 0.    0.03  0.03  0.03], problem(x) = -14.909973
+<p data-sourcepos="287:1-287:3">结果：</p>
+<pre><code data-sourcepos="289:1-326:76" class="language-text">x = [ 0.    0.03  0.03  0.03], problem(x) = -14.909973
 x = [ 0.00092144  0.05990046  0.05982007  0.05981995], problem(x) = -14.820185
 x = [ 0.00280297  0.0898872   0.08946561  0.08946033], problem(x) = -14.730180
 x = [ 0.00568689  0.12014423  0.11895018  0.11892079], problem(x) = -14.639463
