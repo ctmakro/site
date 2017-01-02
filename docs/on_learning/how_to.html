@@ -52,29 +52,59 @@
     <div class="markdown_content"><h1 data-sourcepos="3:1-3:19">Baby steps for ML</h1>
 <p data-sourcepos="5:1-5:38">怎样学习机器学习？吴恩达曾经给出过他的答案：不断复现他人paper中的成果。</p>
 <p data-sourcepos="7:1-7:21">以下是我自接触机器学习以来的一些经验总结。</p>
-<h2 data-sourcepos="9:1-9:33">1. 发现问题 Shoot the <em>right</em> foot</h2>
-<img class="plot" src="how_to_plot_0.svg" title="plot 0" />
-<p data-sourcepos="13:1-13:59">机器学习是解决问题的一种方法，而要解决一个问题，我们首先要发现它。有些人对身边的问题非常不敏感，他们不适合搞机器学习。</p>
-<p data-sourcepos="15:1-15:47">一个机器学习研究者应该可以随时列出生活中存在的100个亟待解决的问题，然后每月解决其中的几个。</p>
-<h2 data-sourcepos="17:1-17:25">2. 数据合成 Data Synthesis</h2>
-<p data-sourcepos="19:1-19:129">机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。</p>
-<p data-sourcepos="21:1-21:130">可能有人说计算机生成的数据集，与真实世界收集的数据相比，必然会有比较大的bias。实际上这完全取决于研究者对具体领域的了解。以视觉为例，如今的主流游戏引擎可以轻而易举地渲染照片级的画面，而DeepMind最近开源的DeepMindLab也不过就是一个游戏引擎。</p>
-<p data-sourcepos="23:1-23:24"><em>Update: OpenAI刚刚开源了Gym</em></p>
-<p data-sourcepos="25:1-25:185">对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如<a href="https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view">这样</a>）。</p>
-<blockquote data-sourcepos="27:1-27:95">
-<p data-sourcepos="27:3-27:95">If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton</p>
-</blockquote>
-<h2 data-sourcepos="29:1-29:24">3. 最小化 Mnistification</h2>
-<p data-sourcepos="31:1-31:24">在实现一个新的方法/架构之前，总是先将其最小化。</p>
-<ul data-sourcepos="33:1-35:0">
-<li data-sourcepos="33:1-33:34">ImageNet wasn't built in one day</li>
-<li data-sourcepos="34:1-35:0">not even MNIST</li>
+<h2 data-sourcepos="9:1-9:28">0. Know what you're doing</h2>
+<ul data-sourcepos="11:1-20:0">
+<li data-sourcepos="11:1-11:61">
+<p data-sourcepos="11:3-11:61">ML = optimize parameters of some function to minimize error</p>
+</li>
+<li data-sourcepos="12:1-12:68">
+<p data-sourcepos="12:3-12:68">DL = optimize parameters of some <em>deep</em> function to minimize error</p>
+</li>
+<li data-sourcepos="13:1-16:0">
+<p data-sourcepos="13:3-13:62">RL = optimize parameters of some function to maximize reward</p>
+</li>
+<li data-sourcepos="17:1-17:99">
+<p data-sourcepos="17:3-17:99">ML Research = optimize parameters of one's brain to fit experiment results and minimize confusion</p>
+</li>
+<li data-sourcepos="18:1-18:86">
+<p data-sourcepos="18:3-18:86">DL Research = optimize ML algorithms and (occasionally) find out how the brain works</p>
+</li>
+<li data-sourcepos="19:1-20:0">
+<p data-sourcepos="19:3-19:80">RL Research = solve real-world problems by converting them into simulated ones</p>
+</li>
 </ul>
-<p data-sourcepos="36:1-36:60">最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.</p>
-<h2 data-sourcepos="38:1-38:28">4. 善于品味 Taste before read</h2>
+<h2 data-sourcepos="21:1-21:33">1. 发现问题 Shoot the <em>right</em> foot</h2>
+<img class="plot" src="how_to_plot_0.svg" title="plot 0" />
+<p data-sourcepos="25:1-25:52">机器学习是解决问题的一种方法，而要解决一个问题，我们首先要发现它。对身边问题不敏感的人不适合搞机器学习。</p>
+<p data-sourcepos="27:1-27:47">一个机器学习研究者应该可以随时列出生活中存在的100个亟待解决的问题，然后每月解决其中的几个。</p>
+<h2 data-sourcepos="29:1-29:25">2. 数据合成 Data Synthesis</h2>
+<p data-sourcepos="31:1-31:129">机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。</p>
+<p data-sourcepos="33:1-33:130">可能有人说计算机生成的数据集，与真实世界收集的数据相比，必然会有比较大的bias。实际上这完全取决于研究者对具体领域的了解。以视觉为例，如今的主流游戏引擎可以轻而易举地渲染照片级的画面，而DeepMind最近开源的DeepMindLab也不过就是一个游戏引擎。</p>
+<p data-sourcepos="35:1-35:24"><em>Update: OpenAI刚刚开源了Gym</em></p>
+<p data-sourcepos="37:1-37:185">对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如<a href="https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view">这样</a>）。</p>
+<blockquote data-sourcepos="39:1-39:95">
+<p data-sourcepos="39:3-39:95">If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton</p>
+</blockquote>
+<h2 data-sourcepos="41:1-41:24">3. 最小化 Mnistification</h2>
+<p data-sourcepos="43:1-43:24">在实现一个新的方法/架构之前，总是先将其最小化。</p>
+<ul data-sourcepos="45:1-47:0">
+<li data-sourcepos="45:1-45:34">ImageNet wasn't built in one day</li>
+<li data-sourcepos="46:1-47:0">not even MNIST</li>
+</ul>
+<p data-sourcepos="48:1-48:60">最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.</p>
+<h2 data-sourcepos="50:1-50:28">4. 善于品味 Taste before read</h2>
 <img class="plot" src="how_to_plot_1.svg" title="plot 1" />
-<p data-sourcepos="42:1-42:104">每天都有10份新的ML Paper，怎么办？科学讲究的是成果复现，而工程讲究的是品味。拿到一篇paper，先看文笔，他能在50个词之内讲清楚他的问题吗？然后以1.0页/秒的速度扫描全文，看看一共配了多少插图？</p>
-<p data-sourcepos="44:1-44:39">三句话讲不清楚问题，或者全是字没几张图，是作者不重视成果的体现。赶紧看下一篇。</p>
+<p data-sourcepos="54:1-54:104">每天都有10份新的ML Paper，怎么办？科学讲究的是成果复现，而工程讲究的是品味。拿到一篇paper，先看文笔，他能在50个词之内讲清楚他的问题吗？然后以1.0页/秒的速度扫描全文，看看一共配了多少插图？</p>
+<p data-sourcepos="56:1-56:29">三句话讲不清楚问题，或者全文无图，是作者不重视成果的体现。</p>
+<h2 data-sourcepos="58:1-58:27">5. Signs of danger (IMO)</h2>
+<ul data-sourcepos="60:1-65:28">
+<li data-sourcepos="60:1-60:47">Addicted to reading &amp; posting things on Zhihu</li>
+<li data-sourcepos="61:1-61:44">Long, verbose Python code without comments</li>
+<li data-sourcepos="62:1-62:54">Repeatedly looking for data and challenges on Kaggle</li>
+<li data-sourcepos="63:1-63:46">Playing with hyper-parameters for over a day</li>
+<li data-sourcepos="64:1-64:37">Highlight one's error% in bold font</li>
+<li data-sourcepos="65:1-65:28">Imagining pure ML startups</li>
+</ul>
 </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}

@@ -6,6 +6,18 @@
 
 以下是我自接触机器学习以来的一些经验总结。
 
+## 0. Know what you're doing
+
+- ML = optimize parameters of some function to minimize error
+- DL = optimize parameters of some *deep* function to minimize error
+- RL = optimize parameters of some function to maximize reward
+
+
+
+- ML Research = optimize parameters of one's brain to fit experiment results and minimize confusion
+- DL Research = optimize ML algorithms and (occasionally) find out how the brain works
+- RL Research = solve real-world problems by converting them into simulated ones
+
 ## 1. 发现问题 Shoot the *right* foot
 
 <plot
@@ -14,7 +26,7 @@ unset key
 plot 0
 />
 
-机器学习是解决问题的一种方法，而要解决一个问题，我们首先要发现它。有些人对身边的问题非常不敏感，他们不适合搞机器学习。
+机器学习是解决问题的一种方法，而要解决一个问题，我们首先要发现它。对身边问题不敏感的人不适合搞机器学习。
 
 一个机器学习研究者应该可以随时列出生活中存在的100个亟待解决的问题，然后每月解决其中的几个。
 
@@ -54,4 +66,13 @@ e
 
 每天都有10份新的ML Paper，怎么办？科学讲究的是成果复现，而工程讲究的是品味。拿到一篇paper，先看文笔，他能在50个词之内讲清楚他的问题吗？然后以1.0页/秒的速度扫描全文，看看一共配了多少插图？
 
-三句话讲不清楚问题，或者全是字没几张图，是作者不重视成果的体现。赶紧看下一篇。
+三句话讲不清楚问题，或者全文无图，是作者不重视成果的体现。
+
+## 5. Signs of danger (IMO)
+
+- Addicted to reading & posting things on Zhihu
+- Long, verbose Python code without comments
+- Repeatedly looking for data and challenges on Kaggle
+- Playing with hyper-parameters for over a day
+- Highlight one's error% in bold font
+- Imagining pure ML startups
