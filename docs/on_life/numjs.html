@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title>RL is progressing rapidly</title>
+    <title>NumJs</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -58,23 +58,11 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><p data-sourcepos="3:1-3:34">大概半年前的时候跟我的一个朋友聊起，说有没有供人工智能比赛的竞技场？</p>
-<p data-sourcepos="5:1-5:33">他说kaggle，我说kaggle比的是error%，没有观赏性。</p>
-<p data-sourcepos="7:1-7:11">我当时的设想是这样的：</p>
-<ul data-sourcepos="9:1-14:0">
-<li data-sourcepos="9:1-10:0">
-<p data-sourcepos="9:3-9:34">服务器上举行一场比赛，由A和B两位 RL agent 轮流出招。</p>
-</li>
-<li data-sourcepos="11:1-12:0">
-<p data-sourcepos="11:3-11:64">首先服务器通知A出招，A通过网络向服务器发送它下一步的招数。服务器收到招数后，计算state，并将state返回给 A和B。</p>
-</li>
-<li data-sourcepos="13:1-14:0">
-<p data-sourcepos="13:3-13:51">然后服务器通知B，B接到通知后，同样计算下一步的招数并发给服务器。如此轮流往复，直到产生胜者为止。</p>
-</li>
-</ul>
-<p data-sourcepos="15:1-15:164">最近OpenAI开源了Gym。Gym是一个【让大家可以通过几行代码将agent通过VNC连接到网络上某个用docker虚拟的训练环境进行训练】的python库。借助Gym，大家可以方便地用单步方法训练agent玩上千种游戏、跑上千种RL Benchmark了。可以预见从此RL领域的玄学会越来越少（类似ImageNet的作用）。</p>
-<p data-sourcepos="17:1-17:36">很快就会出现比如AI拳皇争霸赛、AI极品飞车、AI FIFA这样的比赛。</p>
-<p data-sourcepos="19:1-19:60">这样的进步速度是令人欣喜的。短短十几年，我们就从一帮人挤在游戏厅里玩游戏，进化到了一帮人挤在实验室里看agent玩游戏。</p>
+    <div class="markdown_content"><h2 data-sourcepos="3:1-3:8">NumJs</h2>
+<p data-sourcepos="5:1-5:31">JavaScript要开始跟Python抢科学计算的饭碗了吗？</p>
+<p data-sourcepos="7:1-7:17">向下面这个package的作者致敬</p>
+<p data-sourcepos="9:1-9:39"><a href="https://github.com/nicolaspanel/numjs">https://github.com/nicolaspanel/numjs</a></p>
+<p data-sourcepos="11:1-11:76">目前V8的native interoperability还不够好（毕竟是浏览器引擎），不能直接call C dll，在科学计算上暂时打不过python。</p>
 </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}

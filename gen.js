@@ -14,7 +14,7 @@ function jade(data){
 }
 
 var contentdir = pr + './content/'
-var destdir = pr + './generated/'
+var destdir = pr + './docs/'
 destdir = process.argv[2]||destdir
 
 var templdir = pr + './templates/site.jade'

@@ -46,8 +46,7 @@ plot 0
 
 在实现一个新的方法/架构之前，总是先将其最小化。
 
-- ImageNet wasn't built in one day
-- not even MNIST
+> ImageNet wasn't built in one day.
 
 最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.
 
