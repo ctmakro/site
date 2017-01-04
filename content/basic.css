@@ -17,6 +17,9 @@ ul li{
 ol{
 
 }
+img{
+  max-width: 100%;
+}
 .navnode{
     padding: 3px 3px 3px 20px;
     display: block;

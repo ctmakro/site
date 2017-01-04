@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../../favicon.ico">
+    <title>Activation Functions</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:43">Comparison of Activation Functions 激励函数比较</h1>
+<h2 data-sourcepos="5:1-5:22">problem description</h2>
+<p data-sourcepos="7:1-7:11">data source</p>
+<ul data-sourcepos="9:1-10:0">
+<li data-sourcepos="9:1-10:0">non-linear unbalanced imperfect PMSM motor</li>
+</ul>
+<p data-sourcepos="11:1-11:13">training data</p>
+<ul data-sourcepos="13:1-17:0">
+<li data-sourcepos="13:1-13:49">phase currents sampled from normal distribution</li>
+<li data-sourcepos="14:1-14:53">rotor phase angle sampled from uniform distribution</li>
+<li data-sourcepos="15:1-15:25">resulting static torque</li>
+<li data-sourcepos="16:1-17:0">1000 training, 500 validation</li>
+</ul>
+<p data-sourcepos="18:1-18:21">network architecture:</p>
+<pre><code data-sourcepos="20:1-35:18" class="language-text">input: 3-phase currents &amp; rotor phase angle
+output: torque
+
+currents[3]
+    -&gt;dense[3](activation)-&gt;dense[3](activation)-&gt;dense[5](activation)
+    -&gt;c1
+
+angle[1]-&gt;sin_and_cos[2]
+    -&gt;dense[3](activation)-&gt;dense[3](activation)-&gt;dense[5](activation)
+    -&gt;c2
+
+(c1[5] * c2[5]) -&gt; dense[1]
+
+91 free parameters
+</code></pre>
+<p data-sourcepos="37:1-37:4">loss</p>
+<ul data-sourcepos="39:1-40:0">
+<li data-sourcepos="39:1-40:0">MSE</li>
+</ul>
+<p data-sourcepos="41:1-41:78">visualizations: motor torque driven by 3-phase sine wave, actual and predicted</p>
+<h2 data-sourcepos="43:1-43:7">ReLU</h2>
+<p data-sourcepos="45:1-45:13"><img src="relu.png" alt="" /></p>
+<h2 data-sourcepos="47:1-47:10">sigmoid</h2>
+<p data-sourcepos="49:1-49:16"><img src="sigmoid.png" alt="" /></p>
+<h2 data-sourcepos="51:1-51:11">softplus</h2>
+<p data-sourcepos="53:1-53:17"><img src="softplus.png" alt="" /></p>
+<h2 data-sourcepos="55:1-55:7">tanh</h2>
+<p data-sourcepos="57:1-58:14"><img src="tanh.png" alt="" />
+<img src="tanh2.png" alt="" /></p>
+<h2 data-sourcepos="60:1-60:33">tanhsinc: tanh(x) * sin(x) / x</h2>
+<p data-sourcepos="62:1-62:17"><img src="tanhsinc.png" alt="" /></p>
+</div>
+    <script>
+      if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+  </body>
+</html>
