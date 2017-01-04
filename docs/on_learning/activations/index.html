@@ -70,14 +70,22 @@
 <li data-sourcepos="9:1-10:0">non-linear unbalanced imperfect PMSM motor</li>
 </ul>
 <p data-sourcepos="11:1-11:13">training data</p>
-<ul data-sourcepos="13:1-17:0">
-<li data-sourcepos="13:1-13:49">phase currents sampled from normal distribution</li>
-<li data-sourcepos="14:1-14:53">rotor phase angle sampled from uniform distribution</li>
-<li data-sourcepos="15:1-15:25">resulting static torque</li>
-<li data-sourcepos="16:1-17:0">1000 training, 500 validation</li>
+<ul data-sourcepos="13:1-20:0">
+<li data-sourcepos="13:1-14:0">
+<p data-sourcepos="13:3-13:49">phase currents sampled from normal distribution</p>
+</li>
+<li data-sourcepos="15:1-16:0">
+<p data-sourcepos="15:3-15:53">rotor phase angle sampled from uniform distribution</p>
+</li>
+<li data-sourcepos="17:1-18:0">
+<p data-sourcepos="17:3-17:25">resulting static torque</p>
+</li>
+<li data-sourcepos="19:1-20:0">
+<p data-sourcepos="19:3-19:31">1000 training, 500 validation</p>
+</li>
 </ul>
-<p data-sourcepos="18:1-18:21">network architecture:</p>
-<pre><code data-sourcepos="20:1-35:18" class="language-text">input: 3-phase currents &amp; rotor phase angle
+<p data-sourcepos="21:1-21:21">network architecture:</p>
+<pre><code data-sourcepos="23:1-38:18" class="language-text">input: 3-phase currents &amp; rotor phase angle
 output: torque
 
 currents[3]
@@ -88,26 +96,97 @@ angle[1]-&gt;sin_and_cos[2]
     -&gt;dense[3](activation)-&gt;dense[3](activation)-&gt;dense[5](activation)
     -&gt;c2
 
-(c1[5] * c2[5]) -&gt; dense[1]
+(c1[5] * c2[5]) -&gt; dense[1] -&gt; torque[1]
 
 91 free parameters
 </code></pre>
-<p data-sourcepos="37:1-37:4">loss</p>
-<ul data-sourcepos="39:1-40:0">
-<li data-sourcepos="39:1-40:0">MSE</li>
+<p data-sourcepos="40:1-40:9">objective</p>
+<ul data-sourcepos="42:1-43:0">
+<li data-sourcepos="42:1-43:0">predict torque based on phase currents and rotor angle.</li>
 </ul>
-<p data-sourcepos="41:1-41:78">visualizations: motor torque driven by 3-phase sine wave, actual and predicted</p>
-<h2 data-sourcepos="43:1-43:7">ReLU</h2>
-<p data-sourcepos="45:1-45:13"><img src="relu.png" alt="" /></p>
-<h2 data-sourcepos="47:1-47:10">sigmoid</h2>
-<p data-sourcepos="49:1-49:16"><img src="sigmoid.png" alt="" /></p>
-<h2 data-sourcepos="51:1-51:11">softplus</h2>
-<p data-sourcepos="53:1-53:17"><img src="softplus.png" alt="" /></p>
-<h2 data-sourcepos="55:1-55:7">tanh</h2>
-<p data-sourcepos="57:1-58:14"><img src="tanh.png" alt="" />
-<img src="tanh2.png" alt="" /></p>
-<h2 data-sourcepos="60:1-60:33">tanhsinc: tanh(x) * sin(x) / x</h2>
-<p data-sourcepos="62:1-62:17"><img src="tanhsinc.png" alt="" /></p>
+<p data-sourcepos="44:1-44:8">training</p>
+<ul data-sourcepos="46:1-49:0">
+<li data-sourcepos="46:1-47:0">
+<p data-sourcepos="46:3-46:16">Adam optimizer</p>
+</li>
+<li data-sourcepos="48:1-49:0">
+<p data-sourcepos="48:3-48:76">minimize mean-squared difference (MSE) of predicted angle and actual angle</p>
+</li>
+</ul>
+<h1 data-sourcepos="50:1-50:16">visualizations</h1>
+<ul data-sourcepos="52:1-55:0">
+<li data-sourcepos="52:1-53:0">
+<p data-sourcepos="52:3-52:85">motor torque driven by 3-phase sine wave, actual <code>gt_torq</code> vs predicted <code>pred_torq</code></p>
+</li>
+<li data-sourcepos="54:1-55:0">
+<p data-sourcepos="54:3-54:42">left plot x-axis: time elapsed (seconds)</p>
+</li>
+</ul>
+<h2 data-sourcepos="56:1-56:7">ReLU</h2>
+<ul data-sourcepos="58:1-59:0">
+<li data-sourcepos="58:1-59:0">won't work for obvious reasons.</li>
+</ul>
+<p data-sourcepos="60:1-60:13"><img src="relu.png" alt="" /></p>
+<h2 data-sourcepos="62:1-62:20">sigmoid(logistic)</h2>
+<ul data-sourcepos="64:1-65:0">
+<li data-sourcepos="64:1-65:0">good for logicstic regression, bad for real-valued data</li>
+</ul>
+<p data-sourcepos="66:1-66:16"><img src="sigmoid.png" alt="" /></p>
+<h2 data-sourcepos="68:1-68:11">softplus</h2>
+<ul data-sourcepos="70:1-75:0">
+<li data-sourcepos="70:1-71:0">
+<p data-sourcepos="70:3-70:21">integral of sigmoid</p>
+</li>
+<li data-sourcepos="72:1-73:0">
+<p data-sourcepos="72:3-72:29">what ReLU used to look like</p>
+</li>
+<li data-sourcepos="74:1-75:0">
+<p data-sourcepos="74:3-74:46">bad for real-valued data (lacked minus part)</p>
+</li>
+</ul>
+<p data-sourcepos="76:1-76:17"><img src="softplus.png" alt="" /></p>
+<h2 data-sourcepos="78:1-78:7">tanh</h2>
+<ul data-sourcepos="80:1-83:0">
+<li data-sourcepos="80:1-81:0">
+<p data-sourcepos="80:3-80:27">best for real-valued data</p>
+</li>
+<li data-sourcepos="82:1-83:0">
+<p data-sourcepos="82:3-82:63">least overfit + best performance among all activations tested</p>
+</li>
+</ul>
+<p data-sourcepos="84:1-84:13"><img src="tanh.png" alt="" /></p>
+<p data-sourcepos="86:1-86:14"><img src="tanh2.png" alt="" /></p>
+<h2 data-sourcepos="88:1-88:33">tanhsinc: tanh(x) * sin(x) / x</h2>
+<ul data-sourcepos="90:1-93:0">
+<li data-sourcepos="90:1-91:0">
+<p data-sourcepos="90:3-90:31">care more about local details</p>
+</li>
+<li data-sourcepos="92:1-93:0">
+<p data-sourcepos="92:3-92:38">turn underfit into overfit instantly</p>
+</li>
+</ul>
+<p data-sourcepos="94:1-94:17"><img src="tanhsinc.png" alt="" /></p>
+<h2 data-sourcepos="96:1-96:6">ELU</h2>
+<ul data-sourcepos="98:1-105:0">
+<li data-sourcepos="98:1-99:0">
+<p data-sourcepos="98:3-98:27"><em>visual</em> coolness of ReLU</p>
+</li>
+<li data-sourcepos="100:1-101:0">
+<p data-sourcepos="100:3-100:24">smoothness of softplus</p>
+</li>
+<li data-sourcepos="102:1-103:0">
+<p data-sourcepos="102:3-102:31">gradient-friendliness of tanh</p>
+</li>
+<li data-sourcepos="104:1-105:0">
+<p data-sourcepos="104:3-104:45">works with both real-valued data and images</p>
+</li>
+</ul>
+<p data-sourcepos="106:1-106:12"><img src="elu.png" alt="" /></p>
+<h2 data-sourcepos="108:1-108:19">Leaky ReLU (0.5)</h2>
+<ul data-sourcepos="110:1-111:0">
+<li data-sourcepos="110:1-111:0">just in case you wonder</li>
+</ul>
+<p data-sourcepos="112:1-112:14"><img src="lrelu.png" alt="" /></p>
 </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}
