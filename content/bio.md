@@ -11,7 +11,12 @@
 
 1993, Guangzhou
 
+![](flower_neural_loss_embossed_.jpg)
+
+(painted in Python w/ gradient descent stroke regression)
+
 # List of subjects I'm familiar with
+
 
 ## CS
 
@@ -53,6 +58,8 @@
 - Painting
 - Photography
 
+
+
 ## Literature
 
 - in Chinese only
@@ -62,7 +69,7 @@
 
 ## Hobby
 
-- all above.
+- all above
 - single player games
 
 ## Favorites

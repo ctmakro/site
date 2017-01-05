@@ -2,6 +2,8 @@
 
 # My Personal Site (Experimental)
 
+![](flower_neural_loss_embossed_.jpg)
+
 This site was generated offline using JavaScript.
 
 source: <https://github.com/ctmakro/site>
