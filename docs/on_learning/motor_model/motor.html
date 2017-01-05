@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../../favicon.ico">
+    <title>Learn models of motors</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:30">Learn models of motors (WIP)</h1>
+<p data-sourcepos="5:1-5:105">introduce a way to learn models of (imperfect or non-symmetrical) PMSM motors and models to control them.</p>
+<h2 data-sourcepos="7:1-7:23">background knowledge</h2>
+<p data-sourcepos="9:1-9:66">PMSM motors rotate because two fields interact and produce torque.</p>
+<ul data-sourcepos="11:1-16:0">
+<li data-sourcepos="11:1-12:0">
+<p data-sourcepos="11:3-11:45">stator field = nonlinearity(input currents)</p>
+</li>
+<li data-sourcepos="13:1-14:0">
+<p data-sourcepos="13:3-13:64">rotor field = nonlinearity(sin(rotor angle), cos(rotor angle))</p>
+</li>
+<li data-sourcepos="15:1-16:0">
+<p data-sourcepos="15:3-15:50">static torque T = dot(stator field, rotor field)</p>
+</li>
+</ul>
+<h2 data-sourcepos="17:1-17:14">first steps</h2>
+<ol data-sourcepos="19:1-22:0">
+<li data-sourcepos="19:1-20:0">
+<p data-sourcepos="19:4-19:151">drive the motor stochastically: sample input phase current <code>Ia</code> and <code>Ib</code> from normal distribution, and rotor angle <code>theta</code> from uniform distribution</p>
+</li>
+<li data-sourcepos="21:1-22:0">
+<p data-sourcepos="21:4-21:24">measure output torque</p>
+</li>
+</ol>
+<p data-sourcepos="23:1-23:110">now you have data pairs in the form of <code>(phase current Ia, phase current Ib, rotor angle theta) -&gt; (torque T)</code></p>
+<h2 data-sourcepos="25:1-25:20">learn motor_model</h2>
+<pre><code data-sourcepos="27:1-38:0" class="language-text">Neural Network
+
+phase_currents[2] -&gt; Dense[3](tanh) -&gt; Dense[5](tanh) -&gt; c1[5]
+
+rotor_angle[1] -&gt; sin_and_cos[2] -&gt; Dense[3](tanh) -&gt; Dense[5](tanh) -&gt; c2[5]
+
+// replace Dense[3] with Dense[poles*3] to deal with multi-pole motors
+
+(c1[5] * c2[5]) -&gt; Dense[1] -&gt; torque[1]
+
+</code></pre>
+<p data-sourcepos="40:1-40:138">number of datapoints must &gt; number of network parameters, to prevent overfit. typically you will need 100 datapoints for 60-80 parameters.</p>
+<p data-sourcepos="42:1-42:53">train the network with MSE loss and <em>Adam</em> optimizer.</p>
+<p data-sourcepos="44:1-44:7">result:</p>
+<p data-sourcepos="46:1-46:20"><img src="motor_model.svg" alt="" /></p>
+<p data-sourcepos="48:1-48:78">the model predicts the torque output(given current and rotor angle) perfectly.</p>
+<blockquote data-sourcepos="50:1-50:103">
+<p data-sourcepos="50:2-50:103">for more results using different activation functions, check <a href="../activations/index.html">Activations</a>.</p>
+</blockquote>
+<p data-sourcepos="52:1-52:29">now you have the motor_model.</p>
+<h2 data-sourcepos="54:1-54:21">current regression</h2>
+<p data-sourcepos="56:1-56:133">many combinations of phase currents can produce the same torque, but only one of them is optimal (generates only torque and no heat).</p>
+<p data-sourcepos="58:1-58:42">textbooks on PM motors will tell you that,</p>
+<blockquote data-sourcepos="60:1-60:90">
+<p data-sourcepos="60:3-60:90">greatest torque will be generated when stator field is perpendicular to the rotor field.</p>
+</blockquote>
+<p data-sourcepos="62:1-62:238">traditionally, rotor field angle is estimated from rotor angle but that assumes your rotor is perfectly symmetrical. how could we know the optimal current to produce the optimal magnetic field to drive an imperfect/ non-symmetrical motor?</p>
+<p data-sourcepos="64:1-64:57">since we already have motor_model, the problem reduce to:</p>
+<blockquote data-sourcepos="66:1-66:168">
+<p data-sourcepos="66:3-66:168">given any torque T and any angle theta, find phase currents <code>Ia</code> and <code>Ib</code> that satisfies <code>motor_model(Ia,Ib,theta) == T</code>, same time try to minimize <code>Ia^2</code> and <code>Ib^2</code>.</p>
+</blockquote>
+<pre><code data-sourcepos="68:1-73:0" class="language-text">Neural Network
+
+(phase_currents_in_question[2], rotor_angle[1]) -&gt; motor_model -&gt; torque[1]
+
+</code></pre>
+<p data-sourcepos="75:1-75:82">generate a list of rotor angles and torque numbers, then feed them to the network.</p>
+<p data-sourcepos="77:1-77:193">train the network input layer (the phase currents) with MSE loss + L2 regularization(prefer smaller values of Ia and Ib) with <em>Adam</em> optimizer. the rest of the network weights should be frozen.</p>
+<p data-sourcepos="79:1-79:7">result:</p>
+<p data-sourcepos="81:1-81:17"><img src="curr_reg.svg" alt="" /></p>
+<p data-sourcepos="83:1-83:194">the <code>phase_currents_in_question</code> are learned from white noise to generate desired torque. the actual torque (estimated using motor_model given <code>Ia</code> and <code>Ib</code>) is very close to the desired torque.</p>
+<p data-sourcepos="85:1-85:196">now you have data pairs in the form of <code>(rotor angle theta, torque T) -&gt; (phase current Ia, phase current Ib)</code>. most importantly, the current values are now optimal for the given torque and angle.</p>
+<p data-sourcepos="87:1-87:89">you should generate at least 1000 points of data, to prevent overfit in the next section.</p>
+<h2 data-sourcepos="89:1-89:22">learn control_model</h2>
+<p data-sourcepos="91:1-91:225">We can learn a torque-current model from the data pairs generated. given the desired torque and rotor angle, the model should be able to predict phase currents <code>Ia</code> and <code>Ib</code> (that could produce the desired torque) accurately.</p>
+<pre><code data-sourcepos="93:1-101:0" class="language-text">
+rotor_angle[1] -&gt; sin_and_cos[2] -&gt; Dense[3](tanh) -&gt; Dense[12](tanh) -&gt; c1
+
+desired_torque[1] -&gt; Dense[3](tanh) -&gt; Dense[12](tanh) -&gt; c2
+
+(c1[12] * c2[12]) -&gt; Dense[4](tanh) -&gt; Dense[4](tanh) -&gt; Dense[2] -&gt; currents[2]
+
+</code></pre>
+<p data-sourcepos="103:1-103:113">this network is more complex than previous ones since the underlying process is harder to fit than previous ones.</p>
+<blockquote data-sourcepos="105:1-105:50">
+<p data-sourcepos="105:2-105:50"><em>one-to-many</em> is harder to fit than <em>many-to-one</em></p>
+</blockquote>
+<p data-sourcepos="107:1-107:164">after training, we should be able to control the PMSM motor in torque mode, with an encoder, by generating appropriate phase currents from our neural network model.</p>
+<p data-sourcepos="109:1-109:18">here's the result:</p>
+<p data-sourcepos="111:1-111:22"><img src="control_model.svg" alt="" /></p>
+</div>
+    <script>
+      if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+  </body>
+</html>
