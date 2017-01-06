@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../favicon.ico">
+    <title>Policy Gradient Method 策略梯度方法</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/polgrad.html">Policy Gradient Method 策略梯度方法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:31">Policy Gradient Method 策略梯度方法</h1>
+<p data-sourcepos="5:1-5:229">there are many tutorials online for Reinforcement Learning and specifically the policy gradient method(s). not all of them are well written though, too much math is always the problem. this tutorial however, wants to change this.</p>
+<p data-sourcepos="7:1-7:317">Unfortunately this is going to be written in Chinese. For English readers: I put A LOT OF comments and explanations in English in the source code, so you could go directly to the code and see what it does. I guarantee it will be the most concise code ever written for Neural Network Based Deep Reinforcement Learning!</p>
+<p data-sourcepos="9:1-9:62"><a href="https://github.com/ctmakro/gymnastics/blob/master/polgrad.py">https://github.com/ctmakro/gymnastics/blob/master/polgrad.py</a></p>
+<h2 data-sourcepos="11:1-11:22">you must know <code>gym</code></h2>
+<p data-sourcepos="13:1-13:65">you must know how to install and run experiments with OpenAI Gym.</p>
+<p data-sourcepos="15:1-15:53">你必须知道如何安装OpenAI Gym环境，以及用它运行实验。（提示：<code>pip install gym</code>）</p>
+<h2 data-sourcepos="17:1-17:39">other verified RL learning resources</h2>
+<ul data-sourcepos="19:1-22:0">
+<li data-sourcepos="19:1-20:0">
+<p data-sourcepos="19:3-19:31">David Silver's youtube series</p>
+</li>
+<li data-sourcepos="21:1-22:0">
+<p data-sourcepos="21:3-21:121">John Schulman's youtube series (shorter than Silver's, and lower quality, but the code exercises he offered were GREAT)</p>
+</li>
+</ul>
+<h2 data-sourcepos="23:1-23:36">what you can then achieve 然后你可以实现</h2>
+<div style="text-align:center">
+<video src="training_episode_batch_video.mp4" controls="controls" style="max-width:320px" class="plot">
+if you see this, your browser sucks and can't load the video tag
+</video>
+</div>
+<p data-sourcepos="31:1-31:3">参见：</p>
+<p data-sourcepos="33:1-33:79"><a href="https://gym.openai.com/evaluations/eval_Xy4aCON2TDyhAZynJ3gTA#reproducibility">https://gym.openai.com/evaluations/eval_Xy4aCON2TDyhAZynJ3gTA#reproducibility</a></p>
+<h2 data-sourcepos="35:1-35:10">什么是策略梯度</h2>
+<p data-sourcepos="37:1-37:79">增强学习的一般情景：学习者(Agent)观察环境(Environment)，利用一定的策略(Policy)，来决定什么环境下应该作出什么行为(Action)。</p>
+<p data-sourcepos="39:1-39:130">如果用神经网络来充当学习者，那么网络的输入就是环境变量，或者称为State；而网络的输出就是Action。所谓的策略，就是网络的权重(Weights)。通过调节网络的权重（通常记为θ，即theta），我们就可以改变网络在面对一定环境时的输出，也就是改变了策略。</p>
+<p data-sourcepos="41:1-41:62">调节神经网络权重的最常用方法，是梯度下降法，我们先求出每一个权重对某个误差函数的梯度，然后从权重中减去这个梯度，以降低误差。</p>
+<p data-sourcepos="43:1-43:81">增强学习的目标，是最大化学习者通过其行为获得的报酬(Reward)。对于神经网络学习者，我们只要告诉它什么环境下做什么可以获得最大报酬，然后进行监督训练就可以了。</p>
+<p data-sourcepos="45:1-45:46">但是在增强学习的情景中，经常遇到这样的问题：我们做出了一系列的行为，但是获得的报酬迟迟才到。</p>
+<p data-sourcepos="47:1-47:61">比如去超市买西红柿，我们事先并不知道西红柿和西红柿之间的区别，买完回来被骂了一顿才知道买错了，或者被夸了一顿才知道买对了。</p>
+<p data-sourcepos="49:1-49:75">换言之，我们虽然获得了报酬，但并不确定是因为运气，还是之前的某个行为（比如在挑选西红柿的时候按照其外观分类）导致的，所以没办法给之前的每一步行为打分。</p>
+<p data-sourcepos="51:1-51:85">既然不能给每一步行为打分、无法计算行为对报酬的未来期望值的影响，我们就没有数据可以训练我们的神经网络。于是研究者们提出了一系列的方法，来估算每一步操作的报酬的未来期望值。</p>
+<p data-sourcepos="53:1-53:85">换言之，只要我们能估算网络权重θ，也就是我们所用的策略，对报酬的未来期望值E的梯度，我们就可以用梯度上升法调节θ，对网络进行训练，来提高网络输出的行为获得的报酬的期望值。</p>
+<p data-sourcepos="55:1-55:48">这就是“策略梯度”这个名称的由来。具体代码里我们可以把符号反过来，就变成大家都会做的梯度下降了。</p>
+<p data-sourcepos="57:1-57:51">说太多不如看代码，代码里我写了非常详尽的中文注释和英文注释，应该是目前市面上最简洁的深度增强学习代码。</p>
+<p data-sourcepos="59:1-59:52">代码发布在下面的地址。里面用keras框架实现了一个最简单的神经网络，你也可以改用你自己习惯的学习框架。</p>
+<p data-sourcepos="61:1-61:62"><a href="https://github.com/ctmakro/gymnastics/blob/master/polgrad.py">https://github.com/ctmakro/gymnastics/blob/master/polgrad.py</a></p>
+</div>
+    <script>
+      if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+  </body>
+</html>

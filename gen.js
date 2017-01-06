@@ -176,7 +176,7 @@ var preproc_mdtree = treewalker(filetree,leaf=>leaf.ext=='md'?preprocess_markdow
 var mdtree = treewalker(preproc_mdtree,process_markdown)
 
 var copytree = treewalker(filetree,leaf=>{
-  if('svg.py.html.htm.js.css.png.jpg.gif'.split('.').indexOf(leaf.ext)>=0){
+  if('mp4.svg.py.html.htm.js.css.png.jpg.gif'.split('.').indexOf(leaf.ext)>=0){
     print('justCopy:'.green,leaf.fname.red)
     var fr = contentdir+leaf.pathpad+leaf.fname
     var to = destdir+leaf.pathpad+leaf.fname

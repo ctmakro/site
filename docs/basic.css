@@ -36,7 +36,8 @@ img{
     display: inline-block;
     font-size: 10px;
 }
-  .navnode_title{}
+.navnode_title{}
+
 .plot {
   max-height: 400px;
   display: inline-block;
