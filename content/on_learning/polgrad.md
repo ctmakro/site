@@ -2,7 +2,7 @@
 
 # Policy Gradient Method 策略梯度方法
 
-there are many tutorials online for Reinforcement Learning and specifically the policy gradient method(s). not all of them are well written though, too much math is always the problem. this tutorial however, wants to change this.
+there are many tutorials online for Reinforcement Learning and specifically the policy gradient method(s). not all of them are well written though, too much math has always been a problem. this tutorial however, wants to change this.
 
 Unfortunately this is going to be written in Chinese. For English readers: I put A LOT OF comments and explanations in English in the source code, so you could go directly to the code and see what it does. I guarantee it will be the most concise code ever written for Neural Network Based Deep Reinforcement Learning!
 
