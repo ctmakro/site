@@ -46,6 +46,8 @@
                       </div>
                       <div class="navnode"><a href="./../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
                       </div>
+                      <div class="navnode"><a href="./../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
                       <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
                       </div>
                       <div class="navnode">
@@ -99,7 +101,7 @@
 <h2 data-sourcepos="29:1-29:25">2. 数据合成 Data Synthesis</h2>
 <p data-sourcepos="31:1-31:129">机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。</p>
 <p data-sourcepos="33:1-33:130">可能有人说计算机生成的数据集，与真实世界收集的数据相比，必然会有比较大的bias。实际上这完全取决于研究者对具体领域的了解。以视觉为例，如今的主流游戏引擎可以轻而易举地渲染照片级的画面，而DeepMind最近开源的DeepMindLab也不过就是一个游戏引擎。</p>
-<p data-sourcepos="35:1-35:24"><em>Update: OpenAI刚刚开源了Gym</em></p>
+<p data-sourcepos="35:1-35:29"><em>Update: OpenAI刚刚开源了Universe</em></p>
 <p data-sourcepos="37:1-37:185">对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如<a href="https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view">这样</a>）。</p>
 <blockquote data-sourcepos="39:1-39:95">
 <p data-sourcepos="39:3-39:95">If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton</p>

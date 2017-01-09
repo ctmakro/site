@@ -36,7 +36,7 @@ plot 0
 
 可能有人说计算机生成的数据集，与真实世界收集的数据相比，必然会有比较大的bias。实际上这完全取决于研究者对具体领域的了解。以视觉为例，如今的主流游戏引擎可以轻而易举地渲染照片级的画面，而DeepMind最近开源的DeepMindLab也不过就是一个游戏引擎。
 
-*Update: OpenAI刚刚开源了Gym*
+*Update: OpenAI刚刚开源了Universe*
 
 对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如[这样](https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view)）。
 
