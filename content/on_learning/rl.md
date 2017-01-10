@@ -12,7 +12,7 @@
 
 - 然后服务器通知B，B接到通知后，同样计算下一步的招数并发给服务器。如此轮流往复，直到产生胜者为止。
 
-最近OpenAI开源了Gym。Gym是一个【让大家可以通过几行代码将agent通过VNC连接到网络上某个用docker虚拟的训练环境进行训练】的python库。借助Gym，大家可以方便地用单步方法训练agent玩上千种游戏、跑上千种RL Benchmark了。可以预见从此RL领域的玄学会越来越少（类似ImageNet的作用）。
+最近OpenAI开源了Universe。Universe是一个【让大家可以通过几行代码将agent通过VNC连接到网络上某个用docker虚拟的训练环境进行训练】的python库。借助Universe，大家可以方便地用单步方法训练agent玩上千种游戏、跑上千种RL Benchmark了。可以预见从此RL领域的玄学会越来越少（类似ImageNet的作用）。
 
 很快就会出现比如AI拳皇争霸赛、AI极品飞车、AI FIFA这样的比赛。
 
