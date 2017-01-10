@@ -30,11 +30,13 @@ Here I implement the modified version in Keras.
 
 Notes:
 
-- the layer counts are customized (3 residual stacks, a total of 10 convolutional layers) for my own purpose.
+- By using batch normalization, the implemented network can fit CIFAR-10 to 0.72 accuracy in **5 epochs** (25/minibatch). the batch normalization layers increase the epoch time to 2x, but converges about 10x faster than without normalization.
 
-- !! No batch normalization layers included due to laziness. I wrote this mainly to play with CIFAR-10.
+- credit for batch normalization goes to: <http://jmlr.org/proceedings/papers/v37/ioffe15.pdf>
 
-- to replicate their results, you have to modify the code according to their paper or their Torch code on github.
+- please use Adam optimizer
+
+- the layer counts are customized (3 residual stacks, a total of 10 convolutional layers) for my own purpose. I call this ResNet-10.
 
 - for pre-trained ResNet-50, please check <https://keras.io/applications/>
 
@@ -43,7 +45,6 @@ def relu(x):
     return Activation('relu')(x)
 
 def neck(nip,nop,stride):
-    # nInputPlane, nOutputPlane, stride
     def unit(x):
         nBottleneckPlane = int(nop / 4)
         nbp = nBottleneckPlane
@@ -51,27 +52,33 @@ def neck(nip,nop,stride):
         if nip==nop:
             ident = x
 
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             x = Convolution2D(nbp,1,1,
             subsample=(stride,stride))(x)
 
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             x = Convolution2D(nbp,3,3,border_mode='same')(x)
 
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             x = Convolution2D(nop,1,1)(x)
 
             out = merge([ident,x],mode='sum')
         else:
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             ident = x
 
             x = Convolution2D(nbp,1,1,
             subsample=(stride,stride))(x)
 
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             x = Convolution2D(nbp,3,3,border_mode='same')(x)
 
+            x = BatchNormalization(axis=-1)(x)
             x = relu(x)
             x = Convolution2D(nop,1,1)(x)
 
@@ -98,17 +105,19 @@ i = inp
 
 i = Convolution2D(16,3,3,border_mode='same')(i)
 
-i = cake(16,32,3,1)(i)
-i = cake(32,64,3,2)(i)
-i = cake(64,128,3,2)(i)
+i = cake(16,32,3,1)(i) #32x32
+i = cake(32,64,3,2)(i) #16x16
+i = cake(64,128,3,2)(i) #8x8
 
+i = BatchNormalization(axis=-1)(i)
 i = relu(i)
-i = AveragePooling2D(pool_size=(8,8),border_mode='valid')(i)
-i = Flatten()(i)
+
+i = AveragePooling2D(pool_size=(8,8),border_mode='valid')(i) #1x1
+i = Flatten()(i) # 128
 
 i = Dense(10)(i)
 i = Activation('softmax')(i)
 
 model = Model(input=inp,output=i)
 ```
-![](res_model2.png)
+![](res_model.svg)
