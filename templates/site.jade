@@ -20,3 +20,8 @@ block content
   .markdown_content!=markdown(data.content)
   //- h1 some sample content here
   //- p #{data.content}
+
+  .meta_string
+    p file: #{data.fname}
+    //- p created: #{dateTimeString(data.btime)}
+    p last modified: #{dateTimeString(data.mtime)}

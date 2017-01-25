@@ -44,7 +44,9 @@ function build_tree_from(pathpad,depth){
   for(var i=0;i<cf.length;i++){
     var fname = cf[i]
 
-    if(fs.lstatSync(workingdir+fname).isDirectory()){
+    stats = fs.lstatSync(workingdir+fname)
+
+    if(stats.isDirectory()){
       var subtree = build_tree_from(pathpad+fname,depth+1)
       tree.nodes.push(subtree)
     }else{
@@ -61,6 +63,9 @@ function build_tree_from(pathpad,depth){
 
       leaf.fname_without_ext = fname_without_ext
       leaf.ext = ext
+
+      leaf.mtime = stats.mtime.getTime()
+      leaf.btime = stats.birthtime.getTime()
 
       tree.nodes.push(leaf);
     }
