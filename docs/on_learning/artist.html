@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../favicon.ico">
+    <title>Training of Artists</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../on_learning/artist.html">Training of Artists</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/relu.html">Rectified Linear Unit 整流线性单元</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:21">Training of Artists</h1>
+<p data-sourcepos="5:1-5:45">How to train an artist? for example to paint?</p>
+<p data-sourcepos="7:1-7:164">To answer that question, we must first answer: What do artists do. Another way to look at this question would be, what artists can do that normal people just can't?</p>
+<p data-sourcepos="9:1-9:171">An average painter who paint for a living must be able to paint a lot of things. Faces, objects... he must be able to produce photorealistic results of almost any subject.</p>
+<p data-sourcepos="11:1-11:79">To better illustrate the process of painting, consider the following algorithm:</p>
+<ol data-sourcepos="13:1-24:0">
+<li data-sourcepos="13:1-16:0">
+<p data-sourcepos="13:4-13:77">Compare the image of canvas C with scene S and calculate their difference:</p>
+<blockquote data-sourcepos="15:5-15:20">
+<p data-sourcepos="15:6-15:20">d1 = (C - S)^2.</p>
+</blockquote>
+</li>
+<li data-sourcepos="17:1-20:0">
+<p data-sourcepos="17:4-17:74">Paint a stroke K somewhere on canvas C, calculate the difference again:</p>
+<blockquote data-sourcepos="19:5-19:28">
+<p data-sourcepos="19:6-19:28">d2 = (Paint(C,K) - S)^2</p>
+</blockquote>
+</li>
+<li data-sourcepos="21:1-22:0">
+<p data-sourcepos="21:4-21:54">If d2 &lt; d1, keep the stroke K; otherwise remove it.</p>
+</li>
+<li data-sourcepos="23:1-24:0">
+<p data-sourcepos="23:4-23:15">Goto Step 1.</p>
+</li>
+</ol>
+<p data-sourcepos="25:1-25:148">This algorithm is guaranteed to reduce the mean-squared difference between C and S if we run it for sufficiently long. However it has several flaws:</p>
+<ol data-sourcepos="27:1-32:0">
+<li data-sourcepos="27:1-28:0">
+<p data-sourcepos="27:4-27:410">The perceptive difference between C and S is not the mean-squared difference of the images. We humans care more about some details than others, for example we care more about faces of human than rocks and trees. Most of the artist's work is spent on Mona Lisa's face, not the background. So the algorithm above does not converge towards minimal perceptive difference. (it will eventually, but takes forever)</p>
+</li>
+<li data-sourcepos="29:1-30:0">
+<p data-sourcepos="29:4-29:258">Where should we paint the stroke K? In what color? Well we may use the Monte-Carlo method: Draw the parameters of K from a uniform distribution. The algorithm will eventually converge, but that again takes forever (too high regret rate, too many retries).</p>
+</li>
+<li data-sourcepos="31:1-32:0">
+<p data-sourcepos="31:4-31:212">If we can't remove a painted stroke (say watercolor), this algorithm will not converge. This is why oil painting was so important to Renaissance: You can't mass produce artwork if you can't undo your mistakes.</p>
+</li>
+</ol>
+<p data-sourcepos="33:1-33:200">So the differences between artists and non-artists are quite clear now: We normal human certainly can't run the algorithm above faster than a computer, so the artists must be using a better algorithm.</p>
+<ol data-sourcepos="35:1-40:0">
+<li data-sourcepos="35:1-36:0">
+<p data-sourcepos="35:4-35:90">An artist must estimate perceptive difference very efficiently with very high accuracy.</p>
+</li>
+<li data-sourcepos="37:1-38:0">
+<p data-sourcepos="37:4-37:89">An artist must choose the parameters for K very efficiently with very low regret rate.</p>
+</li>
+<li data-sourcepos="39:1-40:0">
+<p data-sourcepos="39:4-39:122">An artist must be able to do in-brain simulation before painting strokes, in case where mistakes are expensive to undo.</p>
+</li>
+</ol>
+<p data-sourcepos="41:1-41:193">Indeed, the typical training a human artist receives when he attend an art school strengthen their: estimation of preceptive difference, instinct for stroke placement, in-brain image formation.</p>
+<p data-sourcepos="43:1-43:68">So, why don't we train the computer like an artist, to paint for us?</p>
+<p data-sourcepos="45:1-45:204">A while ago I wrote a program which paints realistic oil brush strokes. Using mean-squared difference and per-stroke per-parameter gradient descent it converges just fine(thousands of strokes in minutes).</p>
+<ul data-sourcepos="47:1-48:0">
+<li data-sourcepos="47:1-48:0">But the perceptive difference is decreasing too slowly. The painting looked flat and boring.</li>
+</ul>
+<p data-sourcepos="49:1-49:167">So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.</p>
+<p data-sourcepos="51:1-51:122">Since VGG16 is trained for image classification, it sure knows what features in images are important for human activities.</p>
+<p data-sourcepos="53:1-53:18">Here's what I got:</p>
+<p data-sourcepos="55:1-55:40"><img src="../flower_neural_loss_embossed_.jpg" alt="" /></p>
+<p data-sourcepos="57:1-57:5">Cool.</p>
+<ul data-sourcepos="59:1-64:0">
+<li data-sourcepos="59:1-60:0">
+<p data-sourcepos="59:3-59:246">But now the algorithm slows down. Neural networks are 1000x slower than mean-square; the gradients calculated by numerical differentiation (since the stroke process is not differentiable) on 8 parameters evaluate the neural network for 9 times.</p>
+</li>
+<li data-sourcepos="61:1-62:0">
+<p data-sourcepos="61:3-61:94">Good news: perceptive difference can be estimated with a neural network trained on ImageNet.</p>
+</li>
+<li data-sourcepos="63:1-64:0">
+<p data-sourcepos="63:3-63:111">Bad news: although gradient descent is 1e7 times more efficient than Monte-Carlo, still not efficient enough.</p>
+</li>
+</ul>
+<p data-sourcepos="65:1-65:280">Upcoming: I'm going to train a network that predicts optimal parameters for K very accurately based on current C and S. If this succeeds we may achieve a speed gain of about 50x. With RL techniques the network may even learn how to plan the strokes ahead to form special patterns.</p>
+</div>
+    <script>
+      if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+  </body>
+</html>
