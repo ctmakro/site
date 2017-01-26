@@ -24,3 +24,40 @@ function intosvg(command,fpath){
 
 // runonce('set term svg\n unset output\n plot [-3:3] sin(x)')
 module.exports.intosvg = intosvg
+
+//graphviz shit
+var spawn  = require('child_process').spawn
+
+function dot(command,fpath){
+  var gv = spawn('dot',[
+    '-Tsvg',
+    '-o'+fpath,
+  ])
+  var out = ''
+  var err = ''
+  gv.stdout.on('data',data=>{
+    out+=data
+  })
+  gv.stderr.on('data',data=>{
+    err+=data
+  })
+
+  gv.stdin.write(command)
+  gv.stdin.end()
+}
+
+function test(){
+  dot(`
+    digraph {
+      a -> b[label="0.2",weight="0.2"];
+      a -> c[label="0.4",weight="0.4"];
+      c -> b[label="0.6",weight="0.6"];
+      c -> e[label="0.6",weight="0.6"];
+      e -> e[label="0.1",weight="0.1"];
+      e -> b[label="0.7",weight="0.7"];
+    }
+    `,'./digraph.svg'
+  )
+}
+module.exports.dot = dot
+// test()

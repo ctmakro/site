@@ -151,6 +151,18 @@ var process_markdown =(leaf)=>{
       return `<img class="plot" src="${destfilename}" title="${tag}" />`
     })
 
+    content = content.replace(/<dot([\s\S]*?)\/>/gi,function(matching,p1,offset){
+      // for each replaced graph, generate one svg
+      var suffix = (plotcounter++).toString()
+      var destfilename = leaf.fname_without_ext+'_graph_'+suffix+'.svg'
+      print('generating',destfilename.cyan)
+      var command = p1
+      plot.dot(command, destdir+leaf.pathpad+destfilename)
+
+      var tag = 'graph '+suffix
+      return `<img class="graph" src="${destfilename}" title="${tag}" />`
+    })
+
     return content
   }
 
