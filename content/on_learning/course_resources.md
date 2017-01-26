@@ -2,7 +2,7 @@
 
 # Learning Resources
 
-Below are my recommendation on Learning Resources for ML and DL newbies. If you find yourself in the list, that means your course material is excellent and helped me a lot.
+Below are my recommendation on Learning Resources for ML and DL newbies. If you find yourself in the list, that means your work/material is excellent and helped me a lot.
 
 - *Machine Learning* Andrew Ng 吴恩达 ⭐️⭐️⭐️⭐️⭐️
 

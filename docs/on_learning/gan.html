@@ -39,6 +39,11 @@
               <div class="navnode"><a href="./../bio.html">About</a>
               </div>
               <div class="navnode">
+                      <div class="navnode_title">/lit</div>
+                      <div class="navnode"><a href="./../lit/why_bad_idea.html">Why Smart People Have Bad Ideas</a>
+                      </div>
+              </div>
+              <div class="navnode">
                       <div class="navnode_title">/on_learning</div>
                       <div class="navnode"><a href="./../on_learning/artist.html">Training of Artists</a>
                       </div>
@@ -158,15 +163,16 @@
 <li data-sourcepos="113:1-113:38">优秀的艺术家（生成式模型）可以在纸上还原房间的所有细节（不管是否重要）；</li>
 <li data-sourcepos="114:1-115:0">而一般人（区分式模型）只能在脑海里还原很少一部分、对完成日常任务有帮助的细节。</li>
 </ul>
-<h2 data-sourcepos="116:1-116:22">GAN Training Tricks</h2>
-<p data-sourcepos="118:1-118:70">在所有的tricks里面，亲测最有效的是batch discrimination和single-sided label smoothing.</p>
-<p data-sourcepos="120:1-120:83">G网络有一个取胜策略：令生成的每张图像都长得很像训练样例中的某（几）张图片，简称mode collapse。后果就是每次G网络生成的结果全都一样，D网络却分辨不出来。</p>
-<p data-sourcepos="122:1-122:103">解决方法:在D网络中的每一层，计算G网络生成的图像之间的相似度，并把相似度作为feature map输入到下一层，这样D网络就可以利用相似度信息识别出G网络生成的相似图片，以鼓励G网络生成具有多样性的图片。</p>
-<ul data-sourcepos="124:1-228:0">
-<li data-sourcepos="124:1-170:0">
-<p data-sourcepos="124:3-124:22">Batch Discrimination</p>
-<p data-sourcepos="126:3-126:161">在网络的每一层，对于每个minibatch中的每个sample，求其所有feature maps到其他sample的feature maps的距离，并将此距离作为一个feature map合并到其feature maps中。不同的paper对此有不同的实现方式，我的实现方式很简单，见下面的concat_diff函数：</p>
-<pre><code data-sourcepos="128:3-169:17" class="language-py"># Keras w/ TensorFlow
+<p data-sourcepos="116:1-116:69">这也可以解释为什么很多同学的英语填空选择很高分，但是作文和口语却很差：前者是区分式模型，后者是生成式模型，所需的训练量和容量差两个数量级。</p>
+<h2 data-sourcepos="118:1-118:22">GAN Training Tricks</h2>
+<p data-sourcepos="120:1-120:70">在所有的tricks里面，亲测最有效的是batch discrimination和single-sided label smoothing.</p>
+<p data-sourcepos="122:1-122:83">G网络有一个取胜策略：令生成的每张图像都长得很像训练样例中的某（几）张图片，简称mode collapse。后果就是每次G网络生成的结果全都一样，D网络却分辨不出来。</p>
+<p data-sourcepos="124:1-124:103">解决方法:在D网络中的每一层，计算G网络生成的图像之间的相似度，并把相似度作为feature map输入到下一层，这样D网络就可以利用相似度信息识别出G网络生成的相似图片，以鼓励G网络生成具有多样性的图片。</p>
+<ul data-sourcepos="126:1-230:0">
+<li data-sourcepos="126:1-172:0">
+<p data-sourcepos="126:3-126:22">Batch Discrimination</p>
+<p data-sourcepos="128:3-128:161">在网络的每一层，对于每个minibatch中的每个sample，求其所有feature maps到其他sample的feature maps的距离，并将此距离作为一个feature map合并到其feature maps中。不同的paper对此有不同的实现方式，我的实现方式很简单，见下面的concat_diff函数：</p>
+<pre><code data-sourcepos="130:3-171:17" class="language-py"># Keras w/ TensorFlow
 def concat_diff(i): # i -&gt; Tensor(batch,height,width,features)
     bv = Lambda(
     lambda x:K.mean(K.abs(x[:] - K.mean(x,axis=0)),axis=-1,keepdims=True)
@@ -208,22 +214,22 @@ def dis2(): # discriminative network, 2
     return m,mf
 </code></pre>
 </li>
-<li data-sourcepos="171:1-190:0">
-<p data-sourcepos="171:3-171:30">Single-sided Label Smoothing</p>
-<p data-sourcepos="173:3-173:22">这是D原本的cost function:</p>
-<pre><code data-sourcepos="175:3-178:32" class="language-py">loss = - (log(1-D(G(z))) + log(D(x)))
+<li data-sourcepos="173:1-192:0">
+<p data-sourcepos="173:3-173:30">Single-sided Label Smoothing</p>
+<p data-sourcepos="175:3-175:22">这是D原本的cost function:</p>
+<pre><code data-sourcepos="177:3-180:32" class="language-py">loss = - (log(1-D(G(z))) + log(D(x)))
 # without s-side lbl smoothing
 </code></pre>
-<p data-sourcepos="180:3-180:57">麻烦的是，如果D过于占上风（将训练样例和生成图片分得太清楚），G的参数梯度就会过大，有可能导致G网络无法收敛。</p>
-<p data-sourcepos="182:3-182:62">因此在计算binary cross-entropy函数的时候，可以将训练样例的概率目标调低一点，比如从1.0调到0.9：</p>
-<pre><code data-sourcepos="184:3-187:29" class="language-py">loss = - (log(1-D(G(z))) + 0.1 * log(1-D(x)) + 0.9 * log(D(x)))
+<p data-sourcepos="182:3-182:57">麻烦的是，如果D过于占上风（将训练样例和生成图片分得太清楚），G的参数梯度就会过大，有可能导致G网络无法收敛。</p>
+<p data-sourcepos="184:3-184:62">因此在计算binary cross-entropy函数的时候，可以将训练样例的概率目标调低一点，比如从1.0调到0.9：</p>
+<pre><code data-sourcepos="186:3-189:29" class="language-py">loss = - (log(1-D(G(z))) + 0.1 * log(1-D(x)) + 0.9 * log(D(x)))
 # with s-side lbl smoothing
 </code></pre>
-<p data-sourcepos="189:3-189:31">由于只修改了训练样例的概率目标，这种方法称为单边标签平滑。</p>
+<p data-sourcepos="191:3-191:31">由于只修改了训练样例的概率目标，这种方法称为单边标签平滑。</p>
 </li>
-<li data-sourcepos="191:1-228:0">
-<p data-sourcepos="191:3-191:38">My Generative Network implementation</p>
-<pre><code data-sourcepos="193:3-227:17" class="language-py"># Keras w/ TensorFlow
+<li data-sourcepos="193:1-230:0">
+<p data-sourcepos="193:3-193:38">My Generative Network implementation</p>
+<pre><code data-sourcepos="195:3-229:17" class="language-py"># Keras w/ TensorFlow
 def gen2(): # generative network, 2
     inp = Input(shape=(zed,))
     i = inp
@@ -259,12 +265,12 @@ def gen2(): # generative network, 2
 </code></pre>
 </li>
 </ul>
-<h2 data-sourcepos="229:1-229:5">最后</h2>
-<p data-sourcepos="231:1-231:54">推荐看Ian Goodfellow对GAN的专题视频。目前效果最好的2D图像生成式模型是PPGN，不妨关注。</p>
+<h2 data-sourcepos="231:1-231:5">最后</h2>
+<p data-sourcepos="233:1-233:54">推荐看Ian Goodfellow对GAN的专题视频。目前效果最好的2D图像生成式模型是PPGN，不妨关注。</p>
 </div>
     <div class="meta_string">
       <p>file: gan.md</p>
-      <p>last modified: 2017-01-26 23:14</p>
+      <p>last modified: 2017-01-26 23:40</p>
     </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}
