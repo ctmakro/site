@@ -4,7 +4,7 @@
 
 怎样学习机器学习？吴恩达曾经给出过他的答案：不断复现他人paper中的成果。
 
-以下是我自接触机器学习以来的一些经验总结。
+以下是我自接触机器学习(尤其是深度学习)以来的一些经验总结。
 
 ## 0. Know what you're doing
 
@@ -30,7 +30,13 @@ plot 0
 
 一个机器学习研究者应该可以随时列出生活中存在的100个亟待解决的问题，然后每月解决其中的几个。
 
-## 2. 数据合成 Data Synthesis
+## 2. Repeat what others had done, and study neuroscience
+
+对身边的问题敏感是不够的，你还必须虚心学习。
+
+ML is not about imagination. Your imagination suck when compared to what others had done. They suck when compared to what natural selection had done.
+
+## 3. 数据合成 Data Synthesis
 
 机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。
 
@@ -42,15 +48,15 @@ plot 0
 
 > If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton
 
-## 3. 最小化 Mnistification
+## 4. 最小化 Mnistification
 
-在实现一个新的方法/架构之前，总是先将其最小化。
+在尝试一个新的方法/架构之前，总是先将其最小化。
 
 > ImageNet wasn't built in one day.
 
 最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.
 
-## 4. 善于品味 Taste before read
+## 5. 善于品味 Taste before read
 
 <plot
 set title "Percentage of good papers"
@@ -63,14 +69,9 @@ plot '-' using 1:2:3:4:5:6 with circles lc var
 e
 />
 
-每天都有10份新的ML Paper，怎么办？科学讲究的是成果复现，而工程讲究的是品味。拿到一篇paper，先看文笔，他能在50个词之内讲清楚他的问题吗？然后以1.0页/秒的速度扫描全文，看看一共配了多少插图？
-
-三句话讲不清楚问题，或者全文无图，是作者不重视成果的体现。
-
-## 5. Signs of danger (IMO)
+## 6. Signs of danger (IMO)
 
 - Addicted to reading & posting things on Zhihu
-- Long, verbose Python code without comments
 - Repeatedly looking for data and challenges on Kaggle
 - Playing with hyper-parameters for over a day
 - Highlight one's error% in bold font

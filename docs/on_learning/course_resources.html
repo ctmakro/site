@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../favicon.ico">
+    <title>Learning Resources</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../on_learning/artist.html">Training of Artists</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/course_resources.html">Learning Resources</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gan.html">GAN 生成式对抗网络</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/activations/relu.html">Rectified Linear Unit 整流线性单元</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:20">Learning Resources</h1>
+<p data-sourcepos="5:1-5:172">Below are my recommendation on Learning Resources for ML and DL newbies. If you find yourself in the list, that means your course material is excellent and helped me a lot.</p>
+<ul data-sourcepos="7:1-53:79">
+<li data-sourcepos="7:1-10:0">
+<p data-sourcepos="7:3-7:45"><em>Machine Learning</em> Andrew Ng 吴恩达 ⭐️⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="9:3-9:65">
+<p data-sourcepos="9:4-9:65">ML is no longer rocket science🚀. It's now computer science💻.</p>
+</blockquote>
+</li>
+<li data-sourcepos="11:1-14:0">
+<p data-sourcepos="11:3-11:65"><em>Neural Networks for Machine Learning</em> Geoffrey Hinton ⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="13:3-13:63">
+<p data-sourcepos="13:4-13:63">You will (and a lot of people did) get inspiration from him.</p>
+</blockquote>
+</li>
+<li data-sourcepos="15:1-18:0">
+<p data-sourcepos="15:3-15:83">Andrej Karpathy's blog and his Course Materials for Stanford students. ⭐️⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="17:3-17:63">
+<p data-sourcepos="17:4-17:63">You will love him to the heart if you are a software hacker.</p>
+</blockquote>
+</li>
+<li data-sourcepos="19:1-22:0">
+<p data-sourcepos="19:3-19:56"><em><a href="http://rll.berkeley.edu/deeprlcourse/">http://rll.berkeley.edu/deeprlcourse/</a></em> UCB ⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="21:3-21:71">
+<p data-sourcepos="21:4-21:71">Brand new course based on brand new (and soon to be popular) papers.</p>
+</blockquote>
+</li>
+<li data-sourcepos="23:1-26:0">
+<p data-sourcepos="23:3-23:63"><em><a href="http://ai.berkeley.edu/lecture_videos.html">http://ai.berkeley.edu/lecture_videos.html</a></em> UCB ⭐️⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="25:3-25:136">
+<p data-sourcepos="25:4-25:136">Traditional AI approaches to problems, with comics and humor. People interested in Deep RL could borrow a lot from Dan Klein's class.</p>
+</blockquote>
+</li>
+<li data-sourcepos="27:1-32:0">
+<p data-sourcepos="27:3-27:89">David Silver's lecture and John Schulman's lecture exercises (both on YouTube) ⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="29:3-31:61">
+<p data-sourcepos="29:4-29:36">David Silver: Grandmaster Deep RL</p>
+<p data-sourcepos="31:4-31:61">John Schulman: lectures so-so, but the exercises are great</p>
+</blockquote>
+</li>
+<li data-sourcepos="33:1-36:0">
+<p data-sourcepos="33:3-33:92"><em>How to train a GAN</em> series of videos and papers from Ian Goodfellow and friends. ⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="35:3-35:54">
+<p data-sourcepos="35:4-35:54">Actual tricks may vary but the intuitions are gold.</p>
+</blockquote>
+</li>
+<li data-sourcepos="37:1-53:79">
+<p data-sourcepos="37:3-37:37">Paper on various topics. ⭐️⭐️⭐️⭐️⭐️</p>
+<blockquote data-sourcepos="39:3-39:261">
+<p data-sourcepos="39:5-39:261">These papers discuss mainly about the possibilities and impossibilities of neural networks. Basically if you don't know how to (or whether you can) train a human for a task, you won't be able to train neural networks for that task. They explain exactly why.</p>
+</blockquote>
+<p data-sourcepos="41:3-41:50"><em>Evolving Culture vs Local Minima</em> Yoshua Bengio</p>
+<p data-sourcepos="43:3-43:102"><em>Knowledge Matters: Importance of Prior Information for Optimization</em> Çağlar Gülçehre, Yoshua Bengio</p>
+<p data-sourcepos="45:3-45:48"><em>Reinforcement learning in the brain</em> Yael Niv</p>
+<blockquote data-sourcepos="47:3-47:158">
+<p data-sourcepos="47:5-47:158">Below is an excellent paper on human visual attention mechanism. If you know about human foveal receptive field patterns, you will find this work amazing.</p>
+</blockquote>
+<p data-sourcepos="49:3-49:121"><em>EMERGENCE OF FOVEAL IMAGE SAMPLING FROM LEARNING TO ATTEND IN VISUAL SCENES</em> Brian Cheung, Eric Weiss, Bruno Olshausen</p>
+<blockquote data-sourcepos="51:3-51:36">
+<p data-sourcepos="51:5-51:36">Below: How to descent elegantly.</p>
+</blockquote>
+<p data-sourcepos="53:3-53:79"><em>ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION</em> Diederik P. Kingma, Jimmy Lei Ba</p>
+</li>
+</ul>
+</div>
+    <div class="meta_string">
+      <p>file: course_resources.md</p>
+      <p>last modified: 2017-01-26 17:27</p>
+    </div>
+    <script>
+      if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+  </body>
+</html>

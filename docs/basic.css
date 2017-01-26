@@ -9,6 +9,10 @@
   /* margin-right: 5%; */
   max-width: 768px;
 }
+.markdown_content em {
+    color: gray;
+    margin: 0 2px 0 2px;
+}
 .meta_string {
     font-size: 10px;
     padding-left: 20px;

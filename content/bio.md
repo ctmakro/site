@@ -75,8 +75,9 @@
 ## Favorites
 
 - *Breaking Bad*
-- Yoshua's paper and Andrew & Geoffrey's video
-- Paul Graham's Essays
+- *The Daily Show*
+- *VGHS*
+- *H&P*
 
 ## Contact me
 
