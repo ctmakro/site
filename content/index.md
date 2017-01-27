@@ -20,4 +20,10 @@ unset key
 set title "sinc(x)"
 plot [-10:10][-.5:1.2] sinc(x)=sin(pi*x)/(pi*x), sinc(x)
 />
+
+<dot
+digraph{
+  main -> print -> return
+}
+/>
 </div>

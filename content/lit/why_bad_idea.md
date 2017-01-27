@@ -12,15 +12,15 @@ April 2005
 
 This summer, as an experiment, some friends and I are giving seed funding to a bunch of new startups. It's an experiment because we're prepared to fund younger founders than most investors would. That's why we're doing it during the summer—so even college students can participate.
 
-今年夏天，出于实验目的，我和我的几位朋友准备为一批创业团队提供种子基金。之所以称为实验，是因为大多数投资人都不会投资这么年轻的创始人。这也是我们选择夏天的原因——让在校生也有机会参加。
+今年夏天，出于实验目的，我和我的几位朋友准备为一批创业团队提供种子基金。之所以称为实验，是因为大多数投资人都不会投资这么年轻的创始人。这也是我们选择夏天的原因——这样在校生也能有机会参加。
 
 We know from Google and Yahoo that grad students can start successful startups. And we know from experience that some undergrads are as capable as most grad students. The accepted age for startup founders has been creeping downward. We're trying to find the lower bound.
 
-谷歌和雅虎的经验告诉我们，研究生可以创业成功。而经验也告诉我们，有的本科生比很多研究生的能力还强。创业者的年龄不断刷新下限，我们就是要找到这个下限。
+谷歌和雅虎证明了研究生是可以创业成功的。而经验也告诉我们，有些本科生比很多研究生的能力还强。创业者的年龄不断刷新下限，而我们就是在找这个下限。
 
 The deadline has now passed, and we're sifting through 227 applications. We expected to divide them into two categories, promising and unpromising. But we soon saw we needed a third: promising people with unpromising ideas. [1]
 
-截止时间已过，我们正在检阅这227份申请。我们原计划将申请分为两类：有前途的，和没戏的。然而我们很快发现需要第三类：人有前途，但是事情没戏。[1]
+截止时间已过，一共收到了227份申请。我们原计划把申请分为两类：有前途的，和没戏的。不过我们很快发现需要增加第三类：人有前途，但是事情没戏。[1]
 
 ### The Artix Phase
 
@@ -49,7 +49,7 @@ We're in good company here. Microsoft was not the first company Paul Allen and B
 
 In Robert's defense, he was skeptical about Artix. I dragged him into it. [3] But there were moments when he was optimistic. And if we, who were 29 and 30 at the time, could get excited about such a thoroughly boneheaded idea, we should not be surprised that hackers aged 21 or 22 are pitching us ideas with little hope of making money.
 
-罗伯特一直都吐槽，他当年其实并不看好Artix，是我拉他下水的。[3] 其实当年他比谁都看好。说实话，我们当年都29、30岁了，却还为了这么个SB创业计划激动个半天；如今一帮21、22岁的年轻俊杰向我们递来一个个完全没戏的创业计划，也该算是意料之中吧。
+罗伯特一直吐槽说他当年其实并不看好Artix，是我拉他下水的。[3] 其实当年他比谁都看好。你看吧，我们当年都29、30岁了，却还为了这么个SB创业计划激动个半天；如今一帮21、22岁的青年才俊向我们递来一个个完全没戏的创业计划，也该算是意料之中吧。
 
 ### The Still Life Effect
 
