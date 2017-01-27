@@ -11,7 +11,8 @@ source: <https://github.com/ctmakro/site>
 dependencies:
 
 - `npm install`
-- GNUPlot (for SVG graphics)
+- GNUPlot (for SVG plots)
+- graphviz (for SVG graphs)
 
 <div align=center>
 <plot
