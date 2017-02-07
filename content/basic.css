@@ -1,6 +1,6 @@
 .markdown_content{
   display: inline-block;
-  line-height: 1.5;
+  line-height: 1.7;
   font-size: 15px;
   letter-spacing: .1px;
   vertical-align: top;
@@ -39,8 +39,8 @@ pre{
   font-size: 14px;
 }
 .language-text{
-  font-family: consolas;
-  font-size: 12px;
+font-family: consolas;
+font-size: 12px;
 }
 pre .hljs {
   background-color: #f2fbf2;
