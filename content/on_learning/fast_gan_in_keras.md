@@ -120,3 +120,5 @@ To apply two different parameter updates in one forward-backward pass, you will 
 The full code is available at <https://github.com/ctmakro/hellotensor/blob/master/lets_gan_clean.py>.
 
 Here's the code running on a GTX 1060:
+
+![](gan_cifar_32.png)
