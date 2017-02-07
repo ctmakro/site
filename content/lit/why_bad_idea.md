@@ -178,29 +178,29 @@ But that, I'm convinced, is just the effect of training. Or more precisely, the 
 ----
 The good news is, choosing problems is something that can be learned. I know that from experience. Hackers can learn to make things customers want. [6]
 
-还好，挑选问题是一个可以学习的技能。我的经验同意这一点。黑客们能够学会为人民着想。[6]
+还好，挑选问题是一个可以学会的技能。这一点我是通过经验知道的。黑客们能够学会为人民着想。[6]
 
 This is a controversial view. One expert on "entrepreneurship" told me that any startup had to include business people, because only they could focus on what customers wanted. I'll probably alienate this guy forever by quoting him, but I have to risk it, because his email was such a perfect example of this view:
 
-这是一个具有争议的观点。一个“企业管理”方面的专家告诉我，任何创业公司都必须要有商务人士，因为只有这些人能够为人民着想。我在这里吐槽他可能会被他拉黑，但我还是要吐槽，因为他的邮件简直完美地证明了他的观点：
+当然不是每个人都这么认为。一个“企业管理”方面的专家跟我说过，任何创业公司都必须要有专门的商务人员，因为只有这些人能够为消费者着想。我在这里吐槽他可能会被他拉黑，但我还是要吐槽，因为他的邮件简直完美地体现了这种世界观：
 
 >80% of MIT spinoffs succeed provided they have at least one management person in the team at the start. The business person represents the "voice of the customer" and that's what keeps the engineers and product development on track.
 
 This is, in my opinion, a crock. Hackers are perfectly capable of hearing the voice of the customer without a business person to amplify the signal for them. Larry Page and Sergey Brin were grad students in computer science, which presumably makes them "engineers." Do you suppose Google is only good because they had some business guy whispering in their ears what customers wanted? It seems to me the business guys who did the most for Google were the ones who obligingly flew Altavista into a hillside just as Google was getting started.
 
->MIT的成功创业团队中，有80%在初期拥有至少一名“管理人士”。这些管理人士代表的是“人民的心声”，也正因如此，工程师与他们的产品才能够走上正轨。
+>MIT的成功创业团队中，有80%在初期拥有至少一名“管理人员”。这些管理人员代表的是“用户的心声”，正是因为他们，工程师与他们的产品才能够走向市场。
 
-在我看来，这纯属扯淡。黑客完全具有独立倾听用户心声的能力，而无需管理人士帮忙扩音。Larry Page 和 Sergey Brin是 计算机专业的研究生，因而被称为“工程师”。然而，你认为Google之所以牛逼，是因为它们的一帮“管理人士”在向Google传达用户的需求吗？
+要我说，这纯属扯淡。黑客完全具有独立倾听用户心声的能力，根本不需要什么“管理人员”来扩音。Larry Page 和 Sergey Brin是 计算机专业的研究生，这可能是他们被称为“工程师”的原因。你认为Google之所以牛逼，是因为它们有一帮“管理人员”在向Google传达用户的需求吗？
 
-我觉得对Google帮助最大的“管理人士”，应该是在Google起飞阶段，帮助Altavista（当时市场份额较大的另一家搜索引擎）成功坠毁的那一帮。
+我觉得对Google帮助最大的“管理人员”，应该是在Google起飞阶段，帮助Altavista（当时市场份额较大的另一家搜索引擎）成功坠毁的那一帮。
 
 The hard part about figuring out what customers want is figuring out that you need to figure it out. But that's something you can learn quickly. It's like seeing the other interpretation of an ambiguous picture. As soon as someone tells you there's a rabbit as well as a duck, it's hard not to see it.
 
-要搞清楚用户需要什么，最难就在于搞清楚【你必须搞清楚用户需要什么】这件事。但这件事并不难学。这就如同看一副双关画（同一副画中可以看出两种不同的物体），只要别人告诉你这是一只鸭加一只兔子，你想看不出来都难。
+要搞清楚用户需要什么，最难就在于搞清楚【你必须搞清楚用户需要什么】这件事。但这并没有多难学。这就如同看一副双关画（同一副画中可以看出两种不同的物体），只要别人告诉你这是一只鸭加一只兔子，你想看不出来都难。
 
 And compared to the sort of problems hackers are used to solving, giving customers what they want is easy. Anyone who can write an optimizing compiler can design a UI that doesn't confuse users, once they choose to focus on that problem. And once you apply that kind of brain power to petty but profitable questions, you can create wealth very rapidly.
 
-再者，与黑客们善于解决的那些问题（算法与数据结构）相比较，搞清楚“用户需要什么”简直毫无难度。一个能够写出一款带优化的编译器的人，一定可以设计一组不让用户迷茫的UI，只要他们真的沉下心来做。而一旦把这样的脑力用在那些不起眼但是富含利润的事情上，你很快就能创造大量的财富。
+再者，与黑客们善于解决的那些问题（算法与数据结构）相比较，搞清楚“用户需要什么”简直毫无难度。一个能够写出一款带优化的编译器的人，一定可以设计一组不让用户迷茫的UI，只要他们真的沉下心来做。而一旦把这样的脑力用在那些不起眼但是富含利润的事情上，很快就能创造大量的财富。
 
 That's the essence of a startup: having brilliant people do work that's beneath them. Big companies try to hire the right person for the job. Startups win because they don't—because they take people so smart that they would in a big company be doing "research," and set them to work instead on problems of the most immediate and mundane sort. Think Einstein designing refrigerators. [7]
 
@@ -216,11 +216,11 @@ Most smart people don't do that very well. But adding this ability to raw brainp
 
 A hacker who has learned what to make, and not just how to make, is extraordinarily powerful. And not just at making money: look what a small group of volunteers has achieved with Firefox.
 
-一个搞清楚【该做什么】，而不仅仅是【怎么做】的黑客是所向披靡的。这可不仅仅是讲金钱：看看一小群志愿者在Firefox上创造了多么伟大的奇迹。
+一个搞清楚【该做什么】，而不仅仅是【怎么做】的黑客是所向披靡的。这不一定要跟赚钱扯上关系：看看Firefox那一小帮志愿者都干了些什么。
 
 Doing an Artix teaches you to make something people want in the same way that not drinking anything would teach you how much you depend on water. But it would be more convenient for all involved if the Summer Founders didn't learn this on our dime—if they could skip the Artix phase and go right on to make something customers wanted. That, I think, is going to be the real experiment this summer. How long will it take them to grasp this?
 
-一次如Aritx般的失败，将教育你去做用户真正需要的产品，正如坚持一口水都不喝，将教育你水对人体的重要性。但是，如果各位申请人能够不重蹈我们的覆辙——如果他们能直接跳过Artix阶段，直接去做用户需要的产品，去为人民服务，不是更省事吗？我觉得，这才是这个夏天真正的实验项目：看看他们要多久才能理解这个道理。
+遭遇一次Aritx的失败，才知道要做用户真正需要的产品，就像坚持三天不喝一滴水，才知道水对人体的重要性。但是，如果各位申请人能够不重蹈我们的覆辙——如果他们能直接跳过Artix阶段，直接去做用户需要的产品，去为人民服务，不是更省事吗？我觉得，这才是这个夏天真正的实验项目：看看他们要多久才能理解这个道理。
 
 We decided we ought to have T-Shirts for the SFP, and we'd been thinking about what to print on the back. Till now we'd been planning to use
 
@@ -230,7 +230,7 @@ but now we've decided it's going to be
 
 - Make something people want.
 
-我们准备为申请者印一批T恤，正在研究背后应该印什么。直到刚才为止，我们打算用
+我们准备为申请人印一批T恤，正在研究背后应该印什么。一直到刚才为止，我们准备用
 
 - 看到这行字，说明我在干活。
 
@@ -244,34 +244,34 @@ Notes
 
 [1] SFP applicants: please don't assume that not being accepted means we think your idea is bad. Because we want to keep the number of startups small this first summer, we're going to have to turn down some good proposals too.
 
-各位申请人：被拒绝不等于你的BP写得不好。因为要限制第一届的参加人数，所以很多不错的创业方案我们也放弃了。
+各位申请人：被拒绝不等于你的创业方案写得不好。因为要限制第一届的参加人数，所以很多不错的创业方案我们也放弃了。
 
 [2] Dealers try to give each customer the impression that the stuff they're showing him is something special that only a few people have seen, when in fact it may have been sitting in their racks for years while they tried to unload it on buyer after buyer.
 
-卖画的人希望每一个顾客都以为眼前的作品是稀世珍品，实际上估计是在仓库积压了很久没有推销掉的。
+卖画的人希望每一个顾客都以为眼前的作品是稀世珍品，实际上都是在仓库积压了很久卖不掉的。
 
 [3] On the other hand, he was skeptical about Viaweb too. I have a precise measure of that, because at one point in the first couple months we made a bet: if he ever made a million dollars out of Viaweb, he'd get his ear pierced. We didn't let him off, either.
 
-不过话又说回来，当年他对Viaweb也不是很看好。这个我很清楚，因为头几个月的时候他跟我打赌，假如他能在Viaweb上赚超过一百万美元，他就去穿耳洞。最后当然两样都没落下。
+不过话又说回来，当年他对Viaweb也不是很看好。这个我很清楚，因为最开始几个月的时候他跟我打赌：假如他能在Viaweb上赚超过一百万美元，他就去穿耳洞。最后钱也赚了，耳洞也打了。
 
 [4] I wrote a program to generate all the combinations of "Web" plus a three letter word. I learned from this that most three letter words are bad: Webpig, Webdog, Webfat, Webzit, Webfug. But one of them was Webvia; I swapped them to make Viaweb.
 
-我写了一个程序，生成所有“Web”外加三个字母的组合。然后我就发现大多数三个字母的词都不太好：Webpig, Webdog, Webfat, Webzit, Webfug. 不过其中一个是Webvia，我把它调换了一下，改成了Viaweb.
+我写了一个程序，生成所有“Web”外加三个字母的组合。然后我才发现大多数三个字母的词都不好听：Webpig, Webdog, Webfat, Webzit, Webfug. 不过，其中有一个Webvia，我把它调换了一下，改成了Viaweb.
 
 [5] It's much easier to sell services than a product, just as it's easier to make a living playing at weddings than by selling recordings. But the margins are greater on products. So during the Bubble a lot of companies used consulting to generate revenues they could attribute to the sale of products, because it made a better story for an IPO.
 
-服务比产品好赚，就如同在婚礼上放大屏幕，比事后卖录像带要好赚。但是产品的利润空间更大。所以互联网泡沫期间，很多公司把他们咨询服务的利润记到产品销售利润里去，因为这样更迎合IPO的需求。
+服务比产品好赚钱，就像在婚礼上大屏幕上放录像，比婚礼结束后卖录像带要赚得快。不过产品的盈利空间更大，所以在互联网泡沫期间，就有很多公司把咨询服务的利润记到产品销售的利润里面去，来帮IPO铺路。
 
 [6] Trevor Blackwell presents the following recipe for a startup: "Watch people who have money to spend, see what they're wasting their time on, cook up a solution, and try selling it to them. It's surprising how small a problem can be and still provide a profitable market for a solution."
 
-Trever Blackwell 提出了以下创业配方：“观察那些有钱没地方花的人把时间浪费在哪里，然后熬出一个解决方案卖给他们。有时你会惊讶：不管一个问题多么不起眼，总还是有人愿意买单。”
+Trever Blackwell 提出了以下创业配方：“注意观察那些有钱没地方花的人都把时间浪费在哪里，然后拼凑一个解决方案向他们收费。令人感到惊讶的是，不管多小一点问题，都会有人宁可掏钱。”
 
 [7] You need to offer especially large rewards to get great people to do tedious work. That's why startups always pay equity rather than just salary.
 
-要让最优秀的人干郁闷的活，就必须提供足够大的回报。这就是为什么创业团队除了工资往往还要给期权。
+要让最优秀的人做最乏味的工作，你就必须提供特别高的报酬。这就是为什么创业团队的报酬除了工资，往往还有股份和期权。
 
 [8] Buy an old copy from the 1940s or 50s instead of the current edition, which has been rewritten to suit present fashions. The original edition contained a few unPC ideas, but it's always better to read an original book, bearing in mind that it's a book from a past era, than to read a new version sanitized for your protection.
 
-买40年代或者50年代的旧版，新版都是改写过的。旧版里面有一些政治不正确的言论，但不管怎样，在知情的情况下读原版，总是比读那些为了保护你的视力而阉割过的要好。
+最好买40年代或者50年代的旧版，新版都是改写过的。旧版里面有一些政治不正确的言论，但不管怎么说，在知情的情况下读原版，总是比读那些为了保护你的视力而阉割过的版本要好。
 
 Thanks to Bill Birch, Trevor Blackwell, Jessica Livingston, and Robert Morris for reading drafts of this.
