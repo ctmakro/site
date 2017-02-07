@@ -1,5 +1,8 @@
 .markdown_content{
   display: inline-block;
+  line-height: 1.5;
+  font-size: 15px;
+  letter-spacing: .1px;
   vertical-align: top;
   margin-left: 10px;
   border-width: 0 1px 0 1px;
@@ -8,6 +11,7 @@
   padding: 0 20px 0 20px;
   /* margin-right: 5%; */
   max-width: 768px;
+  /* background-color: hsla(33, 56%, 99%, 1); */
 }
 .markdown_content em {
     color: gray;
@@ -25,15 +29,23 @@
 p{
 
 }
+body{
+  font-family: "Lato", "Microsoft YaHei",sans-serif;
+}
 pre{
   background-color: #d6ead6;
   padding: 3px;
   margin: 10px 0 10px 0;
   font-size: 14px;
 }
-
+.language-text{
+  font-family: consolas;
+  font-size: 12px;
+}
 pre .hljs {
   background-color: #f2fbf2;
+  font-family: consolas;
+  font-size: 12px;
 }
 ul,ol{
 
@@ -82,7 +94,8 @@ img{
 }
 
 :not(pre)>code{
-  background-color: #d2eccd;
+  background-color: hsla(110, 45%, 87%, 1);
+  font-family: consolas;
   padding: 3px;
   color: #0b3e0b;
 }

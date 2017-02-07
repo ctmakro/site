@@ -265,7 +265,7 @@ x = 0.539285, 1.137937, problem(x) = -0.000000
 <p data-sourcepos="239:1-239:31">把这N个偏导数，组合成一个N维矢量，称为函数f在点x处的梯度。</p>
 <p data-sourcepos="241:1-241:29">在教科书中，梯度一般记为倒三角，因此梯度下降法通常这么写：</p>
 <blockquote data-sourcepos="243:1-243:14">
-<p data-sourcepos="243:3-243:14">θ := θ - α▽θ</p>
+<p data-sourcepos="243:3-243:14">θ := θ - α∇θ</p>
 </blockquote>
 <p data-sourcepos="245:1-245:43">在python中，如果使用numpy库，把梯度作为矢量进行运算，之前的代码可以简写为：</p>
 <pre><code data-sourcepos="247:1-249:24" class="language-python">x = x - gradient * alpha
@@ -343,7 +343,7 @@ x = [ 0.50742654  1.58506182  1.39049568  0.81654043], problem(x) = 0.000000
 </div>
     <div class="meta_string">
       <p>file: gd.md</p>
-      <p>last modified: 2017-01-07 18:12</p>
+      <p>last modified: 2017-02-08 03:31</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
@@ -355,5 +355,6 @@ x = [ 0.50742654  1.58506182  1.39049568  0.81654043], problem(x) = 0.000000
       hljs.initHighlightingOnLoad();
       
     </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   </body>
 </html>

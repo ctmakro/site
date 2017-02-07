@@ -22,7 +22,11 @@ To better illustrate the process of painting, consider the following algorithm:
 
 4. Goto Step 1.
 
-This algorithm is guaranteed to reduce the mean-squared difference between C and S if we run it for sufficiently long. However it has several flaws:
+This algorithm is guaranteed to reduce the mean-squared difference between C and S if we run it for sufficiently long.
+
+![](633_0004.png)
+
+However it has several flaws:
 
 1. The perceptive difference between C and S is not the mean-squared difference of the images. We humans care more about some details than others, for example we care more about faces of human than rocks and trees. Most of the artist's work is spent on Mona Lisa's face, not the background. So the algorithm above does not converge towards minimal perceptive difference. (it will eventually, but takes forever)
 
@@ -30,7 +34,7 @@ This algorithm is guaranteed to reduce the mean-squared difference between C and
 
 3. If we can't remove a painted stroke (say watercolor), this algorithm will not converge. This is why oil painting was so important to Renaissance: You can't mass produce artwork if you can't undo your mistakes.
 
-So the differences between artists and non-artists are quite clear now: We normal human certainly can't run the algorithm above faster than a computer, so the artists must be using a better algorithm.
+So the differences between artists and non-artists are quite clear now: We human certainly can't run the algorithm above faster than a computer, so the artists must be using a better algorithm.
 
 1. An artist must estimate perceptive difference very efficiently with very high accuracy.
 
@@ -45,6 +49,8 @@ So, why don't we train the computer like an artist, to paint for us?
 A while ago I wrote a program which paints realistic oil brush strokes. Using mean-squared difference and per-stroke per-parameter gradient descent it converges just fine(thousands of strokes in minutes).
 
 - But the perceptive difference is decreasing too slowly. The painting looked flat and boring.
+
+![](200_0009.jpg)
 
 So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.
 
