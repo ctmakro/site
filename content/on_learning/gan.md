@@ -2,6 +2,8 @@
 
 # Generative Adversarial Network 生成式对抗网络
 
+>更新：我用Keras加一点点Tensorflow实现了一个非常快的GAN，详见 <fast_gan_in_keras.html>
+
 常见的神经网络可以分为“生成式模型”和“区分式模型”。区分式模型(discriminative model)尝试在输入特征之间建立近似的and或者or的关系，以实现对输入进行分类的目的。
 
 比如我们用猫和老虎的脸部图片，训练一个神经网络对物种进行分类，网络通常会这么做：
@@ -170,8 +172,8 @@ GAN方法需要两个神经网络，一个生成网络G和一个区分网络D。
 
 <dot
 digraph{
-  "some_vector z" -> G -> generated_image
-  input_image -> D -> "p(input), 1 for real, 0 for fake"
+  "some_vector z" -> G -> "generated(fake) image"
+  "input(real) image" -> D -> "p(input), 1 for real, 0 for fake"
 }
 />
 

@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title>Power System Analysis</title>
+    <title> Fast DCGAN in Keras</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -83,23 +83,80 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:13">《电力系统分析（上）》</h1>
-<p data-sourcepos="5:1-5:29">电气工程专业的主要就业方向是国家电力部门，也就是两个电网。</p>
-<p data-sourcepos="7:1-7:55">电网是国家经济的命脉，市区停电一天可能导致上亿的损失，因此电网的工作岗位稳定，薪资体面，在很多人眼里是金饭碗。</p>
-<p data-sourcepos="9:1-9:77">如果把电网比作九尾，24小时向全国人民源源不断地提供查克拉，那么在电网工作，就有点像当人柱力。人柱力是火影里最稳定的职业，出场费也给得很高，大家也很羡慕。</p>
-<p data-sourcepos="11:1-11:108">电力系统是很老的技术，早在计算机、原子弹、宇宙飞船、移动电话、互联网出现之前就已经投入大规模应用了。因此电网的主要技术工作都集中在如何保持稳定运行、如何快速排查故障、如何设计保护措施……不会有多少发挥个人创意的空间。</p>
-<p data-sourcepos="13:1-13:77">前段时间阿里把写程序抢月饼的同志开除了。通过这个事情，我们可以把人分成两类，一类是喜欢写程序抢月饼的，还有一类是时刻遵守规则的。电网需要的，就是后一类人。</p>
-<p data-sourcepos="15:1-15:60">前一类人其实也可以去电网，通常有两种结果：待不下去走人，或者一个不小心见了马克思。出于省事，电网其实也不太青睐前一类人。</p>
-<p data-sourcepos="17:1-17:45">电气工程的基础是电路理论，但在求解相关问题、应用相关概念的时候，会使用一套自有的语言体系。</p>
-<p data-sourcepos="19:1-19:107">比如《电力系统分析》中的“有名值”和“标幺值”，其实就是“有量纲”和“无量纲”的意思，但是除了电气工程，没有别的行业是这样叫的。还有所谓的“暂态电势”和“次暂态电势”，其实就是 dE/dt 和 dE^2/d^2t.</p>
-<p data-sourcepos="21:1-21:80">这套语言体系跟控制系统、信号处理等领域的语言有比较大的差别，因为两者覆盖的人群几乎没有交集。电子工程师很少有跟电网打交道的，电网工程师也几乎不会出现在电子行业。</p>
-<p data-sourcepos="23:1-23:206">像电子和计算机这些专业，不论遇到什么困难，都可以先跑个仿真或者写个脚本。在电气工程领域，一比一的实验通常是不可能的（虽然仿真还是可以仿），一切都要求事先计算好，然后尽可能一次成功。上面提到电网比计算机还老，所以遇到有些问题不太好计算的，《电力系统分析》里就会给出各种替代算法、替代分析方法，即便手头没有纸和笔，也可以用“标幺值”进行大概估算。还有传输线模型，每隔几百公里一个π网络，目的也是为了简化手工计算流程。</p>
-<p data-sourcepos="25:1-25:74">学完《电力系统分析》，对此体会尤其深刻：虽然学会了一些计算电力系统参数、分析电力系统故障的方法，但这些方法放到电气工程之外的领域，几乎没有任何用途。</p>
-<p data-sourcepos="27:1-27:72">总结：这是一个与世隔绝、自成体系的学科；这是一个重视经验，循规蹈矩的专业。如果你是一个对事物充满好奇，而且特别有表现欲的人，千万别报电气工程呀。</p>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:21">Fast DCGAN in Keras</h1>
+<p data-sourcepos="5:1-5:146">DCGAN have been implemented in a lot of frameworks. However, existing Keras and Tensorflow implementations are SLOW due to duplicated computation.</p>
+<p data-sourcepos="7:1-7:23">Here's the GAN concept:</p>
+<img class="graph" src="fast_gan_in_keras_graph_0.svg" title="graph 0" />
+<p data-sourcepos="11:1-11:49">And here's the optimal GAN training architecture:</p>
+<img class="graph" src="fast_gan_in_keras_graph_1.svg" title="graph 1" />
+<p data-sourcepos="15:1-15:64">Basically we want to do two things in one forward-backward pass:</p>
+<ol data-sourcepos="17:1-19:0">
+<li data-sourcepos="17:1-17:26">update Wd w.r.t. D_loss</li>
+<li data-sourcepos="18:1-19:0">update Wg w.r.t. G_loss</li>
+</ol>
+<p data-sourcepos="20:1-20:97">This kind of update(different parameters w.r.t. different loss) however is not possible in Keras.</p>
+<blockquote data-sourcepos="22:1-22:46">
+<p data-sourcepos="22:3-22:46">but possible in Torch - check soumith/dcgan.</p>
+</blockquote>
+<p data-sourcepos="24:1-24:145">So the dumb solution was to create two model, one updates Wd after its forward-backward pass, another updates Wg after its forward-backward pass.</p>
+<img class="graph" src="fast_gan_in_keras_graph_2.svg" title="graph 2" />
+<p data-sourcepos="28:1-28:68">That worked, but unfriendly to our precious computational resources.</p>
+<p data-sourcepos="30:1-30:145">To apply two different parameter updates in one forward-backward pass, you will need to write your own update code in raw Tensorflow. Here's how:</p>
+<ol data-sourcepos="32:1-79:0">
+<li data-sourcepos="32:1-33:0">
+<p data-sourcepos="32:4-32:45">Create D and G network in Keras, as usual;</p>
+</li>
+<li data-sourcepos="34:1-72:0">
+<p data-sourcepos="34:4-34:50">Write your parameter update operations by hand:</p>
+<pre><code data-sourcepos="36:5-71:0" class="language-py"># noise: the input z
+noise = Input(shape=(zed,))
+# real_image input
+real_image = Input(shape=(32,32,3))
+
+# dm and gm are your generative and discriminative network.
+generated = gm(noise)
+
+# dm should produce a score between (0,1) remember?
+gscore = dm(generated)
+rscore = dm(real_image)
+
+def log_eps(i):
+    return K.log(i+1e-11)
+
+# calculate the losses
+
+# single side label smoothing: replace 1.0 with 0.9 for real input
+dloss = - K.mean(log_eps(1-gscore) + .1 * log_eps(1-rscore) + .9 * log_eps(rscore))
+gloss = - K.mean(log_eps(gscore))
+
+Adam = tf.train.AdamOptimizer
+
+lr,b1 = 1e-4,.2 # otherwise won't converge.
+optimizer = Adam(lr,beta1=b1)
+
+# update Wd w.r.t. D_loss
+grad_loss_wd = optimizer.compute_gradients(dloss, dm.trainable_weights)
+update_wd = optimizer.apply_gradients(grad_loss_wd)
+
+# update Wg w.r.t G_loss
+grad_loss_wg = optimizer.compute_gradients(gloss, gm.trainable_weights)
+update_wg = optimizer.apply_gradients(grad_loss_wg)
+
+</code></pre>
+</li>
+<li data-sourcepos="73:1-79:0">
+<p data-sourcepos="73:4-73:68">instead of using <code>model.fit()</code>, run the parameter update by hand:</p>
+<pre><code data-sourcepos="75:5-78:60" class="language-py">train_step = [update_wd, update_wg, other_parameter_updates]
+sess.run(train_step,feed_dict={noise,real_image.......})
+</code></pre>
+</li>
+</ol>
+<p data-sourcepos="80:1-80:101">The full code is available at <a href="https://github.com/ctmakro/hellotensor/blob/master/lets_gan_clean.py">https://github.com/ctmakro/hellotensor/blob/master/lets_gan_clean.py</a>.</p>
+<p data-sourcepos="82:1-82:38">Here's the code running on a GTX 1060:</p>
 </div>
     <div class="meta_string">
-      <p>file: electrical.md</p>
-      <p>last modified: 2017-01-03 12:32</p>
+      <p>file: fast_gan_in_keras.md</p>
+      <p>last modified: 2017-02-08 01:03</p>
     </div>
     <script>
       if(window.HighlightEverything){window.HighlightEverything()}
