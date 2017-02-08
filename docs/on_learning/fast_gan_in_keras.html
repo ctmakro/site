@@ -109,9 +109,9 @@
 <li data-sourcepos="34:1-72:0">
 <p data-sourcepos="34:4-34:50">Write your parameter update operations by hand:</p>
 <pre><code data-sourcepos="36:5-71:0" class="language-py"># noise: the input z
-noise = Input(shape=(zed,))
 # real_image input
-real_image = Input(shape=(32,32,3))
+noise = Input(shape=g.input_shape[1:])
+real_image = Input(shape=d.input_shape[1:])
 
 # dm and gm are your generative and discriminative network.
 generated = gm(noise)
@@ -157,7 +157,7 @@ sess.run(train_step,feed_dict={noise,real_image.......})
 </div>
     <div class="meta_string">
       <p>file: fast_gan_in_keras.md</p>
-      <p>last modified: 2017-02-08 01:38</p>
+      <p>last modified: 2017-02-09 02:11</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

@@ -75,9 +75,9 @@ To apply two different parameter updates in one forward-backward pass, you will 
 
     ```py
     # noise: the input z
-    noise = Input(shape=(zed,))
     # real_image input
-    real_image = Input(shape=(32,32,3))
+    noise = Input(shape=g.input_shape[1:])
+    real_image = Input(shape=d.input_shape[1:])
 
     # dm and gm are your generative and discriminative network.
     generated = gm(noise)
