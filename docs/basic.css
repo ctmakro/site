@@ -61,6 +61,9 @@ ol{
 }
 img{
   max-width: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e0adad;
 }
 .navnode{
   padding: 3px 3px 3px 10px;
@@ -94,10 +97,10 @@ img{
 }
 
 :not(pre)>code{
-  background-color: hsla(110, 45%, 87%, 1);
+  background-color: hsl(110, 18%, 94%);
   font-family: consolas;
   padding: 3px;
-  color: #0b3e0b;
+  color: #121f12;
 }
 blockquote{
   background-color: #f9eec6;
