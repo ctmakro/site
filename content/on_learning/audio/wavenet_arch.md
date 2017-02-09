@@ -16,7 +16,7 @@ Just like the image shown above: two sinewave S1 and S2 are marked in red and bl
 
 WaveNet does EXACTLY that, but in the neural network way (so nonlinearties of various kind could be added and trained to deal with real world problems).
 
-1. assume the input signal s1+s2 is being sampled at a frequency of `fs`, and the L1-L2 convolution kernel(drawn in cyan) is sensitive to the difference between two samples.
+1. assume the input signal s1+s2 is being sampled at a frequency of `fs`, and the L1-L2 convolution kernel(drawn in cyan) is sensitive to the difference between two input samples.
 
     ![](wavenet_arch_demo_conv.png)
 
@@ -24,7 +24,7 @@ WaveNet does EXACTLY that, but in the neural network way (so nonlinearties of va
 
     L2 can now say, "I saw a signal of frequency `fs/2` of amplitude `b0 = a0 - a1`".
 
-2. L1 may also pass bias (common part of `a0` and `a1`) information to L2(using the Residual connection drawn in purple).
+2. L1 may also pass bias (common part of `a0` and `a1`) information to L2, using convolution kernels (drawn in purple) that are sensitive to the sum between two input samples.
 
     ![](wavenet_arch_demo_res.png)
 
