@@ -170,7 +170,7 @@
 <p data-sourcepos="137:1-137:202">这也就解释了，为什么各种style transfer实现，都优先选用L-BFGS为优化器。L-BFGS属于 second order method，对上述诸多问题免疫力较高，只可惜L-BFGS原作太高深，以Fortran书写，各大学习框架尚不敢妄自实现，连scikit也只是拿人家的Fortran wrap了一下，而tensorflow又把scikit wrap了一下，到目前为止还没人把这算法弄上显卡。</p>
 <h2 data-sourcepos="139:1-139:10">Finally</h2>
 <p data-sourcepos="141:1-141:24">因为VGG19比较慢，我实验都用的是VGG16.</p>
-<ol data-sourcepos="143:1-181:0">
+<ol data-sourcepos="143:1-201:15">
 <li data-sourcepos="143:1-146:0">
 <p data-sourcepos="143:4-143:113">把 content layer 从 conv4_2 调到 conv5_2. 为了验证content layer 捕捉到我需要的内容，先将style loss关掉，然后以Adam学习率0.001对输入进行梯度下降，效果如下</p>
 <p data-sourcepos="145:5-145:25"><img src="result_again.png" alt="" /></p>
@@ -202,21 +202,19 @@ white_noise_image = tf.Variable(
 <p data-sourcepos="176:5-176:17">你看我说吧，Adam震荡了</p>
 <p data-sourcepos="178:5-178:117">震荡并不是坏事：经过几次震荡，感觉图像中的笔触纹理都连续了很多，这显然是比原来的一团乱麻更优的解。但持续震荡的一大缺点就是它无法在有限时间内落到一个大家相对满意的局部最优解里，就像煮开水如果一直加热就可以一直杀菌但一直不能饮用</p>
 </li>
-<li data-sourcepos="180:1-181:0">
+<li data-sourcepos="180:1-198:0">
 <p data-sourcepos="180:4-180:99">为什么content总是出不来，干脆直接把白噪声图像换成content原图，这样content loss就直接拉到0，然后等style loss慢慢下降。学习率压到0.01，然后去床上躺一会儿</p>
-</li>
-</ol>
-<p data-sourcepos="182:3-185:19"><img src="887_682.jpg" alt="" />
+<p data-sourcepos="182:5-185:21"><img src="887_682.jpg" alt="" />
 <img src="887_706.jpg" alt="" />
 <img src="887_822.jpg" alt="" />
 <img src="887_1034.jpg" alt="" /></p>
-<p data-sourcepos="187:3-187:19"><img src="887_4952.jpg" alt="" /></p>
-<p data-sourcepos="189:3-189:20">终于好了，跟原画并排比一下就知道了：</p>
-<p data-sourcepos="191:3-191:27"><img src="style_comparison.png" alt="" /></p>
-<p data-sourcepos="193:3-193:21">整整 10000 epoch啊！！！！</p>
-<p data-sourcepos="195:3-195:194">你可能会发现经过transfer的style和梵高的画仍然有差距。是的我也发现了。这主要取决于Gram矩阵的大小，比如神经网络的某一层有256个filter，那么Gram矩阵就是256x256.这个矩阵越大，包含的风格信息越多，对细节的刻画自然就越精细。上面的结果我只从VGG16网络中的5层（跟原论文一样）采样Gram矩阵，增加采样层数会拖慢速度，但既然实验都做到这里了，便试试吧。</p>
-<p data-sourcepos="197:3-197:59">换句话说就是VGG网络虽然很牛逼，但是也不可能捕捉所有细节啊，你非要那么仔细去比较两张图，考虑过神经网络的感受吗？</p>
-<ol data-sourcepos="199:1-201:15" start="6">
+<p data-sourcepos="187:5-187:21"><img src="887_4952.jpg" alt="" /></p>
+<p data-sourcepos="189:5-189:22">终于好了，跟原画并排比一下就知道了：</p>
+<p data-sourcepos="191:5-191:29"><img src="style_comparison.png" alt="" /></p>
+<p data-sourcepos="193:5-193:20">整整跑了 10000 epoch</p>
+<p data-sourcepos="195:5-195:177">你可能会发现经过transfer的style和梵高的画仍然有差距。描述的精确程度主要取决于Gram矩阵的大小，比如神经网络的某一层有256个filter，那么Gram矩阵就是256x256.这个矩阵越大，包含的风格信息越多，对细节的刻画自然就越精细。上面的结果我只从VGG16网络中的5层（跟原论文一样）采样Gram矩阵，增加采样层数会拖慢速度。</p>
+<p data-sourcepos="197:5-197:61">换句话说就是VGG网络虽然很牛逼，但是也不可能捕捉所有细节啊，你非要那么仔细去比较两张图，考虑过神经网络的感受吗？</p>
+</li>
 <li data-sourcepos="199:1-201:15">
 <p data-sourcepos="199:4-199:81">增加Gram矩阵采样到所有卷积层（最大限度地保存style）。同时将content loss的比例alpha稍微调高一点，感觉上面图中的人都有点分辨不出了。</p>
 <p data-sourcepos="201:5-201:15">做好我会把图传上来的。</p>
@@ -225,7 +223,7 @@ white_noise_image = tf.Variable(
 </div>
     <div class="meta_string">
       <p>file: style_transfer.md</p>
-      <p>last modified: 2017-02-12 06:49</p>
+      <p>last modified: 2017-02-12 16:40</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
