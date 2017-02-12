@@ -110,7 +110,7 @@
 <p data-sourcepos="31:1-31:28"><img src="1331399709243362376.jpg" alt="" /></p>
 <p data-sourcepos="33:1-33:24">如果你已经学习过卷积神经网络，这应该并不难理解。</p>
 <h2 data-sourcepos="35:1-35:26">Representation of style</h2>
-<p data-sourcepos="37:1-37:206">然后说风格是怎么定义的。风格可以认为是画家的一种习惯：比如物体的光影如何表现，色调的搭配，花草树木用什么笔触勾勒……等等。以上这些描述都不是数学的，没有办法用于我们的优化过程。researcher们发现，可以对神经网络中间层的activation map求其Gram矩阵，并用该矩阵表示风格。换句话说，两张图片在神经网络某一层的Gram矩阵的均方差(MSE)越接近，这两张图片的风格也越接近。然而，这是什么意思？</p>
+<p data-sourcepos="37:1-37:200">然后说风格是怎么定义的。风格可以认为是画家的一种习惯：比如物体的光影如何表现，色调的搭配，花草树木用什么笔触勾勒……等等。以上这些描述都不是数学的，没有办法用于我们的优化过程。researcher们发现，可以对神经网络中间层的activation map求其Gram矩阵，并用该矩阵表示风格。换句话说，两张图片在神经网络某一层的Gram矩阵的数值越接近，这两张图片的风格也越接近。然而，这是什么意思？</p>
 <p data-sourcepos="39:1-39:111">先看简单的例子。之前我们谈到，神经网络每一层的输出，也即每一张activation map都对应着一类feature的分布。下面这张图演示的就是这个关系。这里有两张图片，其中一张树和花是分开的，另一张树和花是重叠在一起的：</p>
 <p data-sourcepos="41:1-41:27"><img src="feature_extraction.png" alt="" /></p>
 <p data-sourcepos="43:1-43:112">在右边的输入图像中，花和树被画在了一起。经过卷积神经网络的层层卷积，在某一层的输出我们得到两张feature map，分别代表花和树在图像空间中的分布。假如这就是画家的风格（喜欢把花和树画在一起），我们要怎么表示这种风格呢？</p>
@@ -223,7 +223,7 @@ white_noise_image = tf.Variable(
 </div>
     <div class="meta_string">
       <p>file: style_transfer.md</p>
-      <p>last modified: 2017-02-12 16:40</p>
+      <p>last modified: 2017-02-12 16:58</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
