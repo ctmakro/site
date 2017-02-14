@@ -196,6 +196,8 @@ def Gram(F):
 
     换句话说就是VGG网络虽然很牛逼，但是也不可能捕捉所有细节啊，你非要那么仔细去比较两张图，考虑过神经网络的感受吗？
 
-6. 增加Gram矩阵采样到所有卷积层（最大限度地保存style）。同时将content loss的比例alpha稍微调高一点，感觉上面图中的人都有点分辨不出了。
+6. bored
 
-    做好我会把图传上来的。
+    ![](trump_inaug.jpg)
+    ![](idol_master.jpg)
+    ![](trump_inaug_fin.jpg)

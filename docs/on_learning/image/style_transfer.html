@@ -170,7 +170,7 @@
 <p data-sourcepos="137:1-137:202">这也就解释了，为什么各种style transfer实现，都优先选用L-BFGS为优化器。L-BFGS属于 second order method，对上述诸多问题免疫力较高，只可惜L-BFGS原作太高深，以Fortran书写，各大学习框架尚不敢妄自实现，连scikit也只是拿人家的Fortran wrap了一下，而tensorflow又把scikit wrap了一下，到目前为止还没人把这算法弄上显卡。</p>
 <h2 data-sourcepos="139:1-139:10">Finally</h2>
 <p data-sourcepos="141:1-141:24">因为VGG19比较慢，我实验都用的是VGG16.</p>
-<ol data-sourcepos="143:1-201:15">
+<ol data-sourcepos="143:1-203:28">
 <li data-sourcepos="143:1-146:0">
 <p data-sourcepos="143:4-143:113">把 content layer 从 conv4_2 调到 conv5_2. 为了验证content layer 捕捉到我需要的内容，先将style loss关掉，然后以Adam学习率0.001对输入进行梯度下降，效果如下</p>
 <p data-sourcepos="145:5-145:25"><img src="result_again.png" alt="" /></p>
@@ -215,15 +215,17 @@ white_noise_image = tf.Variable(
 <p data-sourcepos="195:5-195:177">你可能会发现经过transfer的style和梵高的画仍然有差距。描述的精确程度主要取决于Gram矩阵的大小，比如神经网络的某一层有256个filter，那么Gram矩阵就是256x256.这个矩阵越大，包含的风格信息越多，对细节的刻画自然就越精细。上面的结果我只从VGG16网络中的5层（跟原论文一样）采样Gram矩阵，增加采样层数会拖慢速度。</p>
 <p data-sourcepos="197:5-197:61">换句话说就是VGG网络虽然很牛逼，但是也不可能捕捉所有细节啊，你非要那么仔细去比较两张图，考虑过神经网络的感受吗？</p>
 </li>
-<li data-sourcepos="199:1-201:15">
-<p data-sourcepos="199:4-199:81">增加Gram矩阵采样到所有卷积层（最大限度地保存style）。同时将content loss的比例alpha稍微调高一点，感觉上面图中的人都有点分辨不出了。</p>
-<p data-sourcepos="201:5-201:15">做好我会把图传上来的。</p>
+<li data-sourcepos="199:1-203:28">
+<p data-sourcepos="199:4-199:8">bored</p>
+<p data-sourcepos="201:5-203:28"><img src="trump_inaug.jpg" alt="" />
+<img src="idol_master.jpg" alt="" />
+<img src="trump_inaug_fin.jpg" alt="" /></p>
 </li>
 </ol>
 </div>
     <div class="meta_string">
       <p>file: style_transfer.md</p>
-      <p>last modified: 2017-02-12 16:58</p>
+      <p>last modified: 2017-02-15 00:04</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
