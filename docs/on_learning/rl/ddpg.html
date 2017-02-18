@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../../favicon.ico">
-    <title>Rectified Linear Unit 整流线性单元</title>
+    <title>DDPG Method</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -98,25 +98,95 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:37">Rectified Linear Unit (ReLU) 整流线性单元</h1>
-<img class="plot" src="relu_plot_0.svg" title="plot 0" />
-<p data-sourcepos="7:1-7:61">Rectification 是指电子学中的“整流”，即利用具有单向导通特性的电路元件（比如二极管），将交流电转变为直流电。</p>
-<p data-sourcepos="9:1-9:25">如果给一个电阻R两端通上电压U，通过电阻的电流为：</p>
-<blockquote data-sourcepos="11:1-11:13">
-<p data-sourcepos="11:3-11:13">I = U * 1/R</p>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:43">Deep Deterministic Policy Gradient Method</h1>
+<p data-sourcepos="5:1-5:52">Paper's here: <a href="https://arxiv.org/pdf/1509.02971.pdf">https://arxiv.org/pdf/1509.02971.pdf</a></p>
+<p data-sourcepos="7:1-7:73">Basically you have two network, one called the <code>actor</code>, another <code>critic</code>.</p>
+<ul data-sourcepos="9:1-11:0">
+<li data-sourcepos="9:1-9:51">The actor take state as input and outputs actions</li>
+<li data-sourcepos="10:1-11:0">The critic take state-action pairs as input and outputs the Q value</li>
+</ul>
+<p data-sourcepos="12:1-12:308">In DDPG the actor perform a deterministic policy (given input, the output is not a probabilistic distribution, but a value). We let the critic to judge how good did the actor do; then the actor can use this information to improve its policy. The problem then become: how can we train such a network in Keras?</p>
+<blockquote data-sourcepos="14:1-14:146">
+<p data-sourcepos="14:3-14:146">Of course you can't. For my own convenience I wrote a small library called <code>canton</code>. Check <a href="https://github.com/ctmakro/canton">https://github.com/ctmakro/canton</a> for more details.</p>
 </blockquote>
-<p data-sourcepos="13:1-13:15">设电阻为1欧，U-I图像如下：</p>
-<img class="plot" src="relu_plot_1.svg" title="plot 1" />
-<p data-sourcepos="17:1-17:26">若电阻两端电压为正，则通过电阻的电流为正；反之亦然。</p>
-<p data-sourcepos="19:1-19:34">如果在电阻的一端串个二极管，那么电流就只能正向流动，不能反向流动了。</p>
-<blockquote data-sourcepos="21:1-21:21">
-<p data-sourcepos="21:3-21:21">I = max(U * 1/R, 0)</p>
-</blockquote>
-<img class="plot" src="relu_plot_2.svg" title="plot 2" />
+<ol data-sourcepos="16:1-77:0">
+<li data-sourcepos="16:1-25:0">
+<p data-sourcepos="16:4-16:64">Define the inputs: (state, action, reward, done?, next-state)</p>
+<pre><code data-sourcepos="18:5-24:63" class="language-py">s1 = tf.placeholder(tf.float32,shape=[None,self.inputdims])
+a1 = tf.placeholder(tf.float32,shape=[None,self.outputdims])
+r1 = tf.placeholder(tf.float32,shape=[None,1])
+isdone = tf.placeholder(tf.float32,shape=[None,1])
+s2 = tf.placeholder(tf.float32,shape=[None,self.inputdims])
+</code></pre>
+</li>
+<li data-sourcepos="26:1-35:0">
+<p data-sourcepos="26:4-26:112">Train the critic by minimizing the MSE loss between predicted Q and calculated Q (using Temporal-Difference):</p>
+<pre><code data-sourcepos="28:5-34:61" class="language-py">a2 = self.actor_target(s2)
+q2 = self.critic_target([s2,a2])
+q1_target = r1 + (1-isdone) * self.discount_factor * q2
+q1_predict = self.critic([s1,a1])
+critic_loss = tf.reduce_mean((q1_target - q1_predict)**2)
+</code></pre>
+</li>
+<li data-sourcepos="36:1-43:0">
+<p data-sourcepos="36:4-36:53">Train the actor by maximizing the expected reward:</p>
+<pre><code data-sourcepos="38:5-42:45" class="language-py">a1_predict = self.actor(s1)
+q1_predict = self.critic([s1,a1_predict])
+actor_loss = tf.reduce_mean(- q1_predict)
+</code></pre>
+</li>
+<li data-sourcepos="44:1-58:0">
+<p data-sourcepos="44:4-44:258">You may have noticed that there are two network called &quot;actor_target&quot; and &quot;critic_target&quot;. They are copies of actor and critc, with their weights slowly gradually updated from actor and critic (to reduce action-sample correlation thus stabilize learning).</p>
+<pre><code data-sourcepos="46:5-57:33" class="language-py">tau = tf.Variable(0.001)
+aw = self.actor.get_weights()
+atw = self.actor_target.get_weights()
+cw = self.critic.get_weights()
+ctw = self.critic_target.get_weights()
+
+shift1 = [tf.assign(atw[i], aw[i]*tau + atw[i]*(1-tau))
+    for i,_ in enumerate(aw)]
+shift2 = [tf.assign(ctw[i], cw[i]*tau + ctw[i]*(1-tau))
+    for i,_ in enumerate(cw)]
+</code></pre>
+</li>
+<li data-sourcepos="59:1-77:0">
+<p data-sourcepos="59:4-59:207">That's it. By using the <code>canton</code> library, instead of creating multiple versions of networks in Keras or dealing with variable scopes in TensorFlow, you can now update everything in one <code>tf.Session.run()</code>:</p>
+<pre><code data-sourcepos="61:5-76:14" class="language-py">opt = tf.train.RMSPropOptimizer(1e-4)
+    cstep = opt.minimize(critic_loss,
+        var_list=self.critic.get_weights())
+    astep = opt.minimize(actor_loss,
+        var_list=self.actor.get_weights())
+
+def feed(memory):
+    [s1d,a1d,r1d,isdoned,s2d] = memory # d suffix means data
+    sess = ct.get_session()
+    res = sess.run([critic_loss,actor_loss,
+        cstep,astep,shift1,shift2],
+        feed_dict={
+        s1:s1d,a1:a1d,r1:r1d,isdone:isdoned,s2:s2d,tau:1e-3
+        })
+</code></pre>
+</li>
+</ol>
+<p data-sourcepos="78:1-78:78">Code available at <a href="https://github.com/ctmakro/gymnastics/blob/master/ddpg.py">https://github.com/ctmakro/gymnastics/blob/master/ddpg.py</a>.</p>
+<p data-sourcepos="80:1-80:28">At the time of this writing:</p>
+<ul data-sourcepos="82:1-89:18">
+<li data-sourcepos="82:1-82:87">
+<p data-sourcepos="82:3-82:87">I added some 1/f noise to the output at the beginning of learning, change if you want</p>
+</li>
+<li data-sourcepos="83:1-86:0">
+<p data-sourcepos="83:3-83:148">There's an oscilloscope-like window (hand-drawn in <code>numpy</code>, display with <code>cv2</code>) showing the current action value and Q-value, remove if not needed</p>
+<p data-sourcepos="85:5-85:25"><img src="ddpg_running.png" alt="" /></p>
+</li>
+<li data-sourcepos="87:1-89:18">
+<p data-sourcepos="87:3-87:204">I won the 2nd and 3rd place on <code>Pendulum-V0</code> (the 2nd and 3rd place submission are actually based on an older implementation of DDPG using Keras, which is extremely verbose thus not recommended reading)</p>
+<p data-sourcepos="89:5-89:18"><img src="queen.png" alt="" /></p>
+</li>
+</ul>
 </div>
     <div class="meta_string">
-      <p>file: relu.md</p>
-      <p>last modified: 2017-02-07 23:07</p>
+      <p>file: ddpg.md</p>
+      <p>last modified: 2017-02-18 21:22</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
