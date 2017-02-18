@@ -170,7 +170,7 @@ def feed(memory):
 </ol>
 <p data-sourcepos="78:1-78:78">Code available at <a href="https://github.com/ctmakro/gymnastics/blob/master/ddpg.py">https://github.com/ctmakro/gymnastics/blob/master/ddpg.py</a>.</p>
 <p data-sourcepos="80:1-80:28">At the time of this writing:</p>
-<ul data-sourcepos="82:1-89:18">
+<ul data-sourcepos="82:1-91:203">
 <li data-sourcepos="82:1-82:87">
 <p data-sourcepos="82:3-82:87">I added some 1/f noise to the output at the beginning of learning, change if you want</p>
 </li>
@@ -178,15 +178,16 @@ def feed(memory):
 <p data-sourcepos="83:3-83:148">There's an oscilloscope-like window (hand-drawn in <code>numpy</code>, display with <code>cv2</code>) showing the current action value and Q-value, remove if not needed</p>
 <p data-sourcepos="85:5-85:25"><img src="ddpg_running.png" alt="" /></p>
 </li>
-<li data-sourcepos="87:1-89:18">
-<p data-sourcepos="87:3-87:204">I won the 2nd and 3rd place on <code>Pendulum-V0</code> (the 2nd and 3rd place submission are actually based on an older implementation of DDPG using Keras, which is extremely verbose thus not recommended reading)</p>
+<li data-sourcepos="87:1-91:203">
+<p data-sourcepos="87:3-87:205">I won the 2nd and 3rd place on <code>Pendulum-V0</code> (the 2nd and 3rd place submission are actually based on an older implementation of DDPG using Keras, which is extremely verbose thus not recommended reading).</p>
 <p data-sourcepos="89:5-89:18"><img src="queen.png" alt="" /></p>
+<p data-sourcepos="91:5-91:203">(Gym put recent submissions on top. My final performance is actually worse than John Schulman's TRPO implementation, due to instability of RMSProp IMO. But my agent also learn much faster than his :)</p>
 </li>
 </ul>
 </div>
     <div class="meta_string">
       <p>file: ddpg.md</p>
-      <p>last modified: 2017-02-18 21:22</p>
+      <p>last modified: 2017-02-18 22:08</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

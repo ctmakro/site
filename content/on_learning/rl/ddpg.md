@@ -84,6 +84,8 @@ At the time of this writing:
 
     ![](ddpg_running.png)
 
-- I won the 2nd and 3rd place on `Pendulum-V0` (the 2nd and 3rd place submission are actually based on an older implementation of DDPG using Keras, which is extremely verbose thus not recommended reading)
+- I won the 2nd and 3rd place on `Pendulum-V0` (the 2nd and 3rd place submission are actually based on an older implementation of DDPG using Keras, which is extremely verbose thus not recommended reading).
 
     ![](queen.png)
+
+    (Gym put recent submissions on top. My final performance is actually worse than John Schulman's TRPO implementation, due to instability of RMSProp IMO. But my agent also learn much faster than his :)
