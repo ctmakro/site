@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../favicon.ico">
+    <title>北京收获</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/lit</div>
+                      <div class="navnode"><a href="./../lit/why_bad_idea.html">Why Smart People Have Bad Ideas</a>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/rl.html">RL is progressing rapidly</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/course_resources.html">Learning Resources</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/fast_gan_in_keras.html"> Fast DCGAN in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gan.html">GAN 生成式对抗网络</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/artist.html">Training of Artists</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/image</div>
+                              <div class="navnode"><a href="./../on_learning/image/style_transfer.html">On Style Transfer 风格转移</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/audio</div>
+                              <div class="navnode"><a href="./../on_learning/audio/wavenet_arch.html"> Behind WaveNet</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/activations/relu.html">Rectified Linear Unit 整流线性单元</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../on_life/beijing.html">北京收获</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/numjs.html">NumJs</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:6">北京收获</h1>
+<p data-sourcepos="5:1-5:13">2017年2月22日，北京</p>
+<p data-sourcepos="7:1-7:39">因为微信上与D君的一面之缘，去了北京。那天北京刚好降温，到T2时地面温度是零。</p>
+<p data-sourcepos="9:1-9:151">从摆渡车上下来，身边衣着单薄的帅哥飞奔进航站楼。穿那么少，就算进了航站楼还不是冻死，我想。而就在进入航站楼的一瞬间，我发现我错了：北京很冷，所以整个城市就不停地烧开水，开水通过管道流过每一栋建筑物的每一堵墙，于是这个大雪纷飞的北方城市就暖得跟广州一样。走在北京的小区里，基本上都能闻到一股淡淡的煤气味。</p>
+<p data-sourcepos="11:1-11:57">同行的C君总是说：北京疯了，中国疯了。恐怖的房价、糟糕的空气、忙碌的节奏、高企的生活成本，往北京跑的人都在想什么？</p>
+<p data-sourcepos="13:1-13:31">对呀，我在想什么？这篇文章总结了一下这次的takeaways。</p>
+<h2 data-sourcepos="15:1-15:8">TL;DR</h2>
+<blockquote data-sourcepos="17:1-17:26">
+<p data-sourcepos="17:2-17:26">创业要面向现代化，面向世界，面向未来。 ——邓小平</p>
+</blockquote>
+<p data-sourcepos="19:1-19:60">有的人为了钱而创业，有的人为了成为商人而创业，还有的人为了比赛拿奖而创业。区分这几种人的方法很简单，只需要回答一个问题：</p>
+<ul data-sourcepos="21:1-22:0">
+<li data-sourcepos="21:1-22:0">赚足一亿之后，你是跟朋友出去游山玩水，还是继续赚下一个亿？</li>
+</ul>
+<p data-sourcepos="23:1-23:38">大部分人都会选择前者。然而在北京，有许多人属于后者，即便月薪刚刚能交上房租。</p>
+<p data-sourcepos="25:1-25:6">我的总结是：</p>
+<ul data-sourcepos="27:1-35:0">
+<li data-sourcepos="27:1-31:0">
+<p data-sourcepos="27:3-27:13">如果你是为了钱而创业：</p>
+<ul data-sourcepos="29:5-31:0">
+<li data-sourcepos="29:5-29:42">如果你自认为是万分之一优秀的技术人才，请参考Paul Graham的文章</li>
+<li data-sourcepos="30:5-31:0">如果你自认为不是，建议去上班或者念书</li>
+</ul>
+</li>
+<li data-sourcepos="32:1-35:0">
+<p data-sourcepos="32:3-32:16">如果你是为了成为商人而创业：</p>
+<ul data-sourcepos="34:3-35:0">
+<li data-sourcepos="34:3-35:0">那你根本就不应该知道这个博客，更不可能在读这篇文章</li>
+</ul>
+</li>
+</ul>
+<h2 data-sourcepos="36:1-36:23">Three Types of Logic</h2>
+<p data-sourcepos="38:1-38:160">我喜欢不变的东西，比如不会衰变的元素，不会关门的麦当劳以及不会长大的少女。经过证明的定理是亘古不变的，它将承载着作者的思绪穿越千百万年。我对不变之美的这种喜爱，源自我幼时的经历：数学题的正确答案只有一个，而我是整个学校正确率最高的人。当时我最讨厌的科目就是语文，因为作文没有固定的答案，而诗歌散文只能死记硬背，无法推导。</p>
+<blockquote data-sourcepos="40:1-40:30">
+<p data-sourcepos="40:2-40:30">苟利国家生死以，岂因祸福避趋之。 ——最后大家只记得这两句</p>
+</blockquote>
+<p data-sourcepos="42:1-42:187">然而就像电子工程师总是以基尔霍夫定律代替麦克斯韦方程一样，人类总是用好几套不同的、高度抽象的逻辑来应对生活——因为现实世界实在是太复杂了。为了适应世界复杂而迅猛的变化，与其用一套大而全的逻辑解决所有问题，人类更善于用几套小而简的逻辑来应付。不过这些逻辑规则并不是通过基本物理定律推导得出的，而是由每个人的成长环境决定的，因此我们无法证明它们的对错，而它们之间也常常自相矛盾。</p>
+<h2 data-sourcepos="44:1-44:7">穷人逻辑</h2>
+<p data-sourcepos="46:1-46:129">穷人逻辑就是以自己的人生观和世界观作为依据的思考方式。如果世界是平的，就不要靠边缘太近；如果信基督得永生，就接受福音；如果豆腐花是甜的，就不要放盐；如果口袋里没钱，就努力工作。穷人逻辑高效而环保：在21世纪大家都饿不死，至于世界是什么形状的，又有什么关系呢？</p>
+<p data-sourcepos="48:1-48:114">穷人逻辑并不是穷人的专利——每个人的大脑中都有一套穷人逻辑。有的人拒绝婚前性行为，有的人吃汉堡要去掉牛肉，有的人买车一定要买SUV，有的人贷一辈子款也要在五环内买房……尽管滑稽而不可靠，穷人逻辑是大部分人作出一切选择的基本参考。</p>
+<p data-sourcepos="50:1-50:38">简单地讲，穷人逻辑就是每个人从一无所有，到腰缠万贯都不会改变的某种思考方式。</p>
+<p data-sourcepos="52:1-52:294">C君并不穷：公司资产过亿，产品遍及各地政府职能部门，名片头衔上天下地……他是下属员工心目中的财神爷。但C君的生活没有一秒钟能停下来。业内伙伴要吃饭，部队政府要陪酒，商业套路要布局，全国各地到处跑。以C君的实干与才华，坚持在这样的岗位上，我自然是不能理解的：明年再把全国另一个行业解决方案实现垄断，让自己的朋友圈半径再扩大一倍，到底有什么意义？是每天比员工晚3个小时下班，躺下就睡死，每晚鼾声如雷，第二天再重复一次？我想，这就是我和C君在穷人逻辑上的差别：对他而言，选择继续做一名企业家是不需要思考的问题。在这个目标面前，其他一切辛苦都可以忽略不计；生意场上的任何优势，都令他感到干劲十足。</p>
+<p data-sourcepos="54:1-54:77">C君也不时会抱怨自己现在做的都是繁琐的事务性工作/每天用自己的时间解决别人的问题/在住处比办公室效率还高，但对于下一步该怎么走，他给出的答案永远是继续走。</p>
+<p data-sourcepos="56:1-56:170">听起来像在玩国产RPG：练到接近满级的时候，每天打怪食之无味，删号重练又弃之可惜。个人角色到底有多深入？做生意的亲戚K君曾经提过，很多企业家在遇到重大困难的时候都拒绝放弃，因为商人的特点就是只要赢过，就都不愿意认输。当一个人拒绝放弃的时候，很快高利贷就会成为他的朋友，接着破产就会成为他的女朋友。理性并不是商人的必备属性，但深入角色绝对是。</p>
+<p data-sourcepos="58:1-58:327">在中关村见到了D君。D君也绝对不穷：他是一只会做深度学习的海龟，漂在北京的人海里，拿着令朋友们羡慕到没朋友的工资。听说他要创业，朋友们当然都很惊讶：这家伙是被钱砸傻了吧。D君的内心毫无波澜，他一直以来的目标就是做一名优秀的企业家，在北京的工作不过是过渡和铺垫。他对ICLR、NIPS上的最新进展早已毫无兴趣；他最关心的是刚刚谈完种子轮，准备颠覆零售业的产品，在商业模式上的可行性和进步空间。因此与D君的交流过程总是有些尴尬，一方面D君受过理工科教育，这样一位听众总是会令我不自然地就把话题漂移到interesting technology advancement上；而D君虽然听得懂，却屡屡表示对此不感兴趣（而且他的时间也确实有限），然后把话题又扯回来。</p>
+<p data-sourcepos="60:1-60:159">D君说我是tech-minded，我说他是business-minded。D君的目标是做一个伟大的商人，而像researcher一样重现paper成果，或者像engineer一样关注最新进展，并不能帮他实现这个目标，只有扳手指计算成本和回报、随时盯紧市场和趋势才可以。在穷人逻辑上我们并不兼容——我们互相指出了这一点。</p>
+<p data-sourcepos="62:1-62:66">当然我不确定D君是怎么看待这次会面的——他欢迎我来北京找他的用辞是“我乐意跟任何人交流商业模式”，而我却把他当维基百科用了两个下午。</p>
+<p data-sourcepos="64:1-64:213">在我看来创业是一种选择，一种工作方式，一种通过科学技术赚钱的手段；我从来没有想过要颠覆一个行业、垄断一个市场之类的概念。但对D君来说，如果不能在商业上有所成就，他是没有办法接受和面对自己的；即便出国读研，D君的这个想法也没有变过。不做商人就不见人？读研然后去创业？能做大就不做小？这种把商业作为最高目标，把技术作为可选手段的意识形态，和我在C君身上见到的一模一样。C君当年离开大学的稳定工作下海，估计背后也是这种逻辑在起作用。</p>
+<p data-sourcepos="66:1-66:212">这种态度也让我想起了R君。遇到R君是在大学的创业空间，他当时正在用一台delta结构的打印机帮鞋厂提供3D打样服务，并用美工刀徒手清理打印件周围的毛边。他告诉我他现在在深圳的很多学校以教育为名推这款打印机，并向我阐述了他的商业模式、推广规模和利润预期。这一系列在他看来志在必得的商业行动，在我心里竟激不起半点波澜。到底是他想钱想疯了，还是我真的太没眼光？这到底是他的一厢情愿，还是业内的普遍玩法？商业经验为零的我自然很好奇。</p>
+<p data-sourcepos="68:1-68:214">认识R君之后我曾写过一篇文章《富二代 VS 教二代》，大概的意思就是：出身不同的创业者，其穷人逻辑各有不同；且都是后天获得的，主要受家庭环境影响。各种研究成果也指出，父母与子女的职业相关性相当显著。因此听完D君的介绍，我马上就意识到D君和R君有一个有趣的共同点：他们的父亲都是商人，文化水平都不高，而且都曾（濒临）破产。我认为正是这种经历，让他们获得了那种对对商业道路的追求、对商业成功的渴望。这种欲望的强烈程度是我难以企及的。</p>
+<p data-sourcepos="70:1-70:36">总而言之，每个人都用自己的穷人逻辑回答了“我这辈子应该做什么”这个问题。</p>
+<h2 data-sourcepos="72:1-72:7">富人逻辑</h2>
+<p data-sourcepos="74:1-74:118">富人逻辑就是以他人的人生观和世界观作为依据的思考方式，讲起来比较像“商人逻辑”：如果有人吃汉堡要去掉牛肉，我就帮他去掉牛肉；如果有人买车一定要买SUV，我就通过外观突出这辆车是SUV；如果有人要贷款买件时髦而不实用的衣服，我就借钱给他。</p>
+<p data-sourcepos="76:1-76:42">如果年轻人喜欢偶像，我就批量生产偶像；如果官员收了钱能帮我办事，我就批量给官员送钱。</p>
+<p data-sourcepos="78:1-78:152">使用富人逻辑同样不需要严密的推理。人的七情六欲是怎么产生的不重要，关键是不管别人在想什么，我要么就想办法去迎合他、利用他，要么就想办法抵抗他、屏蔽他。在生活中我们经常要用到富人逻辑：通过提供其他人需要的资源，换取自己需要的资源；或者拒绝向他人提供资源，来保全自己的资源。送礼、红包其实都是富人逻辑的应用。</p>
+<p data-sourcepos="80:1-80:38">富人逻辑并不是富人的专利——穷人也喜欢使用富人逻辑，只不过用得比较糟糕罢了。</p>
+<p data-sourcepos="82:1-82:100">C君当然有自己的一套富人逻辑。不同社会阶层的人马屁应该如何拍，可算是一门学问，而C君将这门学问运用得炉火纯青——我发现，只有以高水平技术工作者自居的人不买他的账。但不管如何，攻心永远是他的最优先策略。</p>
+<p data-sourcepos="84:1-84:198">D君当然也有自己的一套富人逻辑，受过科研训练的他对于言辞轻重的把握总是恰到好处。他知道应该如何对每一类人表达&quot;with all due respect&quot; + 他的真实想法，以至于用在我身上偶尔还会过头。我并没有机会目睹D君与其他人的交流（除了在某知名科技媒体上班的女朋友的突然出现和消失），无法评论更多；但我可以说D君与传统商人的行为模式有显著的不同，更加90后，更加文艺，更加专业，更加无公害。</p>
+<p data-sourcepos="86:1-86:118">作为商人，他们不忘记人，也善于让人过目不忘。这一点上我刚好相反：我的大脑有极强的主动忘记人脸和人名的能力，基本上点完菜就忘记服务员长什么样子那种。我的大脑总是主动地排除来自环境的噪音，而把宝贵的容量用在那些真正能够与我互相欣赏的人身上。</p>
+<p data-sourcepos="88:1-88:37">总而言之，每个人都用自己的富人逻辑，回答了“我要怎么对待其他人”这个问题。</p>
+<h2 data-sourcepos="90:1-90:9">我的穷富逻辑</h2>
+<p data-sourcepos="92:1-92:106">之所以要把穷人逻辑和富人逻辑称为“逻辑”，是因为它们在我们的大脑中根深蒂固，它们会对我们的行为产生决定性的影响，以及不同的逻辑之间很难兼容。中国有句俗语说“三岁定八十”，另一句说“狗改不了吃屎”，用在这里很合适。</p>
+<p data-sourcepos="94:1-94:96">我曾经以为，一个人之所以要创业，是因为现有的收入水平已经远不足以体现个人的价值。D君的现身说法让我明白了：一个人之所以要创业，而不直接去Facebook上班，也可能是因为他更认同商人这个职业。</p>
+<p data-sourcepos="96:1-96:69">对于商业这件事，我持Paul Graham观点：优秀的作品和产品源自伟大的艺术家和工程师。商人只不过是调节流动性、促进财富重新分配的角色。</p>
+<p data-sourcepos="98:1-98:33">而对于马云，或者D君而言，商人才是世界的主角，商业才是世界的未来。</p>
+<p data-sourcepos="100:1-100:98">显然这两种逻辑就不兼容。按照Paul Graham的建议，想要超越商人，先把程序写得足够好，然后把这份脑力用在产品上就可以了；按照D君的想法，先把商业路线评估好，然后从其他公司挖人来开发就可以了。</p>
+<p data-sourcepos="102:1-102:65">所以如果不是D君干过机器学习并且拿过丰厚薪水，我肯定会认为他是疯了，因为跟他论调一致但是脑子长草的年轻“创业者”，外面实在是太多。</p>
+<p data-sourcepos="104:1-104:14">那我个人的穷富逻辑是什么呢？</p>
+<blockquote data-sourcepos="106:1-112:56">
+<p data-sourcepos="106:2-106:73">我的穷人逻辑：要做一些伟大的事情，不要做一类伟大的人。我的人生追求首先是艺术家，然后是工程师，从来就不是商人。如果衣食无忧，我绝对不会去做生意。</p>
+<p data-sourcepos="108:2-108:60">我的富人逻辑：我不在乎你是谁。你若关心技术进展，我们可以聊一整天；聊商业计划，除非你是技术出身，否则不好意思不感兴趣。</p>
+<p data-sourcepos="110:2-110:126">其实我小时候曾经幻想过成为N家公司的董事长，横跨各种产业，人生第一个目标是先赚一百万（90年代一百万是不少钱），然后要把校花娶回家。现在回想起来，我的重点仅仅是赚一百万（以及聪明伶俐+闭月羞花的女朋友），而成为企业家，是我当时唯一知道的发家致富手段。</p>
+<p data-sourcepos="112:2-112:56">我虽然数学不差，但对财富和商业的概念非常弱，这也许是因为我出生、成长在一个财富的多少不能决定生活质量的环境里。</p>
+</blockquote>
+<p data-sourcepos="114:1-114:10">嗯大概就这样。你呢？</p>
+<h2 data-sourcepos="116:1-116:12">与D君的AMA环节</h2>
+<p data-sourcepos="118:1-118:137">上面这些见解主要是根据我近几年在各方面接触各个阶层的人后综合得到的结论提出的。一般对于每个接触对象会有各种闲聊，然后我会提一些比较普遍性的问题，再根据具体对象提一些针对性的问题。当然我没有把这个当成一项工作来做，也不是为了经济目的；基本是出于纯粹的好奇心/对揭示人性的渴望。</p>
+<p data-sourcepos="120:1-120:53">第一次见D君的时候他有事提前走；他的许多观点让我产生了很多疑问。第二次见D君之前我准备了十几个问题，包括：</p>
+<ul data-sourcepos="122:1-128:0">
+<li data-sourcepos="122:1-122:40">你的父母是做什么的，给你提供哪些帮助（答：商人，厨师，初中文化，意即帮个头）</li>
+<li data-sourcepos="123:1-123:40">你如何让投资人知道你会做某项技术，并跑来找你（答：先给BP，他们会到处传的）</li>
+<li data-sourcepos="124:1-124:60">在哪里能看到你的paper？有homepage吗？（答：本来有个人网站后来不搞了，俄语你也看不懂，商业上也没人关心）</li>
+<li data-sourcepos="125:1-125:36">从什么时候开始把创业作为一个选择？（答：没有啊我从来就想当一个商人）</li>
+<li data-sourcepos="126:1-126:30">怎么招人？（答：利用关系从别的公司挖经过考验的优秀人才）</li>
+<li data-sourcepos="127:1-128:0">怎样防止你的雇员跟你一样把上一家老板炒了然后技术带走？（答：无所谓，不介意，马云都不怕我怕毛）</li>
+</ul>
+<p data-sourcepos="129:1-129:53">这次D君仍是有事提前走的；如果不是预先准备好了问题，估计问不了那么多。好在D君对于这些问题，似乎胸有成竹。</p>
+<p data-sourcepos="131:1-131:52">而我（从小学到现在）也终于搞明白了，为什么商人在英语里要称为busy-ness-man：这家伙真的很忙。</p>
+<h2 data-sourcepos="133:1-133:8">在中国创业</h2>
+<p data-sourcepos="135:1-135:17">从这里开始往下都是个人感受和吐槽。</p>
+<p data-sourcepos="137:1-137:77">虽然历史很悠久，但中国是一个发展中国家——我们过去几百年的发展基本为零。我们没有发明手机，计算机和互联网。因此创业这件事情，自然也有中国自身的特点和局限。</p>
+<ol data-sourcepos="139:1-166:0">
+<li data-sourcepos="139:1-146:0">
+<p data-sourcepos="139:4-139:20">中国仍然没有谷歌和Facebook</p>
+<p data-sourcepos="141:5-141:169">中国在技术的复制和创新上是非常快的。但因为历史的原因，我们缺少极端优秀同时又极端自信的hacker。Larry Page和Zuckerberg的父亲都是计算机教授，在他们上中学的时候就为他们提供了专业的计算机科学教育。对于L和Z来说，通过写代码解决问题，是最简单、最直截了当的事情。他们创办了世界上除M$之外最优秀的两家软件公司。</p>
+<p data-sourcepos="143:5-143:66">BAT虽然也很厉害，但中国的互联网软件公司更加依赖商业和集体意志，而不是个人才华或创意。往上三代大家都是农民，谈什么眼光呢？</p>
+<p data-sourcepos="145:5-145:113">当然这一切都在随着时间发生改变（这几年尤其显著，BAT收购了不少年轻创业团队，研发上也增加了投入，特别是微信团队创造了历史）。很快中国就会出现一大批往上三代都是知识分子的家庭。D君们的下一代将造就中国的下一批科技巨头。</p>
+</li>
+<li data-sourcepos="147:1-158:0">
+<p data-sourcepos="147:4-147:23">科技创业（尤其是互联网和软件）只能去北京</p>
+<p data-sourcepos="149:5-149:37">资源方面的原因，如果你有一颗做大、做很大的心，北京显然要优于广州。</p>
+<p data-sourcepos="151:5-151:91">因为北京有那么几所大学，提供最优秀的人才；因为北京有那么一堆投资人，愿意真金白银赌一赌未来。这跟硅谷一样是历史的原因，而一个人的命运啊，除了个人的奋斗，也要考虑到历史的进程。</p>
+<p data-sourcepos="153:5-153:102">因为北京人富有，购买力强。北京人的富有体现在国企的密度上，走在三环我发现许多大厦都是巨型国企的总部，这个密度在广州根本是不可想象的。作为全国蛋糕分配活动的第一站，北京的优势在可见的未来无法被超越。</p>
+<p data-sourcepos="155:5-155:44">当然搞电子最好还是去深圳，人在北京身上的静电总是积累得很快，每天要被水龙头电两次</p>
+<p data-sourcepos="157:5-157:67">从软件创业的角度看，最根本的原因：因为你自己写软件的速度实在太慢，只好招程序员，为了能快速招到素质不差的程序员，就只好去北京了</p>
+</li>
+<li data-sourcepos="159:1-166:0">
+<p data-sourcepos="159:4-159:40">投资人更喜欢business-minded，不太喜欢tech-minded</p>
+<p data-sourcepos="161:5-161:37">这个问题在《投资人和姑娘喜欢的是同一种创业者》中有淋淋尽致的体现。</p>
+<p data-sourcepos="163:5-163:83">我觉得是因为很多投资人自己也是商人，在他们看来tech-minded的人不可能把收益的最大化放在第一位，因此觉得投business-minded的人更靠谱些。</p>
+<p data-sourcepos="165:5-165:69">归根结底还是因为很多tech-minded创业者自己写软件的速度太慢，而招人之后跟business-minded相比就没有竞争力了</p>
+</li>
+</ol>
+<h2 data-sourcepos="167:1-167:11">怎样写软件写得快</h2>
+<ul data-sourcepos="169:1-171:0">
+<li data-sourcepos="169:1-169:21">强调多少遍了，认真把计算机科学的课上完</li>
+<li data-sourcepos="170:1-171:0">参考谷歌的软件工程实践</li>
+</ul>
+<h2 data-sourcepos="172:1-172:16">为什么有的人就是要往北京跑</h2>
+<p data-sourcepos="174:1-174:34">即便不是创业，也仍然要往北京跑，背后的逻辑是什么？当然是穷人逻辑呀。</p>
+<blockquote data-sourcepos="176:1-178:84">
+<p data-sourcepos="176:2-176:111">因为很多人的自我价值，只有在北京能得到最大程度的实现。在北京你能获得投融资环境加成，科技加成，牛逼同事加成，便利生活加成……尤其是生活上，如果不考虑寒冷的冬天，污浊的空气，高昂的房租，在北京生活和广州确实也没有什么区别。</p>
+<p data-sourcepos="178:2-178:84">普遍来讲，在北京，创业公司从零开始到实现全国垄断的速度最快，难度最低。当一个人的穷人逻辑把事业成功排在第一，生活质量排在第二的时候，到北京拼杀就成了最“明智”的选择。</p>
+</blockquote>
+<p data-sourcepos="180:1-180:106">大多数人并不会像上面这样分析。他们内心的穷人逻辑早就帮他们做出了选择：大家在北京都拿比较高的工资，我也想拿，拿完就上瘾，上瘾就舍不得走。别人的小孩都在北京上学，考清华北大，我也想我小孩在北京上学，于是也舍不得走。</p>
+<p data-sourcepos="182:1-182:47">而内心的安宁，对有的人来说，一处偏远的农村就足够了。人的一生，其实都是在和心中的那个穷人比赛。</p>
+<p data-sourcepos="184:1-184:32">要我说还有一个原因：很多北京人并不知道广州是一个更适合居住的城市</p>
+<h2 data-sourcepos="186:1-186:13">教练，我想搞深度学习</h2>
+<p data-sourcepos="188:1-188:21">深度学习难吗/我想转/一般人能学吗/不太敢</p>
+<p data-sourcepos="190:1-190:72">D君用亲身经历证明：只要目的足够明确（我就没见过比他更明确的人），非计算机专业本科毕业的你跑出去读个研究生回来去北京赚深度学习的钱是完全可行的。</p>
+<blockquote data-sourcepos="192:1-192:52">
+<p data-sourcepos="192:2-192:52">D君应该是我见过的青年创业者中，学习能力最强，商业欲望也非常强的，非常罕见。至于各位观众我就不清楚了。</p>
+</blockquote>
+<p data-sourcepos="194:1-194:75">如果不知道具体应该怎么做……D君的建议是直接写信联系你认识的教授。说实话，出生在一个平均学历初中、经商致富原因不明的家庭，D君对知识的追求确实不一般。</p>
+<p data-sourcepos="196:1-196:92">我个人的经验：深度学习主要考察的其实是编程水平（真的），里面用到高中数学那部分其实很容易蒙混过关，但计算机科学底子必须硬。以我的数学和编程水平来看，深度学习并不难，就是必须天天看论文。</p>
+<h2 data-sourcepos="198:1-198:10">商人家庭的熏陶</h2>
+<p data-sourcepos="200:1-200:104">统计来看（《富二代 VS 教二代》），商业野心很大程度上和家庭环境有关，不管是C、D、R君，还是我见过的几乎每一个强调自己是商人的创业者。当你野心足够大，同时受教育程度足够高的时候，做商人的愿望就会非常强烈。</p>
+<h2 data-sourcepos="202:1-202:5">吃饭</h2>
+<p data-sourcepos="204:1-204:62">其实北京吃饭价格还可以，想要实惠的话一定要找很多家饭店开在一起的那种地方。单独一家饭店开着几乎百分之百超低性价比，屡试不爽。</p>
+<p data-sourcepos="206:1-206:28">然后就是就餐环境环境普遍都不错，可能北京人要求比较高吧。</p>
+<p data-sourcepos="208:1-208:17">最好吃的东西当然就是……各地美食。</p>
+<h2 data-sourcepos="210:1-210:5">地铁</h2>
+<p data-sourcepos="212:1-212:58">北京跟香港一样，上扶梯都会排在右边，只有我总是保持广州习惯（随便一站）。可能只有广州人明白想快就去走楼梯的简单道理。</p>
+<p data-sourcepos="214:1-214:41">所有站都终于加装了屏蔽门，买地铁票现在也跟广州一样方便了，不像以前非得办一张卡了。</p>
+<h2 data-sourcepos="216:1-216:18">为什么中国有那么多低学历的富人</h2>
+<p data-sourcepos="218:1-218:53">历史原因，那个年代低学历的人本来就多。而在那个兵荒马乱大家都穷得一逼没读过书的年代赚钱本来就不需要多少知识</p>
+<h2 data-sourcepos="220:1-220:7">36Kr</h2>
+<p data-sourcepos="222:1-222:10">据说他们要搞咨询业务</p>
+<h2 data-sourcepos="224:1-224:5">总结</h2>
+<p data-sourcepos="226:1-226:148">赚钱和做商人是不一样的。有的人把商业作为赚钱养家的手段，但不一定会把商人作为人生的目标。马云会说他创造了百万就业，以体现他作为商人的价值；但即便没有马云，还有刘强东，还有很多人。他们享受的不是钱，而是商业。这种累并上瘾着的感觉并不是每个人都愿意享受的，就像很多人不能理解科学家到底是干什么的一样。</p>
+<blockquote data-sourcepos="228:1-228:34">
+<p data-sourcepos="228:2-228:34">内心深处，商人、工程师和科学家都认为自己是对社会进步最重要的群体。</p>
+</blockquote>
+<p data-sourcepos="230:1-230:145">在我看来，中国互联网飞速发展的幕后功臣，是无数优秀的软硬件工程师，而不是那些在媒体上频繁露面的所谓大佬。而无数优秀的工程师，又离不开中国（以及，美国）高质量的教育。所以我不会选择做商人。当世界信息不对称、利益不均衡的时候，自然会有人做商人；而我希望看到的是一个信息更对称，利益更均衡的世界。</p>
+<p data-sourcepos="232:1-232:84">能把这篇文章读到这里的人，估计都是想赚钱多于想做商人的。没错，有了钱就应该舒服地享受生活，去做自己真正认可与热爱的事情，而做商人对大多数人来说并不是一件能够享受的事情。</p>
+<p data-sourcepos="234:1-234:58">换句话说，人生没有客观目的，只有主观追求：就是去顺应内心的那套穷人逻辑。搞清楚那套逻辑是什么，剩下的问题会简单得多。</p>
+</div>
+    <div class="meta_string">
+      <p>file: beijing.md</p>
+      <p>last modified: 2017-02-25 04:57</p>
+    </div>
+    <script>
+      //if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+      
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  </body>
+</html>
