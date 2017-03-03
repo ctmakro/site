@@ -68,6 +68,8 @@
                       </div>
                       <div class="navnode">
                               <div class="navnode_title">/on_learning/image</div>
+                              <div class="navnode"><a href="./../on_learning/image/fast_lsgan.html">Fast LSGAN in Canton</a>
+                              </div>
                               <div class="navnode"><a href="./../on_learning/image/style_transfer.html">On Style Transfer 风格转移</a>
                               </div>
                       </div>
@@ -170,29 +172,32 @@
 </blockquote>
 <p data-sourcepos="95:1-95:17">这会提高G生成样本对D的欺骗能力。</p>
 <p data-sourcepos="97:1-97:117">如此循环下去，G会生成在特征上越来越接近训练样本的图片；而D会对训练样本和生成样本之间的差异（也就是训练样本不同特征之间的相互依赖关系）越来越敏感。于是很多人将GAN中的G用作图像生成、图像修补、图像超采样等领域，获得了非常好的效果。</p>
-<p data-sourcepos="99:1-99:71">我根据DCGAN的Torch源码，利用Keras实现了一个GAN。训练样例是CIFAR-10中央16x16。以下是经过训练之后，G生成的样本：</p>
-<p data-sourcepos="101:1-103:20"><img src="gan_cifar_1.png" alt="" />
+<blockquote data-sourcepos="99:1-99:55">
+<p data-sourcepos="99:3-99:55">2017-03-04: DCGAN已经不是state-of-the-art，请参考本博客另一篇LSGAN.</p>
+</blockquote>
+<p data-sourcepos="101:1-101:71">我根据DCGAN的Torch源码，利用Keras实现了一个GAN。训练样例是CIFAR-10中央16x16。以下是经过训练之后，G生成的样本：</p>
+<p data-sourcepos="103:1-105:20"><img src="gan_cifar_1.png" alt="" />
 <img src="gan_cifar_2.png" alt="" />
 <img src="gan_cifar_3.png" alt="" /></p>
-<p data-sourcepos="105:1-105:158">从远处来看，这些样本非常像真实的自然照片，近看才发现其实什么也不像。这说明G网络已经大致掌握了训练样例各个像素之间的条件概率分布，例如背景前景颜色的分布，动植物特征的分布等等。这同时也说明D网络现在已经掌握了训练样例中的这些特征（并能够利用这些特征区分真假图片）。而整个训练过程并不需要提供与图像内容相关的任何标签。</p>
-<p data-sourcepos="107:1-107:73">很多GAN相关的paper也提到：在大量无标签数据上用GAN方法进行训练之后，将D网络用于分类，只需要很少标签就可以在短时间内达到非常高的准确率。</p>
-<h2 data-sourcepos="109:1-109:19">Network Capacity</h2>
-<p data-sourcepos="111:1-111:104">由于GAN的拟合对象是p(data)而不是p(label|data)，即data中与label无关的部分也得拟合，因此需要的网络容量会大大超过对data按label分类的分类器网络，不然生成的样本质量会很差。</p>
-<p data-sourcepos="113:1-113:44">这其实就类似于：一位优秀的艺术家和一位普通人经过一个房间，要求他们用笔画出房间里的内容。</p>
-<ul data-sourcepos="115:1-117:0">
-<li data-sourcepos="115:1-115:38">优秀的艺术家（生成式模型）可以在纸上还原房间的所有细节（不管是否重要）；</li>
-<li data-sourcepos="116:1-117:0">而一般人（区分式模型）只能在脑海里还原很少一部分、对完成日常任务有帮助的细节。</li>
+<p data-sourcepos="107:1-107:158">从远处来看，这些样本非常像真实的自然照片，近看才发现其实什么也不像。这说明G网络已经大致掌握了训练样例各个像素之间的条件概率分布，例如背景前景颜色的分布，动植物特征的分布等等。这同时也说明D网络现在已经掌握了训练样例中的这些特征（并能够利用这些特征区分真假图片）。而整个训练过程并不需要提供与图像内容相关的任何标签。</p>
+<p data-sourcepos="109:1-109:73">很多GAN相关的paper也提到：在大量无标签数据上用GAN方法进行训练之后，将D网络用于分类，只需要很少标签就可以在短时间内达到非常高的准确率。</p>
+<h2 data-sourcepos="111:1-111:19">Network Capacity</h2>
+<p data-sourcepos="113:1-113:104">由于GAN的拟合对象是p(data)而不是p(label|data)，即data中与label无关的部分也得拟合，因此需要的网络容量会大大超过对data按label分类的分类器网络，不然生成的样本质量会很差。</p>
+<p data-sourcepos="115:1-115:44">这其实就类似于：一位优秀的艺术家和一位普通人经过一个房间，要求他们用笔画出房间里的内容。</p>
+<ul data-sourcepos="117:1-119:0">
+<li data-sourcepos="117:1-117:38">优秀的艺术家（生成式模型）可以在纸上还原房间的所有细节（不管是否重要）；</li>
+<li data-sourcepos="118:1-119:0">而一般人（区分式模型）只能在脑海里还原很少一部分、对完成日常任务有帮助的细节。</li>
 </ul>
-<p data-sourcepos="118:1-118:69">这也可以解释为什么很多同学的英语填空选择很高分，但是作文和口语却很差：前者是区分式模型，后者是生成式模型，所需的训练量和容量差两个数量级。</p>
-<h2 data-sourcepos="120:1-120:22">GAN Training Tricks</h2>
-<p data-sourcepos="122:1-122:70">在所有的tricks里面，亲测最有效的是batch discrimination和single-sided label smoothing.</p>
-<p data-sourcepos="124:1-124:83">G网络有一个取胜策略：令生成的每张图像都长得很像训练样例中的某（几）张图片，简称mode collapse。后果就是每次G网络生成的结果全都一样，D网络却分辨不出来。</p>
-<p data-sourcepos="126:1-126:103">解决方法:在D网络中的每一层，计算G网络生成的图像之间的相似度，并把相似度作为feature map输入到下一层，这样D网络就可以利用相似度信息识别出G网络生成的相似图片，以鼓励G网络生成具有多样性的图片。</p>
-<ul data-sourcepos="128:1-232:0">
-<li data-sourcepos="128:1-174:0">
-<p data-sourcepos="128:3-128:22">Batch Discrimination</p>
-<p data-sourcepos="130:3-130:161">在网络的每一层，对于每个minibatch中的每个sample，求其所有feature maps到其他sample的feature maps的距离，并将此距离作为一个feature map合并到其feature maps中。不同的paper对此有不同的实现方式，我的实现方式很简单，见下面的concat_diff函数：</p>
-<pre><code data-sourcepos="132:3-173:17" class="language-py"># Keras w/ TensorFlow
+<p data-sourcepos="120:1-120:69">这也可以解释为什么很多同学的英语填空选择很高分，但是作文和口语却很差：前者是区分式模型，后者是生成式模型，所需的训练量和容量差两个数量级。</p>
+<h2 data-sourcepos="122:1-122:22">GAN Training Tricks</h2>
+<p data-sourcepos="124:1-124:70">在所有的tricks里面，亲测最有效的是batch discrimination和single-sided label smoothing.</p>
+<p data-sourcepos="126:1-126:83">G网络有一个取胜策略：令生成的每张图像都长得很像训练样例中的某（几）张图片，简称mode collapse。后果就是每次G网络生成的结果全都一样，D网络却分辨不出来。</p>
+<p data-sourcepos="128:1-128:103">解决方法:在D网络中的每一层，计算G网络生成的图像之间的相似度，并把相似度作为feature map输入到下一层，这样D网络就可以利用相似度信息识别出G网络生成的相似图片，以鼓励G网络生成具有多样性的图片。</p>
+<ul data-sourcepos="130:1-234:0">
+<li data-sourcepos="130:1-176:0">
+<p data-sourcepos="130:3-130:22">Batch Discrimination</p>
+<p data-sourcepos="132:3-132:161">在网络的每一层，对于每个minibatch中的每个sample，求其所有feature maps到其他sample的feature maps的距离，并将此距离作为一个feature map合并到其feature maps中。不同的paper对此有不同的实现方式，我的实现方式很简单，见下面的concat_diff函数：</p>
+<pre><code data-sourcepos="134:3-175:17" class="language-py"># Keras w/ TensorFlow
 def concat_diff(i): # i -&gt; Tensor(batch,height,width,features)
     bv = Lambda(
     lambda x:K.mean(K.abs(x[:] - K.mean(x,axis=0)),axis=-1,keepdims=True)
@@ -234,22 +239,22 @@ def dis2(): # discriminative network, 2
     return m,mf
 </code></pre>
 </li>
-<li data-sourcepos="175:1-194:0">
-<p data-sourcepos="175:3-175:30">Single-sided Label Smoothing</p>
-<p data-sourcepos="177:3-177:22">这是D原本的cost function:</p>
-<pre><code data-sourcepos="179:3-182:32" class="language-py">loss = - (log(1-D(G(z))) + log(D(x)))
+<li data-sourcepos="177:1-196:0">
+<p data-sourcepos="177:3-177:30">Single-sided Label Smoothing</p>
+<p data-sourcepos="179:3-179:22">这是D原本的cost function:</p>
+<pre><code data-sourcepos="181:3-184:32" class="language-py">loss = - (log(1-D(G(z))) + log(D(x)))
 # without s-side lbl smoothing
 </code></pre>
-<p data-sourcepos="184:3-184:57">麻烦的是，如果D过于占上风（将训练样例和生成图片分得太清楚），G的参数梯度就会过大，有可能导致G网络无法收敛。</p>
-<p data-sourcepos="186:3-186:62">因此在计算binary cross-entropy函数的时候，可以将训练样例的概率目标调低一点，比如从1.0调到0.9：</p>
-<pre><code data-sourcepos="188:3-191:29" class="language-py">loss = - (log(1-D(G(z))) + 0.1 * log(1-D(x)) + 0.9 * log(D(x)))
+<p data-sourcepos="186:3-186:57">麻烦的是，如果D过于占上风（将训练样例和生成图片分得太清楚），G的参数梯度就会过大，有可能导致G网络无法收敛。</p>
+<p data-sourcepos="188:3-188:62">因此在计算binary cross-entropy函数的时候，可以将训练样例的概率目标调低一点，比如从1.0调到0.9：</p>
+<pre><code data-sourcepos="190:3-193:29" class="language-py">loss = - (log(1-D(G(z))) + 0.1 * log(1-D(x)) + 0.9 * log(D(x)))
 # with s-side lbl smoothing
 </code></pre>
-<p data-sourcepos="193:3-193:31">由于只修改了训练样例的概率目标，这种方法称为单边标签平滑。</p>
+<p data-sourcepos="195:3-195:31">由于只修改了训练样例的概率目标，这种方法称为单边标签平滑。</p>
 </li>
-<li data-sourcepos="195:1-232:0">
-<p data-sourcepos="195:3-195:38">My Generative Network implementation</p>
-<pre><code data-sourcepos="197:3-231:17" class="language-py"># Keras w/ TensorFlow
+<li data-sourcepos="197:1-234:0">
+<p data-sourcepos="197:3-197:38">My Generative Network implementation</p>
+<pre><code data-sourcepos="199:3-233:17" class="language-py"># Keras w/ TensorFlow
 def gen2(): # generative network, 2
     inp = Input(shape=(zed,))
     i = inp
@@ -285,12 +290,12 @@ def gen2(): # generative network, 2
 </code></pre>
 </li>
 </ul>
-<h2 data-sourcepos="233:1-233:5">最后</h2>
-<p data-sourcepos="235:1-235:54">推荐看Ian Goodfellow对GAN的专题视频。目前效果最好的2D图像生成式模型是PPGN，不妨关注。</p>
+<h2 data-sourcepos="235:1-235:5">最后</h2>
+<p data-sourcepos="237:1-237:54">推荐看Ian Goodfellow对GAN的专题视频。目前效果最好的2D图像生成式模型是PPGN，不妨关注。</p>
 </div>
     <div class="meta_string">
       <p>file: gan.md</p>
-      <p>last modified: 2017-02-07 23:54</p>
+      <p>last modified: 2017-03-04 01:12</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
