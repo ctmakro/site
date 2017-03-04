@@ -126,24 +126,30 @@ gloss = tf.reduce_mean((gscore-1)**2)
 <blockquote data-sourcepos="34:1-34:79">
 <p data-sourcepos="34:3-34:79">I think the results looked significantly better than those produced by DCGAN.</p>
 </blockquote>
-<p data-sourcepos="36:1-36:186">after convergence i think it would be boring just producing a minibatch of 32x32 images and post it here, so i increased the size of the input to the generator, generating large patches:</p>
+<p data-sourcepos="36:1-36:196">after convergence i think it would be boring just producing a minibatch of 32x32 images and post it here, so i increased the size of the input to the generator, generating large 1024x1024 patches:</p>
 <p data-sourcepos="38:1-38:27">(after ~20000 x 32 exampes)</p>
 <p data-sourcepos="40:1-40:5">LSGAN</p>
-<p data-sourcepos="42:1-42:20"><img src="lsgan_large.png" alt="" /></p>
+<p data-sourcepos="42:1-42:20"><img src="lsgan_large.jpg" alt="" /></p>
 <p data-sourcepos="44:1-44:5">DCGAN</p>
-<p data-sourcepos="46:1-46:20"><img src="dcgan_large.png" alt="" /></p>
-<blockquote data-sourcepos="48:1-48:166">
-<p data-sourcepos="48:2-48:166">Without the help of image borders, the filters lost the direction to propagate to produce single objects, that's why you can't see meaningful objects in these images</p>
+<p data-sourcepos="46:1-46:20"><img src="dcgan_large.jpg" alt="" /></p>
+<blockquote data-sourcepos="48:1-48:168">
+<p data-sourcepos="48:2-48:168">Without the help of image borders, the filters lost their direction to propagate to produce single objects, that's why you can't see meaningful objects in these images</p>
 </blockquote>
 <p data-sourcepos="50:1-50:85">I'm not sure whether above networks are underfitting or simply require more training.</p>
 <p data-sourcepos="52:1-52:51">(placeholder: train overnight and see what happens)</p>
-<h2 data-sourcepos="54:1-54:8">Notes</h2>
-<ol data-sourcepos="56:1-101:0">
-<li data-sourcepos="56:1-79:0">
-<p data-sourcepos="56:4-56:380">Please Do Use batch discrimination (within one minibatch, calculate each sample's distance to other samples, then provide that distance as a feature map to next conv layer). The earlier version of my code includes a not-very-good implementation that prevents generator from generating a full batch of identical samples, but won't work if only some of the samples are identical.</p>
-<p data-sourcepos="58:5-58:198">according to <a href="https://arxiv.org/abs/1606.03498">https://arxiv.org/abs/1606.03498</a>, their batch discriminator consist of a trainable tensor, by multiplying input batch with that tensor you get a vector of discriminating features.</p>
-<p data-sourcepos="60:5-60:88">Instead I simply calculate the L1 diff between tensors, then apply exp(- abs_diff) :</p>
-<pre><code data-sourcepos="62:5-76:18" class="language-py">def batch_disc(i):
+<p data-sourcepos="54:1-54:122">Edit 2017-03-04: so I trained with both least square loss and cross entropy loss, with a learning rate of 1e-5, overnight:</p>
+<p data-sourcepos="56:1-56:5">LSGAN</p>
+<p data-sourcepos="58:1-58:22"><img src="lsgan_large_2.jpg" alt="" /></p>
+<p data-sourcepos="60:1-60:5">DCGAN</p>
+<p data-sourcepos="62:1-62:22"><img src="dcgan_large_2.jpg" alt="" /></p>
+<p data-sourcepos="64:1-64:132">Apparently with cross entropy loss the DCGAN model is suffering some weird mode of failure, while LSGAN still in it's stable region.</p>
+<h2 data-sourcepos="66:1-66:8">Notes</h2>
+<ol data-sourcepos="68:1-113:0">
+<li data-sourcepos="68:1-91:0">
+<p data-sourcepos="68:4-68:380">Please Do Use batch discrimination (within one minibatch, calculate each sample's distance to other samples, then provide that distance as a feature map to next conv layer). The earlier version of my code includes a not-very-good implementation that prevents generator from generating a full batch of identical samples, but won't work if only some of the samples are identical.</p>
+<p data-sourcepos="70:5-70:198">according to <a href="https://arxiv.org/abs/1606.03498">https://arxiv.org/abs/1606.03498</a>, their batch discriminator consist of a trainable tensor, by multiplying input batch with that tensor you get a vector of discriminating features.</p>
+<p data-sourcepos="72:5-72:88">Instead I simply calculate the L1 diff between tensors, then apply exp(- abs_diff) :</p>
+<pre><code data-sourcepos="74:5-88:18" class="language-py">def batch_disc(i):
     #assume i shape [N H W C]
     s = tf.shape(i)
     NHWC1 = tf.expand_dims(i,4)
@@ -157,12 +163,12 @@ gloss = tf.reduce_mean((gscore-1)**2)
     out = tf.concat([i, feat],axis=-1) # [N H W C+1]
     return out
 </code></pre>
-<p data-sourcepos="78:5-78:118">batch discrimination is very, very important. you can learn more tricks on Ferenc's site <a href="http://www.inference.vc">http://www.inference.vc</a></p>
+<p data-sourcepos="90:5-90:118">batch discrimination is very, very important. you can learn more tricks on Ferenc's site <a href="http://www.inference.vc">http://www.inference.vc</a></p>
 </li>
-<li data-sourcepos="80:1-96:0">
-<p data-sourcepos="80:4-80:17">Instance Noise</p>
-<p data-sourcepos="82:5-82:107">add noise to both the generator output and the real images, before feeding them into the discriminator.</p>
-<pre><code data-sourcepos="84:5-94:32" class="language-py">inl = tf.Variable(1.)
+<li data-sourcepos="92:1-108:0">
+<p data-sourcepos="92:4-92:17">Instance Noise</p>
+<p data-sourcepos="94:5-94:107">add noise to both the generator output and the real images, before feeding them into the discriminator.</p>
+<pre><code data-sourcepos="96:5-106:32" class="language-py">inl = tf.Variable(1.)
 
 def noisy(i):
     return i + tf.random_normal(mean=0,stddev=inl,shape=tf.shape(i))
@@ -172,22 +178,22 @@ generated = g(noise)
 gscore = d(noisy(generated))
 rscore = d(noisy(real_data))
 </code></pre>
-<p data-sourcepos="95:5-95:417">then decrease it overtime. This technique blurs the border between the distributions of the generated examples and the real ones, making it harder for the discriminator, and easier for the generator. due to the noise, the discriminator cannot use details to discriminate between real and fake examples, therefore it wont force the generator to generate details (that could lead to mode collapse) in the beginning.</p>
+<p data-sourcepos="107:5-107:417">then decrease it overtime. This technique blurs the border between the distributions of the generated examples and the real ones, making it harder for the discriminator, and easier for the generator. due to the noise, the discriminator cannot use details to discriminate between real and fake examples, therefore it wont force the generator to generate details (that could lead to mode collapse) in the beginning.</p>
 </li>
-<li data-sourcepos="97:1-101:0">
-<p data-sourcepos="97:4-97:18">too much tricks</p>
-<p data-sourcepos="99:5-99:114">to get results like those in goodfellow's paper, you have to try all his tricks. I don't have time for that...</p>
+<li data-sourcepos="109:1-113:0">
+<p data-sourcepos="109:4-109:18">too much tricks</p>
+<p data-sourcepos="111:5-111:114">to get results like those in goodfellow's paper, you have to try all his tricks. I don't have time for that...</p>
 </li>
 </ol>
-<h2 data-sourcepos="102:1-102:40">Notes on deconv (or conv2d_transpose)</h2>
-<p data-sourcepos="104:1-104:37">DCGAN uses deconv to upsample images.</p>
-<ol data-sourcepos="106:1-108:0">
-<li data-sourcepos="106:1-106:56">inconvenient (you have to set output shapes manually)</li>
-<li data-sourcepos="107:1-108:0">produce tiling artifacts</li>
+<h2 data-sourcepos="114:1-114:40">Notes on deconv (or conv2d_transpose)</h2>
+<p data-sourcepos="116:1-116:37">DCGAN uses deconv to upsample images.</p>
+<ol data-sourcepos="118:1-120:0">
+<li data-sourcepos="118:1-118:56">inconvenient (you have to set output shapes manually)</li>
+<li data-sourcepos="119:1-120:0">produce tiling artifacts</li>
 </ol>
-<p data-sourcepos="109:1-109:102">instead we use nearest neighbour upsampling, offered in <code>canton</code> as <code>ct.Up2D()</code>, followed by a conv2d.</p>
-<p data-sourcepos="111:1-111:36">here's our Generator implementation:</p>
-<pre><code data-sourcepos="113:1-135:12" class="language-py">def gen_gen():
+<p data-sourcepos="121:1-121:102">instead we use nearest neighbour upsampling, offered in <code>canton</code> as <code>ct.Up2D()</code>, followed by a conv2d.</p>
+<p data-sourcepos="123:1-123:36">here's our Generator implementation:</p>
+<pre><code data-sourcepos="125:1-147:12" class="language-py">def gen_gen():
     c = Can()
     def deconv(nip,nop,tail=True,upscale=2):
         dc = Can()
@@ -209,14 +215,14 @@ rscore = d(noisy(real_data))
     c.chain()
     return c
 </code></pre>
-<p data-sourcepos="137:1-137:234">The generated quality is better than using deconv. No checkboard, yet banding still. For best upsampling behavior, you should consider ESPCN (<a href="http://www.inference.vc/holiday-special-deriving-the-subpixel-cnn-from-first-principles/">http://www.inference.vc/holiday-special-deriving-the-subpixel-cnn-from-first-principles/</a>).</p>
-<h2 data-sourcepos="139:1-139:17">What is Canton</h2>
-<p data-sourcepos="141:1-141:175">A lightweight wrapper around TensorFlow. It offers convenience of Keras but never get into your way. It's also much faster at construction because it doesn't check the shapes.</p>
-<p data-sourcepos="143:1-143:54">you may fork canton on GitHub or <code>pip install canton</code>.</p>
+<p data-sourcepos="149:1-149:234">The generated quality is better than using deconv. No checkboard, yet banding still. For best upsampling behavior, you should consider ESPCN (<a href="http://www.inference.vc/holiday-special-deriving-the-subpixel-cnn-from-first-principles/">http://www.inference.vc/holiday-special-deriving-the-subpixel-cnn-from-first-principles/</a>).</p>
+<h2 data-sourcepos="151:1-151:17">What is Canton</h2>
+<p data-sourcepos="153:1-153:175">A lightweight wrapper around TensorFlow. It offers convenience of Keras but never get into your way. It's also much faster at construction because it doesn't check the shapes.</p>
+<p data-sourcepos="155:1-155:54">you may fork canton on GitHub or <code>pip install canton</code>.</p>
 </div>
     <div class="meta_string">
       <p>file: fast_lsgan.md</p>
-      <p>last modified: 2017-03-04 01:19</p>
+      <p>last modified: 2017-03-04 20:17</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

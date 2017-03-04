@@ -33,23 +33,35 @@ result:
 
 > I think the results looked significantly better than those produced by DCGAN.
 
-after convergence i think it would be boring just producing a minibatch of 32x32 images and post it here, so i increased the size of the input to the generator, generating large patches:
+after convergence i think it would be boring just producing a minibatch of 32x32 images and post it here, so i increased the size of the input to the generator, generating large 1024x1024 patches:
 
 (after ~20000 x 32 exampes)
 
 LSGAN
 
-![](lsgan_large.png)
+![](lsgan_large.jpg)
 
 DCGAN
 
-![](dcgan_large.png)
+![](dcgan_large.jpg)
 
->Without the help of image borders, the filters lost the direction to propagate to produce single objects, that's why you can't see meaningful objects in these images
+>Without the help of image borders, the filters lost their direction to propagate to produce single objects, that's why you can't see meaningful objects in these images
 
 I'm not sure whether above networks are underfitting or simply require more training.
 
 (placeholder: train overnight and see what happens)
+
+Edit 2017-03-04: so I trained with both least square loss and cross entropy loss, with a learning rate of 1e-5, overnight:
+
+LSGAN
+
+![](lsgan_large_2.jpg)
+
+DCGAN
+
+![](dcgan_large_2.jpg)
+
+Apparently with cross entropy loss the DCGAN model is suffering some weird mode of failure, while LSGAN still in it's stable region.
 
 ## Notes
 
