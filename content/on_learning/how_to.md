@@ -6,7 +6,7 @@
 
 以下是我自接触机器学习(尤其是深度学习)以来的一些经验总结。
 
-## 0. Know what you're doing
+## 1. Know what you're doing
 
 - ML = optimize parameters of some function to minimize error
 - DL = optimize parameters of some *deep* function to minimize error
@@ -18,25 +18,13 @@
 - DL Research = optimize ML algorithms and (occasionally) find out how the brain works
 - RL Research = solve real-world problems by converting them into simulated ones
 
-## 1. 发现问题 Shoot the *right* foot
+## 2. Repeat what others have done
 
-<plot
-set title "problem density in someone's eye"
-unset key
-plot 0
-/>
-
-机器学习是解决问题的一种方法，而要解决一个问题，我们首先要发现它。对身边问题不敏感的人不适合搞机器学习。
-
-一个机器学习研究者应该可以随时列出生活中存在的100个亟待解决的问题，然后每月解决其中的几个。
-
-## 2. Repeat what others had done, and study neuroscience
-
-对身边的问题敏感是不够的，你还必须虚心学习。
+必须虚心学习。
 
 ML is not about imagination. Your imagination suck when compared to what others had done. They suck when compared to what natural selection had done.
 
-## 3. 数据合成 Data Synthesis
+## 3. Data Synthesis
 
 机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。
 
@@ -50,13 +38,13 @@ ML is not about imagination. Your imagination suck when compared to what others 
 
 ## 4. 最小化 Mnistification
 
-在尝试一个新的方法/架构之前，总是先将其最小化。
+在尝试一个新的方法/架构之前，总是先将其最小化。这其实是各种paper中最常用的trick。
 
 > ImageNet wasn't built in one day.
 
 最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.
 
-## 5. 善于品味 Taste before read
+## 5. 善于品味 Acquire a good taste
 
 <plot
 set title "Percentage of good papers"
@@ -71,8 +59,9 @@ e
 
 ## 6. Signs of danger (IMO)
 
+- Heavily relied on frameworks
 - Addicted to reading & posting things on Zhihu
 - Repeatedly looking for data and challenges on Kaggle
 - Playing with hyper-parameters for over a day
-- Highlight one's error% in bold font
+- Highlighting error% in bold font
 - Imagining pure ML startups

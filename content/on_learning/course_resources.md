@@ -51,3 +51,7 @@ Below are my recommendation on Learning Resources for ML and DL newbies. If you 
   > Below: How to descent elegantly.
 
   *ADAM: A METHOD FOR STOCHASTIC OPTIMIZATION* Diederik P. Kingma, Jimmy Lei Ba
+
+  > Below: How to correctly initialize your network.
+
+  *Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification* Kaiming He et al.

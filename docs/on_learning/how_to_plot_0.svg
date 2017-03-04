@@ -94,7 +94,16 @@
 	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M45.5,210.0 L45.5,45.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(170, 170, 170)'  d='M45.5,210.0 L45.5,202.5  '/>	<g transform="translate(45.5,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >-10</tspan></text>
+		<text><tspan font-family="Verdana" >-2</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M77.2,210.0 L77.2,45.1  '/></g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(170, 170, 170)'  d='M77.2,210.0 L77.2,202.5  '/>	<g transform="translate(77.2,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" >-1.5</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -103,7 +112,16 @@
 	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M108.9,210.0 L108.9,45.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(170, 170, 170)'  d='M108.9,210.0 L108.9,202.5  '/>	<g transform="translate(108.9,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >-5</tspan></text>
+		<text><tspan font-family="Verdana" >-1</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M140.5,210.0 L140.5,45.1  '/></g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(170, 170, 170)'  d='M140.5,210.0 L140.5,202.5  '/>	<g transform="translate(140.5,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" >-0.5</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -118,10 +136,28 @@
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M203.9,210.0 L203.9,45.1  '/></g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(170, 170, 170)'  d='M203.9,210.0 L203.9,202.5  '/>	<g transform="translate(203.9,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 0.5</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M235.6,210.0 L235.6,45.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(170, 170, 170)'  d='M235.6,210.0 L235.6,202.5  '/>	<g transform="translate(235.6,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 5</tspan></text>
+		<text><tspan font-family="Verdana" > 1</tspan></text>
+	</g>
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M267.2,210.0 L267.2,45.1  '/></g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb(170, 170, 170)'  d='M267.2,210.0 L267.2,202.5  '/>	<g transform="translate(267.2,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
+		<text><tspan font-family="Verdana" > 1.5</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -130,7 +166,7 @@
 	<path stroke='rgb(238, 238, 238)' class="gridline"  d='M298.9,210.0 L298.9,45.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(170, 170, 170)'  d='M298.9,210.0 L298.9,202.5  '/>	<g transform="translate(298.9,228.7)" stroke="none" fill="rgb(170,170,170)" font-family="Verdana" font-size="10.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" > 10</tspan></text>
+		<text><tspan font-family="Verdana" > 2</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -139,56 +175,27 @@
 	<path stroke='rgb(170, 170, 170)'  d='M45.5,45.1 L45.5,210.0 L298.9,210.0 M298.9,45.1 M45.5,45.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(172.2,26.3)" stroke="none" fill="black" font-family="Verdana" font-size="10.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >problem density in someone's eye</tspan></text>
+		<text><tspan font-family="Verdana" >Percentage of good papers</tspan></text>
 	</g>
 </g>
-	<g id="gnuplot_plot_1" ><title>0</title>
+	<g id="gnuplot_plot_1" ><title>'-' using 1:2:3:4:5:6</title>
 <g fill="none" color="white" stroke="black" stroke-width="1.20" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.20" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb(102, 170,  51)'  d='M45.5,127.5 L46.3,127.5 L47.1,127.5 L47.9,127.5 L48.7,127.5 L49.5,127.5 L50.3,127.5 L51.1,127.5
-		L51.9,127.5 L52.6,127.5 L53.4,127.5 L54.2,127.5 L55.0,127.5 L55.8,127.5 L56.6,127.5 L57.4,127.5
-		L58.2,127.5 L59.0,127.5 L59.8,127.5 L60.6,127.5 L61.4,127.5 L62.2,127.5 L63.0,127.5 L63.8,127.5
-		L64.6,127.5 L65.4,127.5 L66.2,127.5 L66.9,127.5 L67.7,127.5 L68.5,127.5 L69.3,127.5 L70.1,127.5
-		L70.9,127.5 L71.7,127.5 L72.5,127.5 L73.3,127.5 L74.1,127.5 L74.9,127.5 L75.7,127.5 L76.5,127.5
-		L77.3,127.5 L78.1,127.5 L78.9,127.5 L79.7,127.5 L80.5,127.5 L81.2,127.5 L82.0,127.5 L82.8,127.5
-		L83.6,127.5 L84.4,127.5 L85.2,127.5 L86.0,127.5 L86.8,127.5 L87.6,127.5 L88.4,127.5 L89.2,127.5
-		L90.0,127.5 L90.8,127.5 L91.6,127.5 L92.4,127.5 L93.2,127.5 L94.0,127.5 L94.8,127.5 L95.5,127.5
-		L96.3,127.5 L97.1,127.5 L97.9,127.5 L98.7,127.5 L99.5,127.5 L100.3,127.5 L101.1,127.5 L101.9,127.5
-		L102.7,127.5 L103.5,127.5 L104.3,127.5 L105.1,127.5 L105.9,127.5 L106.7,127.5 L107.5,127.5 L108.3,127.5
-		L109.0,127.5 L109.8,127.5 L110.6,127.5 L111.4,127.5 L112.2,127.5 L113.0,127.5 L113.8,127.5 L114.6,127.5
-		L115.4,127.5 L116.2,127.5 L117.0,127.5 L117.8,127.5 L118.6,127.5 L119.4,127.5 L120.2,127.5 L121.0,127.5
-		L121.8,127.5 L122.6,127.5 L123.3,127.5 L124.1,127.5 L124.9,127.5 L125.7,127.5 L126.5,127.5 L127.3,127.5
-		L128.1,127.5 L128.9,127.5 L129.7,127.5 L130.5,127.5 L131.3,127.5 L132.1,127.5 L132.9,127.5 L133.7,127.5
-		L134.5,127.5 L135.3,127.5 L136.1,127.5 L136.9,127.5 L137.6,127.5 L138.4,127.5 L139.2,127.5 L140.0,127.5
-		L140.8,127.5 L141.6,127.5 L142.4,127.5 L143.2,127.5 L144.0,127.5 L144.8,127.5 L145.6,127.5 L146.4,127.5
-		L147.2,127.5 L148.0,127.5 L148.8,127.5 L149.6,127.5 L150.4,127.5 L151.1,127.5 L151.9,127.5 L152.7,127.5
-		L153.5,127.5 L154.3,127.5 L155.1,127.5 L155.9,127.5 L156.7,127.5 L157.5,127.5 L158.3,127.5 L159.1,127.5
-		L159.9,127.5 L160.7,127.5 L161.5,127.5 L162.3,127.5 L163.1,127.5 L163.9,127.5 L164.7,127.5 L165.4,127.5
-		L166.2,127.5 L167.0,127.5 L167.8,127.5 L168.6,127.5 L169.4,127.5 L170.2,127.5 L171.0,127.5 L171.8,127.5
-		L172.6,127.5 L173.4,127.5 L174.2,127.5 L175.0,127.5 L175.8,127.5 L176.6,127.5 L177.4,127.5 L178.2,127.5
-		L179.0,127.5 L179.7,127.5 L180.5,127.5 L181.3,127.5 L182.1,127.5 L182.9,127.5 L183.7,127.5 L184.5,127.5
-		L185.3,127.5 L186.1,127.5 L186.9,127.5 L187.7,127.5 L188.5,127.5 L189.3,127.5 L190.1,127.5 L190.9,127.5
-		L191.7,127.5 L192.5,127.5 L193.3,127.5 L194.0,127.5 L194.8,127.5 L195.6,127.5 L196.4,127.5 L197.2,127.5
-		L198.0,127.5 L198.8,127.5 L199.6,127.5 L200.4,127.5 L201.2,127.5 L202.0,127.5 L202.8,127.5 L203.6,127.5
-		L204.4,127.5 L205.2,127.5 L206.0,127.5 L206.8,127.5 L207.5,127.5 L208.3,127.5 L209.1,127.5 L209.9,127.5
-		L210.7,127.5 L211.5,127.5 L212.3,127.5 L213.1,127.5 L213.9,127.5 L214.7,127.5 L215.5,127.5 L216.3,127.5
-		L217.1,127.5 L217.9,127.5 L218.7,127.5 L219.5,127.5 L220.3,127.5 L221.1,127.5 L221.8,127.5 L222.6,127.5
-		L223.4,127.5 L224.2,127.5 L225.0,127.5 L225.8,127.5 L226.6,127.5 L227.4,127.5 L228.2,127.5 L229.0,127.5
-		L229.8,127.5 L230.6,127.5 L231.4,127.5 L232.2,127.5 L233.0,127.5 L233.8,127.5 L234.6,127.5 L235.4,127.5
-		L236.1,127.5 L236.9,127.5 L237.7,127.5 L238.5,127.5 L239.3,127.5 L240.1,127.5 L240.9,127.5 L241.7,127.5
-		L242.5,127.5 L243.3,127.5 L244.1,127.5 L244.9,127.5 L245.7,127.5 L246.5,127.5 L247.3,127.5 L248.1,127.5
-		L248.9,127.5 L249.6,127.5 L250.4,127.5 L251.2,127.5 L252.0,127.5 L252.8,127.5 L253.6,127.5 L254.4,127.5
-		L255.2,127.5 L256.0,127.5 L256.8,127.5 L257.6,127.5 L258.4,127.5 L259.2,127.5 L260.0,127.5 L260.8,127.5
-		L261.6,127.5 L262.4,127.5 L263.2,127.5 L263.9,127.5 L264.7,127.5 L265.5,127.5 L266.3,127.5 L267.1,127.5
-		L267.9,127.5 L268.7,127.5 L269.5,127.5 L270.3,127.5 L271.1,127.5 L271.9,127.5 L272.7,127.5 L273.5,127.5
-		L274.3,127.5 L275.1,127.5 L275.9,127.5 L276.7,127.5 L277.5,127.5 L278.2,127.5 L279.0,127.5 L279.8,127.5
-		L280.6,127.5 L281.4,127.5 L282.2,127.5 L283.0,127.5 L283.8,127.5 L284.6,127.5 L285.4,127.5 L286.2,127.5
-		L287.0,127.5 L287.8,127.5 L288.6,127.5 L289.4,127.5 L290.2,127.5 L291.0,127.5 L291.8,127.5 L292.5,127.5
-		L293.3,127.5 L294.1,127.5 L294.9,127.5 L295.7,127.5 L296.5,127.5 L297.3,127.5 L298.1,127.5 L298.9,127.5
-		 '/></g>
+	<g stroke='none' shape-rendering='crispEdges'>
+		<polygon fill = 'rgb(  0, 158, 115)' fill-opacity = '0.900000' points = '188.5,66.4 185.3,65.6 182.1,65.0 178.8,64.6 175.5,64.3 172.2,64.2 172.2,127.5 '/>
+		<polygon fill = 'rgb( 86, 180, 233)' fill-opacity = '0.900000' points = '172.2,64.2 168.8,64.3 165.5,64.6 162.2,65.0 159.0,65.6 155.8,66.4 152.6,67.3 149.5,68.5 146.4,69.7 143.4,71.1 140.5,72.7 137.7,74.5 134.9,76.3 132.3,78.4 129.8,80.5 127.4,82.8
+125.1,85.2 123.0,87.7 120.9,90.3 119.1,93.1 117.3,95.9 115.7,98.8 114.3,101.8 113.1,104.9 111.9,108.0 111.0,111.2 110.2,114.4 109.6,117.6 109.2,120.9 108.9,124.2 108.9,127.5 108.9,130.9
+109.2,134.2 109.6,137.5 110.2,140.7 111.0,143.9 111.9,147.1 113.1,150.2 114.3,153.3 115.7,156.3 117.3,159.2 119.1,162.0 120.9,164.8 123.0,167.4 125.1,169.9 127.4,172.3 129.8,174.6 132.3,176.7
+134.9,178.8 137.7,180.6 140.5,182.4 143.4,184.0 146.4,185.4 149.5,186.6 152.6,187.8 155.8,188.7 159.0,189.5 162.2,190.1 165.5,190.5 168.8,190.8 172.1,190.8 175.5,190.8 178.8,190.5 182.1,190.1
+185.3,189.5 188.5,188.7 191.7,187.8 194.8,186.6 197.9,185.4 200.9,184.0 203.8,182.4 206.6,180.6 209.4,178.8 212.0,176.7 214.5,174.6 216.9,172.3 219.2,169.9 221.3,167.4 223.4,164.8 225.2,162.0
+227.0,159.2 228.6,156.3 230.0,153.3 231.2,150.2 232.4,147.1 233.3,143.9 234.1,140.7 234.7,137.5 235.1,134.2 235.4,130.9 235.5,127.6 235.4,124.2 235.1,120.9 234.7,117.6 234.1,114.4 233.3,111.2
+232.4,108.0 231.2,104.9 230.0,101.8 228.6,98.8 227.0,95.9 225.2,93.1 223.4,90.3 221.3,87.7 219.2,85.2 216.9,82.8 214.5,80.5 212.0,78.4 209.4,76.3 206.6,74.5 203.8,72.7 200.9,71.1
+197.9,69.7 194.8,68.5 191.7,67.3 188.5,66.4 172.2,127.5 '/>
 	</g>
-<g fill="none" color="white" stroke="rgb(102, 170,  51)" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+	</g>
+<g fill="none" color="white" stroke="rgb( 86, 180, 233)" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
