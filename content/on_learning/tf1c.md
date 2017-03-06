@@ -1,10 +1,10 @@
-! Compiling TF 1.0
+! Compile TF 1.0
 
 # Compiling TensorFlow r1.0 from source, OS X, RMBP2015
 
-To support things like SSE and AVX.
+To support SSE3, 4.1, 4.2, AVX, AVX2, FMA
 
->Since 1.0 TF removed support for acceleration instructions in their official build due to complain from a couple old school users. Guess what? I'll (have to) build it myself.
+>Since 1.0, TF removed support for acceleration instructions from their official build, due to complain from a couple old school users. Guess what? I'll (have to) build it myself.
 
 # If it works, don't build it
 
@@ -15,20 +15,20 @@ Google did a great job with their Blaze (Bazel) build system -- a system specifi
 # Detailed Steps
 
 ```bash
-# install JDK first.
+# install JDK first
 
-# then bazel, the open-source and incon-venient version of Blaze
+# then install bazel, the open-source and possibly-censored version of Blaze
 $ brew install bazel
 
-# here let's assume you already have all the python essentials (pip, six, wheel, numpy) installed.
-# I have miniconda3 installed as main python.
+# Assume you have all the python essentials (pip, six, wheel, numpy) installed.
+# I have miniconda3 installed as my main python.
 
 $ git clone https://github.com/tensorflow/tensorflow
 $ cd tensorflow
 $ git checkout r1.0
 $ ./configure
 
-# enter enter enter enter
+# press enter enter enter enter
 # configure script start to download a lot of things, now go eat something
 
 # (!) per original instruction you are expected to run this command:
@@ -45,6 +45,6 @@ $ bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 # (important, otherwise python import will fail due to name clashing)
 $ cd ~
 
-# then as usual
+# then install the wheel as usual
 pip install --upgrade /tmp/tensorflow_pkg/<tensorflow_blahblah_x86_64.whl>
 ```
