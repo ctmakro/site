@@ -31,8 +31,16 @@ Why not just use Cross Entropy Method? Because for this problem, the number of p
 ## The Cure
 
 - try lower learning rate
-- slightly deeper network
+
+  the replay memory is growing. At first when there are only 100k pairs or so, Adam optimizer at its default setting can do a pretty descent job; But after reaching 1M pairs I think I should decrease the learning rate to reduce the variance of the gradients.
+
+- slightly deeper/wider network
+
+  did help.
+
 - reduce deviation from proven good policies (eg. trust region policy optimiztion)
+
+
 
 ## Appendix
 
