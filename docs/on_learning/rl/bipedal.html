@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../../favicon.ico">
-    <title>Rectified Linear Unit 整流线性单元</title>
+    <title>BipedalWalker-v2</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -108,25 +108,34 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:37">Rectified Linear Unit (ReLU) 整流线性单元</h1>
-<img class="plot" src="relu_plot_0.svg" title="plot 0" />
-<p data-sourcepos="7:1-7:61">Rectification 是指电子学中的“整流”，即利用具有单向导通特性的电路元件（比如二极管），将交流电转变为直流电。</p>
-<p data-sourcepos="9:1-9:25">如果给一个电阻R两端通上电压U，通过电阻的电流为：</p>
-<blockquote data-sourcepos="11:1-11:13">
-<p data-sourcepos="11:3-11:13">I = U * 1/R</p>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:18">BipedalWalker-v2</h1>
+<p data-sourcepos="5:1-5:178"><video controls loop autoplay src="https://openai-kubernetes-prod-scoreboard.s3.amazonaws.com/v1/evaluations/eval_yZqDtftNTmO8xIEoLwciQ/training_episode_batch_video.mp4"></video></p>
+<p data-sourcepos="7:1-7:423">Reinforcement Learning in the real world is still an ill defined problem. The agent have to be greedy; But not too greedy. One might conjecture that an optimal agent should have bayesian behaviour, which again is not always what we want, nor the design goal of our brain. We want the agent to be curious so they could exploit the environment whenever possible, but not too curious so that they will continue to work for us.</p>
+<p data-sourcepos="9:1-9:220">It's like training your employee. You want your employee to be exceptionally efficient at his job; while at the same time you want them to stay working for you. Which is hard, if not impossible. (unless you're Google...)</p>
+<h2 data-sourcepos="11:1-11:17">The Impossible</h2>
+<p data-sourcepos="13:1-13:17"><img src="bipedal1.jpg" alt="" /></p>
+<p data-sourcepos="15:1-15:63"><a href="https://gym.openai.com/evaluations/eval_yZqDtftNTmO8xIEoLwciQ">https://gym.openai.com/evaluations/eval_yZqDtftNTmO8xIEoLwciQ</a></p>
+<p data-sourcepos="17:1-17:169">BipedalWalker-v2 is a very hard environment on Gym. Your agent should run very fast, should not trip himself off, should use as little energy as possible. 即又要马儿跑，又要马儿不吃草</p>
+<blockquote data-sourcepos="19:1-19:113">
+<p data-sourcepos="19:2-19:113">This is not a tutorial. Go learn what is Gym and Reinforcement Learning. Some resources are listed in this blog.</p>
 </blockquote>
-<p data-sourcepos="13:1-13:15">设电阻为1欧，U-I图像如下：</p>
-<img class="plot" src="relu_plot_1.svg" title="plot 1" />
-<p data-sourcepos="17:1-17:26">若电阻两端电压为正，则通过电阻的电流为正；反之亦然。</p>
-<p data-sourcepos="19:1-19:34">如果在电阻的一端串个二极管，那么电流就只能正向流动，不能反向流动了。</p>
-<blockquote data-sourcepos="21:1-21:21">
-<p data-sourcepos="21:3-21:21">I = max(U * 1/R, 0)</p>
-</blockquote>
-<img class="plot" src="relu_plot_2.svg" title="plot 2" />
+<p data-sourcepos="21:1-21:485">&quot;Solving&quot; the environment require an average total reward of over 300 over 100 consecutive episodes. Which is NOTORIOUSLY HARD. (less than 5 people solved it on Gym) My DDPG agent (yes, the name of the algorithm) can get up to 305 for a few episodes, then the peformance drops for a while (agent start making stupid mistakes and fall), then rise up to 300, again and again. Which of course is unstable, and if you smooth the peformance curve you get the curve shown above (around 250).</p>
+<p data-sourcepos="23:1-23:308">From the curve you will also notice: It's not that hard to learn to walk. Since DDPG is deterministic, for exploration I added 1/fsquare noise to the output and decrease it overtime. The agent will learn the basics of walking at around 700 episode, when the noise is down low enough to stabilize the actions.</p>
+<h2 data-sourcepos="25:1-25:31">The curse of online learning</h2>
+<p data-sourcepos="27:1-27:361">Start by logging the training error. The training is not very stable. The critic seem to have a hard time fitting a few bad datapoints, and when those datapoints (from the replay memory) are being trained on, the critic loss (predicted vs projected Q-value) rises. And as soon as the critic loss rises, the actor loss rises, then we start to see agents falling.</p>
+<p data-sourcepos="29:1-29:183">Why not just use Cross Entropy Method? Because for this problem, the number of parameter is too large for any unbiased offline method. It would take way too many episodes to converge.</p>
+<h2 data-sourcepos="31:1-31:11">The Cure</h2>
+<ul data-sourcepos="33:1-35:0">
+<li data-sourcepos="33:1-33:25">try lower learning rate</li>
+<li data-sourcepos="34:1-35:0">slightly deeper network</li>
+</ul>
+<h2 data-sourcepos="36:1-36:11">Appendix</h2>
+<p data-sourcepos="38:1-38:68">There are 4 major stragegy to walk, your agent is using one of them.</p>
+<p data-sourcepos="40:1-40:17"><img src="bipedal2.png" alt="" /></p>
 </div>
     <div class="meta_string">
-      <p>file: relu.md</p>
-      <p>last modified: 2017-02-07 23:07</p>
+      <p>file: bipedal.md</p>
+      <p>last modified: 2017-03-10 00:08</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
