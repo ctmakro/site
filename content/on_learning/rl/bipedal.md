@@ -32,6 +32,7 @@ Why not just use Cross Entropy Method? Because for this problem, the number of p
 
 - try lower learning rate
 - slightly deeper network
+- reduce deviation from proven good policies (eg. trust region policy optimiztion)
 
 ## Appendix
 
