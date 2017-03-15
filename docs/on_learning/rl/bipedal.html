@@ -120,31 +120,38 @@
 <p data-sourcepos="19:2-19:113">This is not a tutorial. Go learn what is Gym and Reinforcement Learning. Some resources are listed in this blog.</p>
 </blockquote>
 <p data-sourcepos="21:1-21:485">&quot;Solving&quot; the environment require an average total reward of over 300 over 100 consecutive episodes. Which is NOTORIOUSLY HARD. (less than 5 people solved it on Gym) My DDPG agent (yes, the name of the algorithm) can get up to 305 for a few episodes, then the peformance drops for a while (agent start making stupid mistakes and fall), then rise up to 300, again and again. Which of course is unstable, and if you smooth the peformance curve you get the curve shown above (around 250).</p>
-<p data-sourcepos="23:1-23:308">From the curve you will also notice: It's not that hard to learn to walk. Since DDPG is deterministic, for exploration I added 1/fsquare noise to the output and decrease it overtime. The agent will learn the basics of walking at around 700 episode, when the noise is down low enough to stabilize the actions.</p>
-<h2 data-sourcepos="25:1-25:31">The curse of online learning</h2>
-<p data-sourcepos="27:1-27:361">Start by logging the training error. The training is not very stable. The critic seem to have a hard time fitting a few bad datapoints, and when those datapoints (from the replay memory) are being trained on, the critic loss (predicted vs projected Q-value) rises. And as soon as the critic loss rises, the actor loss rises, then we start to see agents falling.</p>
-<p data-sourcepos="29:1-29:183">Why not just use Cross Entropy Method? Because for this problem, the number of parameter is too large for any unbiased offline method. It would take way too many episodes to converge.</p>
-<h2 data-sourcepos="31:1-31:11">The Cure</h2>
-<ul data-sourcepos="33:1-44:0">
-<li data-sourcepos="33:1-36:0">
-<p data-sourcepos="33:3-33:25">try lower learning rate</p>
-<p data-sourcepos="35:3-35:258">the replay memory is growing. At first when there are only 100k pairs or so, Adam optimizer at its default setting can do a pretty descent job; But after reaching 1M pairs I think I should decrease the learning rate to reduce the variance of the gradients.</p>
+<p data-sourcepos="23:1-23:17"><img src="bipedal3.png" alt="" /></p>
+<blockquote data-sourcepos="25:1-25:24">
+<p data-sourcepos="25:2-25:24">above from another run.</p>
+</blockquote>
+<p data-sourcepos="27:1-27:308">From the curve you will also notice: It's not that hard to learn to walk. Since DDPG is deterministic, for exploration I added 1/fsquare noise to the output and decrease it overtime. The agent will learn the basics of walking at around 700 episode, when the noise is down low enough to stabilize the actions.</p>
+<p data-sourcepos="29:1-29:32">Then I added some plotting code:</p>
+<p data-sourcepos="31:1-31:17"><img src="bipedal4.png" alt="" /></p>
+<p data-sourcepos="33:1-33:24">This is not what I want.</p>
+<h2 data-sourcepos="35:1-35:31">The curse of online learning</h2>
+<p data-sourcepos="37:1-37:361">Start by logging the training error. The training is not very stable. The critic seem to have a hard time fitting a few bad datapoints, and when those datapoints (from the replay memory) are being trained on, the critic loss (predicted vs projected Q-value) rises. And as soon as the critic loss rises, the actor loss rises, then we start to see agents falling.</p>
+<p data-sourcepos="39:1-39:183">Why not just use Cross Entropy Method? Because for this problem, the number of parameter is too large for any unbiased offline method. It would take way too many episodes to converge.</p>
+<h2 data-sourcepos="41:1-41:11">The Cure</h2>
+<ul data-sourcepos="43:1-54:0">
+<li data-sourcepos="43:1-46:0">
+<p data-sourcepos="43:3-43:25">try lower learning rate</p>
+<p data-sourcepos="45:3-45:258">the replay memory is growing. At first when there are only 100k pairs or so, Adam optimizer at its default setting can do a pretty descent job; But after reaching 1M pairs I think I should decrease the learning rate to reduce the variance of the gradients.</p>
 </li>
-<li data-sourcepos="37:1-40:0">
-<p data-sourcepos="37:3-37:31">slightly deeper/wider network</p>
-<p data-sourcepos="39:3-39:11">did help.</p>
+<li data-sourcepos="47:1-50:0">
+<p data-sourcepos="47:3-47:31">slightly deeper/wider network</p>
+<p data-sourcepos="49:3-49:11">did help.</p>
 </li>
-<li data-sourcepos="41:1-44:0">
-<p data-sourcepos="41:3-41:82">reduce deviation from proven good policies (eg. trust region policy optimiztion)</p>
+<li data-sourcepos="51:1-54:0">
+<p data-sourcepos="51:3-51:82">reduce deviation from proven good policies (eg. trust region policy optimiztion)</p>
 </li>
 </ul>
-<h2 data-sourcepos="45:1-45:11">Appendix</h2>
-<p data-sourcepos="47:1-47:68">There are 4 major stragegy to walk, your agent is using one of them.</p>
-<p data-sourcepos="49:1-49:17"><img src="bipedal2.png" alt="" /></p>
+<h2 data-sourcepos="55:1-55:11">Appendix</h2>
+<p data-sourcepos="57:1-57:68">There are 4 major stragegy to walk, your agent is using one of them.</p>
+<p data-sourcepos="59:1-59:17"><img src="bipedal2.png" alt="" /></p>
 </div>
     <div class="meta_string">
       <p>file: bipedal.md</p>
-      <p>last modified: 2017-03-10 00:37</p>
+      <p>last modified: 2017-03-13 06:56</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

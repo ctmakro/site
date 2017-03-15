@@ -20,7 +20,17 @@ BipedalWalker-v2 is a very hard environment on Gym. Your agent should run very f
 
 "Solving" the environment require an average total reward of over 300 over 100 consecutive episodes. Which is NOTORIOUSLY HARD. (less than 5 people solved it on Gym) My DDPG agent (yes, the name of the algorithm) can get up to 305 for a few episodes, then the peformance drops for a while (agent start making stupid mistakes and fall), then rise up to 300, again and again. Which of course is unstable, and if you smooth the peformance curve you get the curve shown above (around 250).
 
+![](bipedal3.png)
+
+>above from another run.
+
 From the curve you will also notice: It's not that hard to learn to walk. Since DDPG is deterministic, for exploration I added 1/fsquare noise to the output and decrease it overtime. The agent will learn the basics of walking at around 700 episode, when the noise is down low enough to stabilize the actions.
+
+Then I added some plotting code:
+
+![](bipedal4.png)
+
+This is not what I want.
 
 ## The curse of online learning
 
