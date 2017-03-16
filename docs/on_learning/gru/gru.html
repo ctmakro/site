@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../../favicon.ico">
-    <title>RL is progressing rapidly</title>
+    <title>GRU and Convolutional GRU</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -113,27 +113,97 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><p data-sourcepos="3:1-3:34">大概半年前的时候跟我的一个朋友聊起，说有没有供人工智能比赛的竞技场？</p>
-<p data-sourcepos="5:1-5:33">他说kaggle，我说kaggle比的是error%，没有观赏性。</p>
-<p data-sourcepos="7:1-7:11">我当时的设想是这样的：</p>
-<ul data-sourcepos="9:1-14:0">
-<li data-sourcepos="9:1-10:0">
-<p data-sourcepos="9:3-9:34">服务器上举行一场比赛，由A和B两位 RL agent 轮流出招。</p>
-</li>
-<li data-sourcepos="11:1-12:0">
-<p data-sourcepos="11:3-11:64">首先服务器通知A出招，A通过网络向服务器发送它下一步的招数。服务器收到招数后，计算state，并将state返回给 A和B。</p>
-</li>
-<li data-sourcepos="13:1-14:0">
-<p data-sourcepos="13:3-13:51">然后服务器通知B，B接到通知后，同样计算下一步的招数并发给服务器。如此轮流往复，直到产生胜者为止。</p>
-</li>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:27">GRU and Convolutional GRU</h1>
+<p data-sourcepos="5:1-5:22">GRU, compared to LSTM,</p>
+<ul data-sourcepos="7:1-10:0">
+<li data-sourcepos="7:1-7:24">is easier to implement</li>
+<li data-sourcepos="8:1-8:39">requires fewer (steps of) computation</li>
+<li data-sourcepos="9:1-10:0">no difference in capacity</li>
 </ul>
-<p data-sourcepos="15:1-15:179">最近OpenAI开源了Universe。Universe是一个【让大家可以通过几行代码将agent通过VNC连接到网络上某个用docker虚拟的训练环境进行训练】的python库。借助Universe，大家可以方便地用单步方法训练agent玩上千种游戏、跑上千种RL Benchmark了。可以预见从此RL领域的玄学会越来越少（类似ImageNet的作用）。</p>
-<p data-sourcepos="17:1-17:36">很快就会出现比如AI拳皇争霸赛、AI极品飞车、AI FIFA这样的比赛。</p>
-<p data-sourcepos="19:1-19:60">这样的进步速度是令人欣喜的。短短十几年，我们就从一帮人挤在游戏厅里玩游戏，进化到了一帮人挤在实验室里看agent玩游戏。</p>
+<h2 data-sourcepos="11:1-11:29">GRU - fake text generation</h2>
+<p data-sourcepos="13:1-13:15">Implementation:</p>
+<pre><code data-sourcepos="15:1-40:20" class="language-py"># single forward pass version of GRU. Normally we don't use this directly
+class GRU_onepass(Can):
+    def __init__(self,num_in,num_h):
+        super().__init__()
+        # assume input has dimension num_in.
+        self.num_in,self.num_h = num_in, num_h
+        self.wz = Dense(num_in+num_h,num_h,bias=False)
+        self.wr = Dense(num_in+num_h,num_h,bias=False)
+        self.w = Dense(num_in+num_h,num_h,bias=False)
+        self.incan([self.wz,self.wr,self.w])
+        # http://colah.github.io/posts/2015-08-Understanding-LSTMs/
+
+    def __call__(self,i):
+        # assume hidden, input is of shape [batch,num_h] and [batch,num_in]
+        hidden = i[0]
+        inp = i[1]
+        wz,wr,w = self.wz,self.wr,self.w
+        dims = tf.rank(inp)
+        c = tf.concat([hidden,inp],axis=dims-1)
+        z = tf.sigmoid(wz(c))
+        r = tf.sigmoid(wr(c))
+        h_c = tf.tanh(w(tf.concat([hidden*r,inp],axis=dims-1)))
+        h_new = (1-z) * hidden + z * h_c
+        return h_new
+</code></pre>
+<p data-sourcepos="41:1-41:84">(source available at <a href="https://github.com/ctmakro/canton/blob/master/canton/cans.py">https://github.com/ctmakro/canton/blob/master/canton/cans.py</a>)</p>
+<p data-sourcepos="43:1-43:223">The instance below is trained (on some English text) to predict next character based on previous characters. Characters are one-hot encoded bytes. Yes, 256 classes, which means this model will work with multibyte languages.</p>
+<pre><code data-sourcepos="45:1-72:75" class="language-text">In [1]: mymodel.load_weights('mymodel.npy')
+successfully loaded from mymodel.npy
+7 weights assigned.
+Out[1]: True
+
+In [2]: show2(1000)
+? The cacked philosophy this smull resplie time, sacrity soncelse intrulvevelly
+weach. But DETt out rety bat
+belowed and hadbitions of selquets not more,
+there, the
+spect the dees and that the foundeed and mo but has forthither protubled dure:
+whone of his, itself proup of arobemations of be incrised heals dationar what it
+Go his light
+reed of ruspect a modelr these forse'st
+case of with what is
+philosophers anjuring adrreaders
+of wittout,&quot; that morust means do thithis now whay atajizater of stares. If of
+with mean vorigenly motaphysically, furselves they seck ont allieater
+over octer sesper as a nature as gievinence, and naturefless sume creally of
+hume of a deintatish&quot; and the makions
+with underivally this
+adymedtiams moods not crually. Till but benounger enoundflle: with is prevement his
+face: the astore Will
+religions, 's ortas and ciscesching ho to arn the peispepies than our offer or
+the juttity; and will
+pesceple! it wisking the blowners broug dived, been thrighten acompthe it w
+</code></pre>
+<p data-sourcepos="73:1-73:93">code available at <a href="https://github.com/ctmakro/hellotensor/blob/master/gru_text_generation.py">https://github.com/ctmakro/hellotensor/blob/master/gru_text_generation.py</a></p>
+<h2 data-sourcepos="75:1-75:38">Convolutional GRU - object tracking</h2>
+<p data-sourcepos="77:1-77:155">This technique (Convolutional Recurrence) is not widely used until recently: <a href="http://vision.ouc.edu.cn/valse/slides/20160323/VALSE-Xingjian.pdf">http://vision.ouc.edu.cn/valse/slides/20160323/VALSE-Xingjian.pdf</a> (ConvLSTM)</p>
+<p data-sourcepos="79:1-79:262">Basically, by using a convolutional recurrent network we can now model <strong>spatiotemporal relationships</strong>. In plain English: You can <strong>extract and exploit movement information</strong> from image sequences. This greatly improves, e.g., the performance of object trackers.</p>
+<p data-sourcepos="81:1-81:108">The implementation of ConvGRU in Canton framework is very simple. Just replace the Dense layers with Conv2D:</p>
+<pre><code data-sourcepos="83:1-94:44" class="language-py"># single forward pass version of GRUConv2D.
+class GRUConv2D_onepass(GRU_onepass): # inherit the __call__ method
+    def __init__(self,num_in,num_h,*args,**kwargs):
+        Can.__init__(self)
+        # assume input has dimension num_in.
+        self.num_in,self.num_h = num_in, num_h
+        self.wz = Conv2D(num_in+num_h,num_h,usebias=False,*args,**kwargs)
+        self.wr = Conv2D(num_in+num_h,num_h,usebias=False,*args,**kwargs)
+        self.w = Conv2D(num_in+num_h,num_h,usebias=False,*args,**kwargs)
+        self.incan([self.wz,self.wr,self.w])
+</code></pre>
+<p data-sourcepos="95:1-95:84">(source available at <a href="https://github.com/ctmakro/canton/blob/master/canton/cans.py">https://github.com/ctmakro/canton/blob/master/canton/cans.py</a>)</p>
+<p data-sourcepos="97:1-97:246">The instance below (regular convolution + recurrent convolution) is trained on a drone fly-by dataset. For each scene there are 8 consecutive images with a drone flying across. The network should output 1 where it believe is a drone; 0 otherwise.</p>
+<p data-sourcepos="99:1-99:23"><img src="convgru_track1.png" alt="" /></p>
+<p data-sourcepos="101:1-101:118"><strong>Top left:</strong> Network output, from t0...t7. <strong>Top right:</strong> Ground Truth (where the drone is). <strong>Bottom:</strong> Input images</p>
+<p data-sourcepos="103:1-103:287">As you can see in the beginning (t0) the network cannot tell the drone apart from the background. But after every step  its belief changes a little; Finally after 3 steps it gained enough information about the scene, successfully seperating the drone (white) from the background (black).</p>
+<p data-sourcepos="105:1-105:177"><strong>Below:</strong> Without the help of motion, even human can barely detect anything from the images. Again, the network gradually adjusted its belief about the moving object over time.</p>
+<p data-sourcepos="107:1-107:23"><img src="convgru_track2.png" alt="" /></p>
+<p data-sourcepos="109:1-109:96">code available at <a href="https://github.com/ctmakro/hellotensor/blob/master/drone_detector_canton2.py">https://github.com/ctmakro/hellotensor/blob/master/drone_detector_canton2.py</a></p>
 </div>
     <div class="meta_string">
-      <p>file: rl.md</p>
-      <p>last modified: 2017-01-10 16:14</p>
+      <p>file: gru.md</p>
+      <p>last modified: 2017-03-16 09:14</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
