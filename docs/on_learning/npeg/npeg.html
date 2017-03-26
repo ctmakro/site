@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../../favicon.ico">
-    <title> Behind WaveNet</title>
+    <title>NPEG图像压缩</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -122,48 +122,66 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:16">Behind WaveNet</h1>
-<p data-sourcepos="5:1-5:169">WaveNet <a href="https://arxiv.org/pdf/1609.03499.pdf">https://arxiv.org/pdf/1609.03499.pdf</a> is a convolutional neural network architecture that takes a bunch of audio samples as input, and predicts the next sample.</p>
-<p data-sourcepos="7:1-7:21"><img src="wavenet_arch.png" alt="" /></p>
-<p data-sourcepos="9:1-9:69">It worked so well(speech generation, music audio generation), so why?</p>
-<h2 data-sourcepos="11:1-11:18">My explaination</h2>
-<p data-sourcepos="13:1-13:251">Any audio signal can be synthesized with a collection of sine waves(or wavelets) of different frequencies. If we know the frequency, phase and amplitude of each of the sine waves(or wavelets), it is trivial to predict the amplitude of the next sample.</p>
-<p data-sourcepos="15:1-15:395">Just like the image shown above: two sinewave S1 and S2 are marked in red and blue, given their frequency <code>f</code>, phase <code>theta</code> and amplitude <code>A</code>, predicting their next sample would be as simple as calculating <code>Asin((2pi + theta) * f)</code>. So if we could decompose the incoming audio signal into a bunch of sinewaves, predicting the next sample would be as easy as <code>sum(sin(each sinewave parameters))</code></p>
-<p data-sourcepos="17:1-17:152">WaveNet does EXACTLY that, but in the neural network way (so nonlinearties of various kind could be added and trained to deal with real world problems).</p>
-<ol data-sourcepos="19:1-44:0">
-<li data-sourcepos="19:1-26:0">
-<p data-sourcepos="19:4-19:179">assume the input signal s1+s2 is being sampled at a frequency of <code>fs</code>, and the L1-L2 convolution kernel(drawn in cyan) is sensitive to the difference between two input samples.</p>
-<p data-sourcepos="21:5-21:35"><img src="wavenet_arch_demo_conv.png" alt="" /></p>
-<p data-sourcepos="23:5-23:132">obviously, after the L1-L2 convolution, signal of frequency <code>fs/2</code> (like the blue S2) will produce high activation (<code>b0</code>) in L2.</p>
-<p data-sourcepos="25:5-25:85">L2 can now say, &quot;I saw a signal of frequency <code>fs/2</code> of amplitude <code>b0 = a0 - a1</code>&quot;.</p>
-</li>
-<li data-sourcepos="27:1-32:0">
-<p data-sourcepos="27:4-27:175">L1 may also pass bias (common part of <code>a0</code> and <code>a1</code>) information to L2, using convolution kernels (drawn in purple) that are sensitive to the sum between two input samples.</p>
-<p data-sourcepos="29:5-29:34"><img src="wavenet_arch_demo_res.png" alt="" /></p>
-<p data-sourcepos="31:5-31:73">L2 can now say, &quot;apart of that, I also saw a bias of <code>r0 = a0 + b0</code>&quot;.</p>
-</li>
-<li data-sourcepos="33:1-38:0">
-<p data-sourcepos="33:4-33:124">then after the L2-L3 convolution, signal of frequency <code>fs/4</code> (like the red S1) will produce high activation (<code>b1</code>) in L3.</p>
-<p data-sourcepos="35:5-35:35"><img src="wavenet_arch_demo_res2.png" alt="" /></p>
-<p data-sourcepos="37:5-37:85">L3 can now say, &quot;I saw a signal of frequency <code>fs/4</code> of amplitude <code>b1 = r0 - r1</code>&quot;.</p>
-</li>
-<li data-sourcepos="39:1-40:0">
-<p data-sourcepos="39:4-39:180">so if we repeat this structure <code>N</code> times, we can extract the amplitude(and phase, won't go into detail here) information of sinewaves of frequency <code>fs/2, fs/4, fs/8 ... fs/2^N</code>.</p>
-</li>
-<li data-sourcepos="41:1-44:0">
-<p data-sourcepos="41:4-41:196">Then in order to predict the next sample using functions like <code>sum(sin(each sinewave parameters))</code>, we feed information from different frequencies to the output, using skip connections(yellow).</p>
-<p data-sourcepos="43:5-43:36"><img src="wavenet_arch_demo_skips.png" alt="" /></p>
-</li>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:45">NPEG图像压缩 - Neural Network Image Compression</h1>
+<blockquote data-sourcepos="5:1-5:131">
+<p data-sourcepos="5:3-5:131">This page is written in Chinese. English readers might prefer to go directly to the repository: <a href="https://github.com/ctmakro/npeg">https://github.com/ctmakro/npeg</a></p>
+</blockquote>
+<blockquote data-sourcepos="7:1-7:20">
+<p data-sourcepos="7:3-7:20">阅读本文需要基本的卷积神经网络知识。</p>
+</blockquote>
+<p data-sourcepos="9:1-9:59">对二进制串进行编码，空间最优的方法是霍夫曼法。不同二进制串的熵不同，使用霍夫曼法进行编码后的长度也不同，即压缩比不同。</p>
+<p data-sourcepos="11:1-11:9">下面是两串二进制：</p>
+<p data-sourcepos="13:1-13:41">100001001000000000 - 10010110101101010001</p>
+<p data-sourcepos="15:1-15:31">对霍夫曼法而言，第一串比第二串要更容易压缩，压缩后的长度更短。</p>
+<p data-sourcepos="17:1-17:16">对媒体数据进行有损压缩，分两步：</p>
+<ol data-sourcepos="19:1-21:0">
+<li data-sourcepos="19:1-19:35">将媒体数据通过一定方法，转换成0或者1比较多的某种二进制表示形式</li>
+<li data-sourcepos="20:1-21:0">对结果进行霍夫曼编码，实现压缩。</li>
 </ol>
-<p data-sourcepos="45:1-45:365">So the idea here is simple: decompose incoming waveform into different frequencies, extract parameters(amplitude and phase), then predict the next sample based on the parameters. So you might ask, why don't they just use FFT, or other well-established frequency domain analysis method??? Since after all, their 1D dilated convolutions are just doing the job of DFT.</p>
-<p data-sourcepos="47:1-47:169">I don't know either, but Facebook just found out how to do 2D convolution with FFT (<a href="https://github.com/facebook/fbcunn">https://github.com/facebook/fbcunn</a>), so the same thing could happen to WaveNet too.</p>
-<h2 data-sourcepos="49:1-49:44">Original description in the WaveNet paper</h2>
-<p data-sourcepos="51:1-51:239">As I explained above, those &quot;skip connections&quot; are required since the prediction network won't function without information from those connections. However, DeepMind gave very few comments on &quot;skip connections&quot;, describing it like a trick:</p>
-<p data-sourcepos="53:1-53:27"><img src="wavenet_arch_paper.png" alt="" /></p>
+<p data-sourcepos="22:1-22:10">JPEG是这么做的：</p>
+<ol data-sourcepos="24:1-29:0" start="0">
+<li data-sourcepos="24:1-24:16">把图像分割成若干8x8小块</li>
+<li data-sourcepos="25:1-25:24">把8x8的二维图像转换成64x1的一维图像</li>
+<li data-sourcepos="26:1-26:28">对64x1图像作DFT，得到不同频率下的幅度和相位</li>
+<li data-sourcepos="27:1-27:52">剔除DFT结果中幅度较小的项（假设人眼对这些项不敏感），使得结果中0变多，能够被霍夫曼法压缩得更小</li>
+<li data-sourcepos="28:1-29:0">对结果进行霍夫曼编码，实现压缩。</li>
+</ol>
+<p data-sourcepos="30:1-30:82">JPEG这个方法有很多缺点。DFT剔除项之后，边缘处像素的值会发生变化，造成图像的不连续。经JPEG压缩的图像，最显著的特点就是图像中能看到大量8x8的马赛克方块。</p>
+<p data-sourcepos="32:1-32:67">能不能别把图像切成一块一块分别转换成二进制串，而是连续地将整张图像转换成一张大的bitmap呢？嗯，可以用卷积神经网络(CNN)试试。</p>
+<p data-sourcepos="34:1-34:71">要把图像转换成二进制串再转换回来，需要两个CNN，一个负责编码（图像-&gt;0-1 bitmap），一个负责解码（0-1 bitmap-&gt;图像）。</p>
+<p data-sourcepos="36:1-36:26">训练架构（绿色箭头表示以降低误差为目标，更新参数）：</p>
+<img class="graph" src="npeg_graph_0.svg" title="graph 0" />
+<p data-sourcepos="40:1-40:75">其中sigmoid函数的作用是把encoder的输出限制到0和1之间。为了让网络多输出0，少输出1（以便压缩），我在生成的二进制码上添加了一个惩罚项：</p>
+<pre><code data-sourcepos="42:1-44:71" class="language-python">loss = tf.reduce_mean((y-x)**2) + tf.reduce_mean(binary_code**2) * 0.01
+</code></pre>
+<p data-sourcepos="46:1-46:9">这样架构就变成了：</p>
+<img class="graph" src="npeg_graph_1.svg" title="graph 1" />
+<p data-sourcepos="50:1-50:14">训练开始之后，情况是这样的：</p>
+<p data-sourcepos="52:1-52:22"><img src="npeg_lownoise.jpg" alt="" /></p>
+<p data-sourcepos="54:1-54:7">左边从上到下：</p>
+<ul data-sourcepos="56:1-59:0">
+<li data-sourcepos="56:1-56:12">输入图像（共3通道）</li>
+<li data-sourcepos="57:1-57:17">从sigmoid输出解码的图像</li>
+<li data-sourcepos="58:1-59:0">将sigmoid输出二值化，然后解码的图像</li>
+</ul>
+<p data-sourcepos="60:1-60:7">右边从上到下：</p>
+<ul data-sourcepos="62:1-64:0">
+<li data-sourcepos="62:1-62:30">sigmoid输出 （由左边第一张图生成，共128通道）</li>
+<li data-sourcepos="63:1-64:0">sigmoid输出，二值化之后</li>
+</ul>
+<p data-sourcepos="65:1-65:135">仔细看可以看到，sigmoid输出并不是用0和1，而是在用深浅不同的灰色表示信息，而decoder也是从这些深浅不同的灰色中还原图像的。如果我们把sigmoid输出二值化，这些信息就完全丢失了。那么，要怎样才能逼神经网络用0和1，而不是0和1之间的其他数值来表示信息呢？</p>
+<p data-sourcepos="67:1-67:8">答案是增加噪声！</p>
+<p data-sourcepos="69:1-69:74">如果我们在sigmoid函数之前添加高斯噪声，那么encoder和decoder就会开始发现，用灰色不可靠，只有用0和1编码的信息才能抵御噪声干扰。</p>
+<p data-sourcepos="71:1-71:17">增加高斯噪声之后，架构变成了这样：</p>
+<img class="graph" src="npeg_graph_2.svg" title="graph 2" />
+<p data-sourcepos="75:1-75:19">将噪声的标准差调到15，训练效果如下：</p>
+<p data-sourcepos="77:1-77:23"><img src="npeg_highnoise.jpg" alt="" /></p>
+<p data-sourcepos="79:1-79:50">可以看到，网络已经学会用二进制dither来编码图像内容，对sigmoid输出做不做二值化区别不大。</p>
+<p data-sourcepos="81:1-81:53">运行本文实验的代码在我的github上：<a href="https://github.com/ctmakro/npeg">https://github.com/ctmakro/npeg</a></p>
 </div>
     <div class="meta_string">
-      <p>file: wavenet_arch.md</p>
-      <p>last modified: 2017-02-09 23:33</p>
+      <p>file: npeg.md</p>
+      <p>last modified: 2017-03-26 16:30</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../favicon.ico">
+    <title> 不写码 No Code</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/lit</div>
+                      <div class="navnode"><a href="./../lit/why_bad_idea.html">Why Smart People Have Bad Ideas</a>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../on_learning/tf1c.html"> Compile TF 1.0</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/course_resources.html">Learning Resources</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/fast_gan_in_keras.html"> Fast DCGAN in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gan.html">GAN 生成式对抗网络</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/artist.html">Training of Artists</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/audio</div>
+                              <div class="navnode"><a href="./../on_learning/audio/wavenet_arch.html"> Behind WaveNet</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/image</div>
+                              <div class="navnode"><a href="./../on_learning/image/fast_lsgan.html">Fast LSGAN in Canton</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/image/style_transfer.html">On Style Transfer 风格转移</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/npeg</div>
+                              <div class="navnode"><a href="./../on_learning/npeg/npeg.html">NPEG图像压缩</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/activations/relu.html">Rectified Linear Unit 整流线性单元</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/rl</div>
+                              <div class="navnode"><a href="./../on_learning/rl/bipedal.html">BipedalWalker-v2</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/rl/ddpg.html">DDPG Method</a>
+                              </div>
+                              <div class="navnode"><a href="./../on_learning/rl/rl.html">RL is progressing rapidly</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/gru</div>
+                              <div class="navnode"><a href="./../on_learning/gru/gru.html">GRU and Convolutional GRU</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../on_life/beijing.html">北京收获</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/lang.html"> 编程语言的选择</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/nocode.html"> 不写码 No Code</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/numjs.html">NumJs</a>
+                      </div>
+                      <div class="navnode"><a href="./../on_life/reprod.html"> Reproducibility 可复现性</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:13">不写码 No Code</h1>
+<blockquote data-sourcepos="5:1-5:32">
+<p data-sourcepos="5:2-5:32">这是一些（真实的）寓言故事的集合。如果你想创业，先读完再骂我。</p>
+</blockquote>
+<p data-sourcepos="7:1-7:31">A君跑过来跟我说，我准备参加xxx创业大赛，这是我们的计划书。</p>
+<p data-sourcepos="9:1-9:59">什么计划。拿来一看，是个手机APP。100页的计划书我看了2页，快速翻过后面的98页，呃我觉得你们还是去食用排泄物吧。</p>
+<p data-sourcepos="11:1-11:29">A君内心当然是不服的，你又不是评委，懂个J8，我不问你了。</p>
+<h2 data-sourcepos="13:1-13:26">没写过码 Never Coded Before</h2>
+<p data-sourcepos="15:1-15:73">B君跟我说，考虑毕业-&gt;工作-&gt;创业。我问你想怎么创业，他说移动互联网，加上他又是学金融的，两个结合。我问，你知道你手机上最难写的APP是什么吗？</p>
+<p data-sourcepos="17:1-17:61">不知道。我告诉他，是微信（当然还有地图，这里就举微信吧）。他说，什么，微信是最难写的？不会吧？微信不是最基本的聊天功能吗？</p>
+<p data-sourcepos="19:1-19:24">螺丝钉也是最基本的五金产品啊，你造个螺丝钉我看看</p>
+<h2 data-sourcepos="21:1-21:25">写过两行 Greeted The World</h2>
+<p data-sourcepos="23:1-23:39">C君跟我说，我们想试试做这个产品，原理已经搞清楚了，想招两个SE干，你看行不行</p>
+<p data-sourcepos="25:1-25:4">我看不行</p>
+<p data-sourcepos="27:1-27:5">为什么不行</p>
+<p data-sourcepos="29:1-29:14">因为你招不到真正的软件工程师</p>
+<p data-sourcepos="31:1-31:10">软件工程师还有假的吗</p>
+<p data-sourcepos="33:1-33:29">商业计划书99%都是忽悠，凭什么工程师就得100%是真的？</p>
+<h2 data-sourcepos="35:1-35:21">社会阶梯 Social Ladder</h2>
+<blockquote data-sourcepos="37:1-37:8">
+<p data-sourcepos="37:2-37:8">这一段是铺垫。</p>
+</blockquote>
+<p data-sourcepos="39:1-39:116">政治局常委比中国的其他人都聪明吗？当然不是的。但他们因为各种原因当上了政治局常委，在某些方面就比中国的大多数人都清楚了。他们掌握游戏规则；他们的子女也充分享受这些游戏规则带来的好处。和他们的子女相比，你只是运气不好生在了寻常百姓家。</p>
+<p data-sourcepos="41:1-41:25">银行高管就比坐柜台的聪明吗？当然不是的，理由同上。</p>
+<p data-sourcepos="43:1-43:52">所以对于寻常百姓家的孩子，就需要爬社会阶梯了。大家都一样聪明，高管工作却数量有限，怎么决定谁来当高管呢？</p>
+<p data-sourcepos="45:1-45:76">如果两个人都一样聪明，那当然选风险比较小的那个人。如果是比较调皮的人，说不定哪天就把公司和客户给卖了。银行高管突然支出几千万然后消失的事情不是没发生过。</p>
+<p data-sourcepos="47:1-47:109">那怎么判断一个人的风险大不大呢？很简单，给他设一个高得变态的门槛，看他愿不愿意翻。比如说他们支行就招研究生，你研究什么的他们不管，只要是研究生就行。如果这个人愿意花两年时间把门槛翻了，那他至少也懂得珍惜来之不易的工作。</p>
+<p data-sourcepos="49:1-49:115">所以很多研究生学位并不是在培养研究型人才，而是名符其实的“敲门砖”，敲完门就是一块砖。如果是选拔党的干部，那门槛就更多啦，从团员写思想报告就开始了。思想报告有几句话是真的？无非是在考验你是否忠诚，毕竟党妈不缺钱，要的是听话的孩子。</p>
+<blockquote data-sourcepos="51:1-51:101">
+<p data-sourcepos="51:2-51:101">题外话：一碗水要端平，如果招新人标准那么高，老员工的学历又不够，外面会有意见的。所以国企和事业单位就时常要求并资助老员工去拿个学位（比如公共管理），至于这些学位和做研究的水平有多大关系，我就不清楚了。</p>
+</blockquote>
+<p data-sourcepos="53:1-53:48">研究生如此，本科如此，衡水中学又怎能不如此？应试教育盛行，主要就是因为社会对应试人才需求比较大。</p>
+<p data-sourcepos="55:1-55:50">不过技术创业就不服这个规律，考试考不好没关系，只要程序写得好，咱可以空手创造财富，不用去给人家擦鞋。</p>
+<p data-sourcepos="57:1-57:18">那为什么有钱人一般都不是搞技术的呢？</p>
+<h2 data-sourcepos="59:1-59:32">搞技术就穷吗 No English Translation</h2>
+<p data-sourcepos="61:1-61:95">有人说搞技术永远当穷人，我觉得这要分开看：如果没有你公司就转不起来，例如你是Elon Musk的合伙人，那你应该穷不到哪里去。如果没有你公司照样转，那当然就只能拿平均工资了。说到底是看水平。</p>
+<p data-sourcepos="63:1-63:43">不过如果你看工资中位数，搞技术也确实挺穷的。这是因为大家水平普遍不高，原因接下来解释。</p>
+<h2 data-sourcepos="65:1-65:32">工程师是干什么的 What Do Engineers Do</h2>
+<p data-sourcepos="67:1-67:80">科学家擅长的是：提出一个定理，并证明它的真伪。而工程师的工作是：已知一系列定理，用这些定理组合出一个系统。当然这两个职业的界限是模糊的，科学家也经常要当工程师。</p>
+<p data-sourcepos="69:1-69:118">问题是，证明一个定理，定理本身不一定有用；但设计一个系统，系统必须按照要求工作。用几条定理组合一个系统，有无数种组合方式，而能够达到目标的组合方式只是其中大海捞针的一部分；证明定理是多对一，设计系统是一对多，后者对人脑来说当然更难一些。</p>
+<p data-sourcepos="71:1-71:68">换句话说，优秀的工程师并不只是熟悉各种科学原理；他们还可以用丰富的经验在大部分情况下确定较优的解决方案。工程师不发明东西，他们组合东西。</p>
+<p data-sourcepos="73:1-73:86">软件工程可能是这方面最显著的。计算机的工作原理是众所周知的；x86指令集是人人平等的；问题是同样的计算机同样的CPU，不同的人写的软件的质量和效率却相去甚远。这是为什么呢？</p>
+<p data-sourcepos="75:1-75:79">恰恰是因为计算机太强大了。图灵机原则上可以做任何事情，指令的任意组合都可以运行，但能够完成某个特定任务的指令组合，却只是所有合法的指令组合中的非常小的一部分。</p>
+<p data-sourcepos="77:1-77:114">而软件工程师的工作就是按照任务要求，生成一条符合这个要求的指令列表。这是多么困难的一个搜索问题啊！（在那么大的空间里寻找那么稀疏的解）学过搜索树的同学就知道，要提高搜索的速度，就必须加入启发(Heuristic)来减少分支数量。</p>
+<p data-sourcepos="79:1-79:236">这个启发从哪里来呢？之前讲过，x86面前人人平等，高水平工程师并不比低水平工程师掌握更多原理。但他知道这些原理的好用组合分别是哪些。换言之，一个工程师经验越丰富，他在寻找较优解的搜索过程中每一步尝试的方案就越少，找到较优解的速度就越快。换句话说，假如待设计系统的复杂度为N，高水平工程师花费的时间接近O(N log N)，低水平工程师花费的时间则接近O(2^N)。这就是为什么即便掌握了计算机的工作原理，很多刚参加工作的计算机系毕业生也无法在有限时间内完成软件系统的设计。</p>
+<p data-sourcepos="81:1-81:99">而当<strong>非工程师</strong>面试工程师的时候，由于时间关系，出的题目往往比较简单（即N较小），且偏原理性，结果不同水平的工程师表现差不多。而真到设计实用系统的时候（即N较大），垃圾工程师就开始无限拖工期了。</p>
+<p data-sourcepos="83:1-83:31">这就是为什么搞技术永远当穷人：因为大多数工程师都是垃圾工程师。</p>
+<p data-sourcepos="85:1-85:28">这就是为什么你招不到真工程师：因为你考的东西他们全都懂。</p>
+<h2 data-sourcepos="87:1-87:23">往上爬 Climb The Ladder</h2>
+<p data-sourcepos="89:1-89:78">垃圾工程师并不甘心当穷人，想翻身。他们开始把自己跟身边的人比较，明明每天都是干9个小时，为什么他拿一万二我拿六千五？凭什么他就当项目经理，我每天写测试样例？</p>
+<p data-sourcepos="91:1-91:61">啊，肯定是因为我学历不够，他们这是搞学历歧视。妈逼的，老子回去考个研究生再跟你们斗。或者老子直接去考公务员，看看谁羡慕谁。</p>
+<p data-sourcepos="93:1-93:79">这是时下不少中国年轻人的想法，我认识的D君和E君，还有F君、H君都是这种想法。他们跟我提起这些事的时候，我能从他们的语气中听出那种垃圾工程师专属的软弱与自私。</p>
+<p data-sourcepos="95:1-95:42">他们的出发点是对的。如果屌丝想顺着社会的阶梯往上爬，刷学历确实是一种屡试不爽的途径。</p>
+<p data-sourcepos="97:1-97:45">但他们没有预料到的是，这种不爽情绪很可能会伴随终生——垃圾工程师是不知道自己为什么垃圾的。</p>
+<h2 data-sourcepos="99:1-99:39">证：社会是不公平的 Proof of Social Inequality</h2>
+<p data-sourcepos="101:1-101:36">在公平的社会中，回报与投入成正比，而投入取决于个人能力的高低，比如智商。</p>
+<p data-sourcepos="103:1-103:106">人群中智商的分布是正态分布，因此如果社会是公平的，个人财富的分布也应该是正态分布（即富人和穷人都少，中等收入者多），然而所有国家的个人财富都接近指数分布（即富人少，中等收入者较多，穷人最多），因此社会是不公平的。</p>
+<p data-sourcepos="105:1-105:95">但即便社会不公平，回报与投入仍然成正比！！！只不过一般人投入劳动，而富人可以投入资本，导致富人越来越富，穷人则越来越容易被剥削。这就是为什么虽然回报与投入成正比，社会的财富分布却是指数分布。</p>
+<p data-sourcepos="107:1-107:40">所以垃圾工程师不想干技术，而希望通过攀爬阶梯从富人手中争取财富，也算情有可原吧。</p>
+<p data-sourcepos="109:1-109:31">但也只是情有可原。决定爬的时候到处周围说的，最后一定爬不上去。</p>
+<h2 data-sourcepos="111:1-111:27">创业必败定理 Why You Must Fail</h2>
+<p data-sourcepos="113:1-113:34">为什么创业成功率如此低？上面讲过，因为你找错人了。这里给出数学解释。</p>
+<p data-sourcepos="115:1-115:103">写一个手机APP，加上后台服务，加上美工，加上运维，加上两个月变一次的商业模式，想创业成功大概需要完成1000个步骤。如果有一个步骤失败了（比如App关键功能实现不了），除非用其他步骤代替，否则创业将失败。</p>
+<p data-sourcepos="117:1-117:72">为了提高创业成功率，你尽量招优秀的人才。但由于上面提到的原因，你招的人并不完美，他完成任务的成功率只有95%。你觉得95%就够了，于是开始创业。</p>
+<p data-sourcepos="119:1-119:23">假设每个步骤的成功率是95%，总成功率是多少？</p>
+<p data-sourcepos="121:1-121:23">假设每个步骤的成功率是99%，总成功率是多少？</p>
+<p data-sourcepos="123:1-123:25">假设每个步骤的成功率是99.5%，总成功率是多少？</p>
+<p data-sourcepos="125:1-125:95">答案分别是 5e-23, 4e-5, 6e-3。最后一个数字接近风投的平均成功率。钱对风投来说不过是个数字，但创业者的时间却是真金白银的时间，既然时间宝贵，为什么不挑成功率高一点的项目做呢？</p>
+<p data-sourcepos="127:1-127:12">因为大部分同学脑子有洞。</p>
+<p data-sourcepos="129:1-129:36">想创业的同学可以自己拿计算器核对一下，看是我算错了呢，还是你们脑子有洞。</p>
+<h2 data-sourcepos="131:1-131:11">总结 TL;DR</h2>
+<p data-sourcepos="133:1-133:41">我想说的你们都猜到了：不写码是不行的！不写码的人，是无法区分另一个人会不会写码的。</p>
+</div>
+    <div class="meta_string">
+      <p>file: nocode.md</p>
+      <p>last modified: 2017-03-22 06:50</p>
+    </div>
+    <script>
+      //if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+      
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  </body>
+</html>
