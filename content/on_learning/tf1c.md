@@ -1,18 +1,20 @@
-! Compile TF 1.0
+! Compiling TensorFlow
 
-# Compiling TensorFlow r1.0 from source, OS X, RMBP2015
+# Compiling TensorFlow r1.0+ from source, OS X, RMBP2015
 
-To support SSE3, 4.1, 4.2, AVX, AVX2, FMA
+To support SSE3, 4.1, 4.2, AVX, AVX2, FMA.
 
->Since 1.0, TF removed support for acceleration instructions from their official build, due to complain from a couple old school users. Guess what? I'll (have to) build it myself.
+>Since 1.0, TF removed support for acceleration instructions from their official build, due to complain from a couple old school users.
 
-# If it works, don't build it
+Prebuilt Python Wheels are available at <https://github.com/ctmakro/tensorflow_custom_python_wheel_build>.
+
+## Notes
 
 Building TF on my machine once took ~30min (building), ~20min (Downloading all the stuff), ~entire night (Googling Google, dealing with all kinds of issues).
 
 Google did a great job with their Blaze (Bazel) build system -- a system specifically designed to do this one thing (build software), in world record speed. Yet still takes half an hour. Without Blaze it's hard to imagine Google engineers literally doing anything productive.
 
-# Detailed Steps
+## Detailed Steps
 
 ```bash
 # install JDK first
