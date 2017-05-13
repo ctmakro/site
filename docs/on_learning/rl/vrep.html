@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../../favicon.ico">
-    <title> Behind WaveNet</title>
+    <title>V-REP + Gym = RL</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -124,48 +124,61 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:16">Behind WaveNet</h1>
-<p data-sourcepos="5:1-5:169">WaveNet <a href="https://arxiv.org/pdf/1609.03499.pdf">https://arxiv.org/pdf/1609.03499.pdf</a> is a convolutional neural network architecture that takes a bunch of audio samples as input, and predicts the next sample.</p>
-<p data-sourcepos="7:1-7:21"><img src="wavenet_arch.png" alt="" /></p>
-<p data-sourcepos="9:1-9:69">It worked so well(speech generation, music audio generation), so why?</p>
-<h2 data-sourcepos="11:1-11:18">My explaination</h2>
-<p data-sourcepos="13:1-13:251">Any audio signal can be synthesized with a collection of sine waves(or wavelets) of different frequencies. If we know the frequency, phase and amplitude of each of the sine waves(or wavelets), it is trivial to predict the amplitude of the next sample.</p>
-<p data-sourcepos="15:1-15:395">Just like the image shown above: two sinewave S1 and S2 are marked in red and blue, given their frequency <code>f</code>, phase <code>theta</code> and amplitude <code>A</code>, predicting their next sample would be as simple as calculating <code>Asin((2pi + theta) * f)</code>. So if we could decompose the incoming audio signal into a bunch of sinewaves, predicting the next sample would be as easy as <code>sum(sin(each sinewave parameters))</code></p>
-<p data-sourcepos="17:1-17:152">WaveNet does EXACTLY that, but in the neural network way (so nonlinearties of various kind could be added and trained to deal with real world problems).</p>
-<ol data-sourcepos="19:1-44:0">
-<li data-sourcepos="19:1-26:0">
-<p data-sourcepos="19:4-19:179">assume the input signal s1+s2 is being sampled at a frequency of <code>fs</code>, and the L1-L2 convolution kernel(drawn in cyan) is sensitive to the difference between two input samples.</p>
-<p data-sourcepos="21:5-21:35"><img src="wavenet_arch_demo_conv.png" alt="" /></p>
-<p data-sourcepos="23:5-23:132">obviously, after the L1-L2 convolution, signal of frequency <code>fs/2</code> (like the blue S2) will produce high activation (<code>b0</code>) in L2.</p>
-<p data-sourcepos="25:5-25:85">L2 can now say, &quot;I saw a signal of frequency <code>fs/2</code> of amplitude <code>b0 = a0 - a1</code>&quot;.</p>
-</li>
-<li data-sourcepos="27:1-32:0">
-<p data-sourcepos="27:4-27:175">L1 may also pass bias (common part of <code>a0</code> and <code>a1</code>) information to L2, using convolution kernels (drawn in purple) that are sensitive to the sum between two input samples.</p>
-<p data-sourcepos="29:5-29:34"><img src="wavenet_arch_demo_res.png" alt="" /></p>
-<p data-sourcepos="31:5-31:73">L2 can now say, &quot;apart of that, I also saw a bias of <code>r0 = a0 + b0</code>&quot;.</p>
-</li>
-<li data-sourcepos="33:1-38:0">
-<p data-sourcepos="33:4-33:124">then after the L2-L3 convolution, signal of frequency <code>fs/4</code> (like the red S1) will produce high activation (<code>b1</code>) in L3.</p>
-<p data-sourcepos="35:5-35:35"><img src="wavenet_arch_demo_res2.png" alt="" /></p>
-<p data-sourcepos="37:5-37:85">L3 can now say, &quot;I saw a signal of frequency <code>fs/4</code> of amplitude <code>b1 = r0 - r1</code>&quot;.</p>
-</li>
-<li data-sourcepos="39:1-40:0">
-<p data-sourcepos="39:4-39:180">so if we repeat this structure <code>N</code> times, we can extract the amplitude(and phase, won't go into detail here) information of sinewaves of frequency <code>fs/2, fs/4, fs/8 ... fs/2^N</code>.</p>
-</li>
-<li data-sourcepos="41:1-44:0">
-<p data-sourcepos="41:4-41:196">Then in order to predict the next sample using functions like <code>sum(sin(each sinewave parameters))</code>, we feed information from different frequencies to the output, using skip connections(yellow).</p>
-<p data-sourcepos="43:5-43:36"><img src="wavenet_arch_demo_skips.png" alt="" /></p>
-</li>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:25">V-REP + OpenAI Gym = RL</h1>
+<p data-sourcepos="5:1-5:137">V-REP: The powerful, user friendly, and free-to-use robot simulation platform for researchers and hackers. Supports basically everything.</p>
+<p data-sourcepos="7:1-7:71">OpenAI Gym: The de facto standard interface for Reinforcement Learning.</p>
+<p data-sourcepos="9:1-9:122">So, how can we hook V-REP onto an Gym environment, so that we could perform 3D robotic simulations step-by-step in Python?</p>
+<h2 data-sourcepos="11:1-11:26">Remote Controlled V-REP</h2>
+<p data-sourcepos="13:1-13:129">V-REP provides a set of APIs accessible from socket, with dynamic libraries and binding for Python, Lua and a bunch of languages.</p>
+<p data-sourcepos="15:1-15:43">You will have to write some python code to:</p>
+<ol data-sourcepos="17:1-28:0">
+<li data-sourcepos="17:1-17:37">Start a V-REP instance from Python</li>
+<li data-sourcepos="18:1-18:41">Connect to the instance you've started</li>
+<li data-sourcepos="19:1-19:59">Load the scene file (the scene we are about to simulate)</li>
+<li data-sourcepos="20:1-20:23">Start the simulation</li>
+<li data-sourcepos="21:1-21:22">Step the simulation</li>
+<li data-sourcepos="22:1-22:79">Read/Write something from/to V-REP to control the simulation and record data</li>
+<li data-sourcepos="23:1-23:23">Goto 5 several times</li>
+<li data-sourcepos="24:1-24:22">Stop the simulation</li>
+<li data-sourcepos="25:1-25:63">(Important) Check to see if the simulation actually stopped.</li>
+<li data-sourcepos="26:1-26:24">Goto 4 several times</li>
+<li data-sourcepos="27:1-28:0">Kill the V-REP instance from python if no longer needed.</li>
 </ol>
-<p data-sourcepos="45:1-45:365">So the idea here is simple: decompose incoming waveform into different frequencies, extract parameters(amplitude and phase), then predict the next sample based on the parameters. So you might ask, why don't they just use FFT, or other well-established frequency domain analysis method??? Since after all, their 1D dilated convolutions are just doing the job of DFT.</p>
-<p data-sourcepos="47:1-47:169">I don't know either, but Facebook just found out how to do 2D convolution with FFT (<a href="https://github.com/facebook/fbcunn">https://github.com/facebook/fbcunn</a>), so the same thing could happen to WaveNet too.</p>
-<h2 data-sourcepos="49:1-49:44">Original description in the WaveNet paper</h2>
-<p data-sourcepos="51:1-51:239">As I explained above, those &quot;skip connections&quot; are required since the prediction network won't function without information from those connections. However, DeepMind gave very few comments on &quot;skip connections&quot;, describing it like a trick:</p>
-<p data-sourcepos="53:1-53:27"><img src="wavenet_arch_paper.png" alt="" /></p>
+<p data-sourcepos="29:1-29:26">Which means a lot of code.</p>
+<p data-sourcepos="31:1-31:261">Good news: I wrote a library called <code>vrepper</code>, available at <a href="https://github.com/ctmakro/vrepper">https://github.com/ctmakro/vrepper</a>, that could correctly handle the routine mentioned above. You should at least look at the code - which may save you a lot of precious time, that I've spent already.</p>
+<p data-sourcepos="33:1-33:73">You may expand your own functionality. Consult V-REP's Remote API manual.</p>
+<h2 data-sourcepos="35:1-35:39">An example on the usage of <code>vrepper</code></h2>
+<p data-sourcepos="37:1-37:198">Here I made a 3D cart-pole environment. It contains camera output rendered with OpenGL in V-REP, so that you could see how the simulation went with V-REP running in headless mode (mode without GUI).</p>
+<p data-sourcepos="39:1-39:26">video demonstration below:</p>
+<p data-sourcepos="41:1-41:53"><video controls loop autoplay src="vrep.mp4"></video></p>
+<p data-sourcepos="43:1-43:53">To run the example above, here's what you have to do:</p>
+<pre><code data-sourcepos="45:1-67:0" class="language-bash"># install V-REP 3.40 (latest version as the time of writing) for your operating system. Make sure the vrep executable is in your PATH variable.
+
+$ pip install tensorflow numpy
+$ pip install canton
+
+$ pip install opencv-python # won't always work. Just make sure you have OpenCV3 installed, and you could &quot;import cv2&quot; in Python.
+
+$ git clone https://github.com/ctmakro/cv2tools # visualization utility
+$ pip install -e ./cv2tools
+$ git clone https://github.com/ctmakro/vrepper
+$ pip install -e ./vrepper
+
+$ git clone https://github.com/ctmakro/gymnastics
+$ cd gymnastics
+
+# then simply follow the video:
+$ ipython -i test_cartpole.py
+
+agent.load_weights() # load the neural network weights
+test()
+
+</code></pre>
+<p data-sourcepos="69:1-69:15">Happy learning!</p>
 </div>
     <div class="meta_string">
-      <p>file: wavenet_arch.md</p>
-      <p>last modified: 2017-02-09 23:33</p>
+      <p>file: vrep.md</p>
+      <p>last modified: 2017-05-13 18:24</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
