@@ -148,11 +148,13 @@
 <p data-sourcepos="31:1-31:261">Good news: I wrote a library called <code>vrepper</code>, available at <a href="https://github.com/ctmakro/vrepper">https://github.com/ctmakro/vrepper</a>, that could correctly handle the routine mentioned above. You should at least look at the code - which may save you a lot of precious time, that I've spent already.</p>
 <p data-sourcepos="33:1-33:73">You may expand your own functionality. Consult V-REP's Remote API manual.</p>
 <h2 data-sourcepos="35:1-35:39">An example on the usage of <code>vrepper</code></h2>
-<p data-sourcepos="37:1-37:198">Here I made a 3D cart-pole environment. It contains camera output rendered with OpenGL in V-REP, so that you could see how the simulation went with V-REP running in headless mode (mode without GUI).</p>
-<p data-sourcepos="39:1-39:26">video demonstration below:</p>
-<p data-sourcepos="41:1-41:53"><video controls loop autoplay src="vrep.mp4"></video></p>
-<p data-sourcepos="43:1-43:53">To run the example above, here's what you have to do:</p>
-<pre><code data-sourcepos="45:1-67:0" class="language-bash"># install V-REP 3.40 (latest version as the time of writing) for your operating system. Make sure the vrep executable is in your PATH variable.
+<p data-sourcepos="37:1-37:48">Here I made a 3D cart-pole environment in V-REP.</p>
+<p data-sourcepos="39:1-39:18"><img src="cart_pole.jpg" alt="" /></p>
+<p data-sourcepos="41:1-41:158">It contains camera output rendered with OpenGL in V-REP, so that you could see how the simulation went with V-REP running in headless mode (mode without GUI).</p>
+<p data-sourcepos="43:1-43:26">video demonstration below:</p>
+<p data-sourcepos="45:1-45:53"><video controls loop autoplay src="vrep.mp4"></video></p>
+<p data-sourcepos="47:1-47:53">To run the example above, here's what you have to do:</p>
+<pre><code data-sourcepos="49:1-71:0" class="language-bash"># install V-REP 3.40 (latest version as the time of writing) for your operating system. Make sure the vrep executable is in your PATH variable.
 
 $ pip install tensorflow numpy
 $ pip install canton
@@ -174,11 +176,11 @@ agent.load_weights() # load the neural network weights
 test()
 
 </code></pre>
-<p data-sourcepos="69:1-69:15">Happy learning!</p>
+<p data-sourcepos="73:1-73:15">Happy learning!</p>
 </div>
     <div class="meta_string">
       <p>file: vrep.md</p>
-      <p>last modified: 2017-05-13 18:24</p>
+      <p>last modified: 2017-05-13 18:32</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

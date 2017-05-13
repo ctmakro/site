@@ -34,7 +34,11 @@ You may expand your own functionality. Consult V-REP's Remote API manual.
 
 ## An example on the usage of `vrepper`
 
-Here I made a 3D cart-pole environment. It contains camera output rendered with OpenGL in V-REP, so that you could see how the simulation went with V-REP running in headless mode (mode without GUI).
+Here I made a 3D cart-pole environment in V-REP.
+
+![](cart_pole.jpg)
+
+It contains camera output rendered with OpenGL in V-REP, so that you could see how the simulation went with V-REP running in headless mode (mode without GUI).
 
 video demonstration below:
 
