@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title>Training of Artists</title>
+    <title> Make a Ferenova</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -129,85 +129,54 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:21">Training of Artists</h1>
-<p data-sourcepos="5:1-5:45">How to train an artist? for example to paint?</p>
-<p data-sourcepos="7:1-7:164">To answer that question, we must first answer: What do artists do. Another way to look at this question would be, what artists can do that normal people just can't?</p>
-<p data-sourcepos="9:1-9:171">An average painter who paint for a living must be able to paint a lot of things. Faces, objects... he must be able to produce photorealistic results of almost any subject.</p>
-<p data-sourcepos="11:1-11:79">To better illustrate the process of painting, consider the following algorithm:</p>
-<ol data-sourcepos="13:1-24:0">
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:26">Make yourself a Ferenova</h1>
+<p data-sourcepos="5:1-5:53">Ferenova is the official ball of FIFA World Cup 2002.</p>
+<p data-sourcepos="7:1-7:22"><img src="ferenova_real.jpg" alt="" /></p>
+<p data-sourcepos="9:1-9:88">I like its design very much. Below are the steps I took to make it available in Unity3D.</p>
+<h2 data-sourcepos="11:1-11:17">Detailed steps</h2>
+<ol data-sourcepos="13:1-52:0">
 <li data-sourcepos="13:1-16:0">
-<p data-sourcepos="13:4-13:77">Compare the image of canvas C with scene S and calculate their difference:</p>
-<blockquote data-sourcepos="15:5-15:20">
-<p data-sourcepos="15:6-15:20">d1 = (C - S)^2.</p>
-</blockquote>
+<p data-sourcepos="13:4-13:32">(Blender) create an icosphere</p>
+<p data-sourcepos="15:5-15:21"><img src="ferenova.jpg" alt="" /></p>
 </li>
 <li data-sourcepos="17:1-20:0">
-<p data-sourcepos="17:4-17:74">Paint a stroke K somewhere on canvas C, calculate the difference again:</p>
-<blockquote data-sourcepos="19:5-19:28">
-<p data-sourcepos="19:6-19:28">d2 = (Paint(C,K) - S)^2</p>
-</blockquote>
+<p data-sourcepos="17:4-17:30">Cut seams for UV unwrapping</p>
+<p data-sourcepos="19:5-19:22"><img src="ferenova2.jpg" alt="" /></p>
 </li>
-<li data-sourcepos="21:1-22:0">
-<p data-sourcepos="21:4-21:54">If d2 &lt; d1, keep the stroke K; otherwise remove it.</p>
+<li data-sourcepos="21:1-24:0">
+<p data-sourcepos="21:4-21:9">Unwrap</p>
+<p data-sourcepos="23:5-23:22"><img src="ferenova3.jpg" alt="" /></p>
 </li>
-<li data-sourcepos="23:1-24:0">
-<p data-sourcepos="23:4-23:15">Goto Step 1.</p>
+<li data-sourcepos="25:1-30:0">
+<p data-sourcepos="25:4-25:34">Paint the textures in Photoshop</p>
+<p data-sourcepos="27:5-27:22"><img src="ferenova4.jpg" alt="" /></p>
+<p data-sourcepos="29:5-29:22"><img src="ferenova5.jpg" alt="" /></p>
 </li>
-</ol>
-<p data-sourcepos="25:1-25:118">This algorithm is guaranteed to reduce the mean-squared difference between C and S if we run it for sufficiently long.</p>
-<p data-sourcepos="27:1-27:17"><img src="633_0004.png" alt="" /></p>
-<p data-sourcepos="29:1-29:29">However it has several flaws:</p>
-<ol data-sourcepos="31:1-36:0">
-<li data-sourcepos="31:1-32:0">
-<p data-sourcepos="31:4-31:410">The perceptive difference between C and S is not the mean-squared difference of the images. We humans care more about some details than others, for example we care more about faces of human than rocks and trees. Most of the artist's work is spent on Mona Lisa's face, not the background. So the algorithm above does not converge towards minimal perceptive difference. (it will eventually, but takes forever)</p>
+<li data-sourcepos="31:1-34:0">
+<p data-sourcepos="31:4-31:21">Resulting textures</p>
+<p data-sourcepos="33:5-33:22"><img src="ferenova6.jpg" alt="" /></p>
 </li>
-<li data-sourcepos="33:1-34:0">
-<p data-sourcepos="33:4-33:258">Where should we paint the stroke K? In what color? Well we may use the Monte-Carlo method: Draw the parameters of K from a uniform distribution. The algorithm will eventually converge, but that again takes forever (too high regret rate, too many retries).</p>
+<li data-sourcepos="35:1-40:0">
+<p data-sourcepos="35:4-35:122">Get back to blender and import these textures, then map them to the scorresponding input channels (color, normal, etc.)</p>
+<p data-sourcepos="37:5-37:22"><img src="ferenova7.jpg" alt="" /></p>
+<p data-sourcepos="39:5-39:22"><img src="ferenova8.jpg" alt="" /></p>
 </li>
-<li data-sourcepos="35:1-36:0">
-<p data-sourcepos="35:4-35:212">If we can't remove a painted stroke (say watercolor), this algorithm will not converge. This is why oil painting was so important to Renaissance: You can't mass produce artwork if you can't undo your mistakes.</p>
+<li data-sourcepos="41:1-48:0">
+<p data-sourcepos="41:4-41:76">Not bad! Export the Blender scene to FBX format, then import it to Unity.</p>
+<p data-sourcepos="43:5-43:49">Assign the icosphere mesh to a sphere object.</p>
+<p data-sourcepos="45:5-45:40">Assign the textures to the material.</p>
+<p data-sourcepos="47:5-47:22"><img src="ferenova9.jpg" alt="" /></p>
 </li>
-</ol>
-<p data-sourcepos="37:1-37:193">So the differences between artists and non-artists are quite clear now: We human certainly can't run the algorithm above faster than a computer, so the artists must be using a better algorithm.</p>
-<ol data-sourcepos="39:1-44:0">
-<li data-sourcepos="39:1-40:0">
-<p data-sourcepos="39:4-39:90">An artist must estimate perceptive difference very efficiently with very high accuracy.</p>
-</li>
-<li data-sourcepos="41:1-42:0">
-<p data-sourcepos="41:4-41:89">An artist must choose the parameters for K very efficiently with very low regret rate.</p>
-</li>
-<li data-sourcepos="43:1-44:0">
-<p data-sourcepos="43:4-43:122">An artist must be able to do in-brain simulation before painting strokes, in case where mistakes are expensive to undo.</p>
+<li data-sourcepos="49:1-52:0">
+<p data-sourcepos="49:4-49:22">Here's what we got:</p>
+<p data-sourcepos="51:5-51:23"><img src="ferenova10.jpg" alt="" /></p>
 </li>
 </ol>
-<p data-sourcepos="45:1-45:193">Indeed, the typical training a human artist receives when he attend an art school strengthen their: estimation of preceptive difference, instinct for stroke placement, in-brain image formation.</p>
-<p data-sourcepos="47:1-47:68">So, why don't we train the computer like an artist, to paint for us?</p>
-<p data-sourcepos="49:1-49:204">A while ago I wrote a program which paints realistic oil brush strokes. Using mean-squared difference and per-stroke per-parameter gradient descent it converges just fine(thousands of strokes in minutes).</p>
-<ul data-sourcepos="51:1-52:0">
-<li data-sourcepos="51:1-52:0">But the perceptive difference is decreasing too slowly. The painting looked flat and boring.</li>
-</ul>
-<p data-sourcepos="53:1-53:17"><img src="200_0009.jpg" alt="" /></p>
-<p data-sourcepos="55:1-55:167">So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.</p>
-<p data-sourcepos="57:1-57:122">Since VGG16 is trained for image classification, it sure knows what features in images are important for human activities.</p>
-<p data-sourcepos="59:1-59:18">Here's what I got:</p>
-<p data-sourcepos="61:1-61:40"><img src="../flower_neural_loss_embossed_.jpg" alt="" /></p>
-<p data-sourcepos="63:1-63:5">Cool.</p>
-<ul data-sourcepos="65:1-70:0">
-<li data-sourcepos="65:1-66:0">
-<p data-sourcepos="65:3-65:246">But now the algorithm slows down. Neural networks are 1000x slower than mean-square; the gradients calculated by numerical differentiation (since the stroke process is not differentiable) on 8 parameters evaluate the neural network for 9 times.</p>
-</li>
-<li data-sourcepos="67:1-68:0">
-<p data-sourcepos="67:3-67:94">Good news: perceptive difference can be estimated with a neural network trained on ImageNet.</p>
-</li>
-<li data-sourcepos="69:1-70:0">
-<p data-sourcepos="69:3-69:111">Bad news: although gradient descent is 1e7 times more efficient than Monte-Carlo, still not efficient enough.</p>
-</li>
-</ul>
-<p data-sourcepos="71:1-71:280">Upcoming: I'm going to train a network that predicts optimal parameters for K very accurately based on current C and S. If this succeeds we may achieve a speed gain of about 50x. With RL techniques the network may even learn how to plan the strokes ahead to form special patterns.</p>
+<p data-sourcepos="53:1-53:92">If you felt that I wasn't clear enough, courses on Computer Graphics are highly recommended.</p>
 </div>
     <div class="meta_string">
-      <p>file: artist.md</p>
-      <p>last modified: 2017-02-08 03:37</p>
+      <p>file: ferenova.md</p>
+      <p>last modified: 2017-05-20 01:27</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
