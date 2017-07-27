@@ -62,7 +62,7 @@
 
     1. 修改固件。商家提供的是某个版本的Marlin改出来的，文件夹名字叫做“For linear and pulley - with hotbed”。修改之后如下：
 
-        configuration.h
+        Configuration.h
 
         ```cpp
         // EEPROM
@@ -77,80 +77,37 @@
         #define EEPROM_CHITCHAT
         ```
 
-        Marlin_main.cpp
+        这样修改之后，我们的AK就能够响应M500（把设置存到EEPROM中）命令，进而也就可以响应M666（对三条轨道增加修正量）命令了。
+
+        由于AK固件对终点开关（endswitch）都是作常闭开关处理，而delta结构打印机并不需要x_min、y_min、z_min开关，所以这几个口都没有接常闭开关而是悬空，后果就是机器会认为这些开关一直处于被触发的状态。在这个状态下，虽然AK仍然可以正常打印，但是M666命令会失去效果，即G28归位之后，机器并不会按照M666命令所要求的，向下移动设定的偏移量。所以这里也需要修改固件，把xyz_min都设成常开开关。
+
+        Configuration.h
 
         ```cpp
-            case 28: //G28 Home all Axis one at a time
-        #ifdef ENABLE_AUTO_BED_LEVELING
-              plan_bed_level_matrix.set_to_identity();  //Reset the plane ("erase" all leveling data)
-        #endif //ENABLE_AUTO_BED_LEVELING
-
-        #ifdef NONLINEAR_BED_LEVELING
-              reset_bed_level();
-        #endif //NONLINEAR_BED_LEVELING
-
-              saved_feedrate = feedrate;
-              saved_feedmultiply = feedmultiply;
-              feedmultiply = 100;
-              previous_millis_cmd = millis();
-
-              enable_endstops(true);
-
-              for(int8_t i=0; i < NUM_AXIS; i++) {
-                destination[i] = current_position[i];
-              }
-              feedrate = 0.0;
-
-        #ifdef DELTA
-                  // A delta can only safely home all axis at the same time
-                  // all axis have to home at the same time
-
-                  // Move all carriages up together until the first endstop is hit.
-                  current_position[X_AXIS] = 0;
-                  current_position[Y_AXIS] = 0;
-                  current_position[Z_AXIS] = 0;
-                  plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
-
-                  destination[X_AXIS] = 3 * Z_MAX_LENGTH;
-                  destination[Y_AXIS] = 3 * Z_MAX_LENGTH;
-                  destination[Z_AXIS] = 3 * Z_MAX_LENGTH;
-                  feedrate = 1.732 * homing_feedrate[X_AXIS];
-                  plan_buffer_line(destination[X_AXIS], destination[Y_AXIS], destination[Z_AXIS], destination[E_AXIS], feedrate/60, active_extruder);
-                  st_synchronize();
-                  endstops_hit_on_purpose();
-
-                  current_position[X_AXIS] = destination[X_AXIS];
-                  current_position[Y_AXIS] = destination[Y_AXIS];
-                  current_position[Z_AXIS] = destination[Z_AXIS];
-
-                  // take care of back off and rehome now we are all at the top
-                  HOMEAXIS(X);
-                  HOMEAXIS(Y);
-                  HOMEAXIS(Z);
-
-                  calculate_delta(current_position);
-                  // following line modified by Qin Yongliang
-                  plan_set_position(delta[X_AXIS]-endstop_adj[0], delta[Y_AXIS]-endstop_adj[1], delta[Z_AXIS]-endstop_adj[2], current_position[E_AXIS]);
-
+        // The pullups are needed if you directly connect a mechanical endswitch between the signal and ground pins.
+        const bool X_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+        const bool Y_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+        const bool Z_MIN_ENDSTOP_INVERTING = true; // set to true to invert the logic of the endstop.
+        const bool X_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+        const bool Y_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
+        const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic of the endstop.
         ```
 
-        这样修改之后，我们的AK就能够响应M500（把设置存到EEPROM中）和M666（对三条轨道增加修正量）两个命令了。
+        验证：在pronterface里，先G28归位，然后M666 x-10 y-10 z-10，然后M500，打印机应该返回“保存成功”。然后M501，看我们通过M666设置的内容，是否已经写入EEPROM。写入之后即便断电也是不会丢失的。然后再进行一次G28归位，看看三个轴在归位后，是不是又都下降了10mm？看来这种方法也能调节偏移量，而且不用调螺丝。（如果你真的想调螺丝：M3螺丝的螺距是0.5mm，如果要调节0.1mm，就拧1/5圈，以此类推。）
 
-        验证：在pronterface里，先G28，然后M666 x-10 y-10 z-10，然后M500，打印机应该返回“保存成功”。然后M501，看我们通过M666设置的内容，是否已经写入EEPROM。写入之后即便断电也是不会丢失的。然后按pronterface界面上的z轴向下1mm的按钮，看看三个轴是否都同时下降了10mm？说明这种方法也能调节偏移量，而且不用调螺丝。（如果你真的想调螺丝：M3螺丝的螺距是0.5mm，如果要调节0.1mm，就拧1/5圈，以此类推。）
+        验证完之后，记得复原M666设置（M666 x0 y0 z0, M500, M501），方便进行下一步。
 
-        验证完之后，记得复原M666设置。（M666 x0 y0 z0, M500, M501）
-
-    2. 将打印头移动到靠近x轴（打印机的x轴）处，点击界面上z轴（直角坐标系的z轴）向下1mm、向下0.1mm的按钮，直到触底。为了避免打印头损坏，一般用白纸垫在打印头和床面之间，如果白纸来回抽动遇到阻力，就说明已经触底。
+    2. 将打印头移动到靠近x轴（打印机的x轴）处，点击界面上z轴（直角坐标系的z轴）向下1mm及向下0.1mm的按钮，直到打印头触底。为了避免打印头损坏，通常用一张白纸垫在打印头和床面之间，如果白纸来回抽动遇到阻力，就说明已经触底。
 
         用M114命令读取此时Z轴（直角坐标系的z轴）高度，比如说-30.5，说明在靠近x轴（打印机的X轴）处，床面的高度是-30.5mm。
 
-        将打印头再分别移动到靠近y、z轴(打印机的y、z轴)处，也分别测量高度。
+        将打印头再分别移动到靠近y、z轴(打印机的y、z轴)处，也分别测量打印头触碰床面时，直角坐标系z轴的高度。把这三个高度记录下来。
 
-        假如现在测量到了 x-30.5, y-30.9, z-31.2，就说明如果想让直角坐标系的z=0平面和实际床面重合，就要给打印机x,y,z三个轴分别增加-30.5/-30.9/-31.2的偏移量。增加的方法：M666 x-30.5 y-30.9 z-31.2, M500, M501
+        假如现在测量到了三个高度，分别是： 靠近x轴z=-30.5, 靠近y轴z=-30.9, 靠近z轴z=-31.2。这时如果想让直角坐标系的z=0平面和实际床面重合，就要给打印机x,y,z三个轴分别增加-30.5/-30.9/-31.2的偏移量。增加的方法之前已经提过：M666 x-30.5 y-30.9 z-31.2, M500, M501
 
-    3. 将打印机G28归位（或者直接按绿色的z轴归位按钮），重复第2步，直到打印头无论在床面的什么位置，移动到底时，坐标系的z轴均为0.
+    3. 将打印机G28归位（或者直接按绿色的z轴归位按钮），重复第2步，直到打印头无论在床面上方什么位置，向下移动到触碰床面时，通过M114读取的坐标系z轴高度均为0.
 
-    上面这个步骤看上去很复杂，但如果把常用操作制作成pronterface里的按钮，速度就很快了。另一个好处是调节很精确，比拧螺丝精确。
+    上面这些步骤看上去很费时间，但如果把常用操作制作成pronterface里的按钮，通过点击按钮移动到靠近每个轴的地方，很快就能弄完了。用这种方式调节机器，比拧螺丝要精确，而且不用背诵螺丝的转动方向和角度。
 
     在打印的过程中，如果某一处的丝不粘平台，说明此处偏高；如果某一处的丝被压扁甚至不出丝，说明此处偏低，挤出头刮床；相应微调M666 +-0.1mm，再重新打印，直到效果完美为止。
 
