@@ -155,6 +155,8 @@
 ![](bearing_assembly.jpg)
 ![](bearing_assembly2.jpg)
 
+<div id="firmware"></div>
+
 ## Marlin bugfix-1.1.4 版固件 for AK
 
 20170728更新
