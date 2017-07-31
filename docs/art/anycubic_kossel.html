@@ -421,15 +421,14 @@ PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Conf
 <p data-sourcepos="387:1-387:37">一番分析之后，我决定设计一款能够让三个滑轮受力均衡，将轨道真正夹紧的滑车：</p>
 <p data-sourcepos="389:1-389:118">After some analysis I decided to design a pulley that could balance the forces between wheels and hold the rail tight:</p>
 <p data-sourcepos="391:1-391:26"><img src="pulley_new_design.jpg" alt="" /></p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
-<p data-sourcepos="395:1-395:28"><img src="pulley_new_prepared.jpg" alt="" /></p>
-<p data-sourcepos="397:1-397:29"><img src="pulley_new_installed.jpg" alt="" /></p>
-<p data-sourcepos="399:1-399:61">装好之后我发现我的新设计仍然有改进的空间。但即便这样，现在这个设计也已经比原版好很多了，从上下推拉滑车的手感就能感觉出来。</p>
-<p data-sourcepos="401:1-401:199">After installation I noticed that my design could be further improved. But even so my current design is much better than the original, you can tell from the feeling of pulling the pulley up and down.</p>
-<p data-sourcepos="403:1-403:62">由于我的设计比原版要矮1毫米，所以我把探头装上，运行一次 G33 P5 之后，机器的等效半径从96.95增加到了97.28。</p>
-<p data-sourcepos="405:1-405:143">Since my new design is 1mm thinner than the original, the z-probe is installed and a G33 P5 is ran, and my RADIUS has gone from 96.95 to 97.28:</p>
-<p data-sourcepos="407:1-407:31"><img src="pulley_new_calibrating.jpg" alt="" /></p>
-<pre><code data-sourcepos="409:1-429:45" class="language-text">&gt;&gt;&gt; g33p5
+<p data-sourcepos="393:1-393:28"><img src="pulley_new_prepared.jpg" alt="" /></p>
+<p data-sourcepos="395:1-395:29"><img src="pulley_new_installed.jpg" alt="" /></p>
+<p data-sourcepos="397:1-397:61">装好之后我发现我的新设计仍然有改进的空间。但即便这样，现在这个设计也已经比原版好很多了，从上下推拉滑车的手感就能感觉出来。</p>
+<p data-sourcepos="399:1-399:199">After installation I noticed that my design could be further improved. But even so my current design is much better than the original, you can tell from the feeling of pulling the pulley up and down.</p>
+<p data-sourcepos="401:1-401:62">由于我的设计比原版要矮1毫米，所以我把探头装上，运行一次 G33 P5 之后，机器的等效半径从96.95增加到了97.28。</p>
+<p data-sourcepos="403:1-403:143">Since my new design is 1mm thinner than the original, the z-probe is installed and a G33 P5 is ran, and my RADIUS has gone from 96.95 to 97.28:</p>
+<p data-sourcepos="405:1-405:31"><img src="pulley_new_calibrating.jpg" alt="" /></p>
+<pre><code data-sourcepos="407:1-427:45" class="language-text">&gt;&gt;&gt; g33p5
 SENDING:G33P5
 G33 Auto Calibrate
 Checking... AC
@@ -449,8 +448,9 @@ Calibration OK                                    rolling back.
 .Tower angle :    Tx:+2.54  Ty:+0.34  Tz:+0.00
 Save with M500 and/or copy to Configuration.h
 </code></pre>
-<p data-sourcepos="431:1-431:20">不错。然后我对设计进行了微调，再次打印：</p>
-<p data-sourcepos="433:1-433:67">Which is fine. Then I changed my design slightly and printed again:</p>
+<p data-sourcepos="429:1-429:20">不错。然后我对设计进行了微调，再次打印：</p>
+<p data-sourcepos="431:1-431:67">Which is fine. Then I changed my design slightly and printed again:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
 <p data-sourcepos="435:1-435:27"><img src="pulley_new_design2.jpg" alt="" /></p>
 <p data-sourcepos="437:1-437:26">我用白色箭头标出了每组螺丝对弯月形部分施加的作用力。</p>
 <p data-sourcepos="439:1-439:92">I marked the force applied to the moon-shaped piece by each set of screws with white arrows.</p>
@@ -469,7 +469,7 @@ Save with M500 and/or copy to Configuration.h
 </div>
     <div class="meta_string">
       <p>file: anycubic_kossel.md</p>
-      <p>last modified: 2017-07-31 13:20</p>
+      <p>last modified: 2017-07-31 14:27</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

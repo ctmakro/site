@@ -390,8 +390,6 @@ After some analysis I decided to design a pulley that could balance the forces b
 
 ![](pulley_new_design.jpg)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
-
 ![](pulley_new_prepared.jpg)
 
 ![](pulley_new_installed.jpg)
@@ -431,6 +429,8 @@ Save with M500 and/or copy to Configuration.h
 不错。然后我对设计进行了微调，再次打印：
 
 Which is fine. Then I changed my design slightly and printed again:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
 
 ![](pulley_new_design2.jpg)
 
