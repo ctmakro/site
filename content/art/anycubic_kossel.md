@@ -123,9 +123,11 @@
 
 3. 温度的问题
 
-    这个得根据实际耗材和速度设定。我热床设65度，这个温度下第一层略柔软，附着力增强。挤出要设成200度，设180度的话还没挤出来就被旁边的风扇吹冷了。PLA用180度（最低温度）的前提是挤出头的温度和显示器上的温度一致，实际上挤出头的温度会低一些，所以应该设定得高一些。一般来说，打印速度越快，温度也应该越高，避免流量大的时候挤出头被PLA过度冷却，导致细丝、断丝。
+    这个得根据实际耗材和速度,以及床面附着力设定。我热床设65度，这个温度下第一层略柔软，附着力增强。设成50度我的床面附着力不足。基本原则是，在床面能够附着的情况下，温度越低越好。
 
-    PLA的性质类似玻璃，没有固定的熔点，在100度附近可以抽丝，在60度以上失去刚性，50度左右恢复刚性。每次作品打印完我会命令打印头移到台面上方，风扇开启，帮助台面降温；降到50度的时候就可以把打印好的作品拔下来了。
+    挤出设成200度，设180度的话还没挤出来就被旁边的风扇吹冷了。PLA用180度（最低温度）的前提是挤出头的温度和显示器上的温度一致，实际上挤出头的温度会低一些，所以应该设定得高一些。一般来说，打印速度越快，温度也应该越高，避免流量大的时候挤出头被PLA过度冷却，导致细丝、断丝。
+
+    PLA的性质类似玻璃，没有固定的熔点，在100度附近可以抽丝，在60度以上失去刚性，50度左右恢复刚性。每次作品打印完我会命令打印头移到台面上方，风扇开启，帮助台面降温；降到45度的时候就可以把打印好的作品拔下来了。因为PLA导热差，所以台面温度低于50度的时候，内部温度可能还很高。如果太早拔下来会造成作品底部变形。
 
 ## 风扇叶
 
@@ -234,7 +236,11 @@
 
     在G33过程中发现一个问题，因为Z探头和打印头横向距离大概20mm（加热部件体积大，没办法装得太靠近），所以在有的测试点，Z探头会点到台面之外，而打印头会戳到床上，根本停不下来，十分恐怖。解决方法是减小测试半径，让测试点不要太接近床面的边缘。方法：在一切开始之前，输入命令：M665 B75 即可将测试半径限制到75mm。
 
-    M665完了，再G33 P5（P5表示测量很多个点，并校准所有参数到较高精度），等待一个略微漫长的过程，看着探头上下运动，最终得到输出如下：
+    M665完了，再G33 P5（P5表示测量很多个点，并校准所有参数到较高精度），等待一个略微漫长的过程，看着探头上下运动……
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/F2oLUJQs0Bs" frameborder="0" allowfullscreen></iframe>
+
+    最终得到输出如下：
 
     ```text
     >>> G33 P5
@@ -353,3 +359,105 @@
     然后M500保存。
 
     热床不是用PID，而是用ping pong大法控制的，所以不用校准。我试过热床用PID，效果不如ping pong（在固件里叫“bang bang”）好。
+
+<div id="pulley"></div>
+
+## 滑车改造消回差 Pulley Upgrade for Kossel Deltas with backlash
+
+![](original_pulley.jpg)
+
+原版的滑车个别回差比较大，会把比较小的圆画成椭圆，有些尖锐的角会画成圆角。
+
+![](backlash_explained.jpg)
+
+误差可大至0.5毫米。所以就产生了一种印象：要提高精度，就必须把滑车换成线轨。
+
+The original pulley design have severe backlash, causing the printer to draw small circles into ellipses, sharp edges into rounded edges. The error could be up to about 0.5mm. Thus we tend to believe that in order to increase the accuracy we must discard the pulley and use linear bearing instead.
+
+其实只要用手去扳一下安装好的滑车，就会发现滑车的设计有很严重的问题，即便所有的螺丝都拧到最紧，滑车仍然会晃，挤出头仍然可以摇动。到底是什么问题？我画了一张图作说明：
+
+Well actually if you move the installed pulley you will notice there are numerous design flaws present, that the pulley, and therefore the extrusion, could still wiggle even when all the screws are tightened. I drew a sketch to show why.
+
+![](original_sketch.jpg)
+
+左上：理想状态 右上：实际情况 左下：理想状态 右下：实际情况
+
+upleft: ideal upright: actual downleft:ideal downright: actual
+
+一番分析之后，我决定设计一款能够让三个滑轮受力均衡，将轨道真正夹紧的滑车：
+
+After some analysis I decided to design a pulley that could balance the forces between wheels and hold the rail tight:
+
+![](pulley_new_design.jpg)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
+
+![](pulley_new_prepared.jpg)
+
+![](pulley_new_installed.jpg)
+
+装好之后我发现我的新设计仍然有改进的空间。但即便这样，现在这个设计也已经比原版好很多了，从上下推拉滑车的手感就能感觉出来。
+
+After installation I noticed that my design could be further improved. But even so my current design is much better than the original, you can tell from the feeling of pulling the pulley up and down.
+
+由于我的设计比原版要矮1毫米，所以我把探头装上，运行一次 G33 P5 之后，机器的等效半径从96.95增加到了97.28。
+
+Since my new design is 1mm thinner than the original, the z-probe is installed and a G33 P5 is ran, and my RADIUS has gone from 96.95 to 97.28:
+
+![](pulley_new_calibrating.jpg)
+
+```text
+>>> g33p5
+SENDING:G33P5
+G33 Auto Calibrate
+Checking... AC
+.Height:329.52    Ex:+0.00  Ey:-1.12  Ez:-0.10    Radius:96.95
+.Tower angle :    Tx:+0.89  Ty:-0.22  Tz:+0.00
+Iteration : 01                                    std dev:0.241
+.Height:329.76    Ex:+0.00  Ey:-0.74  Ez:-0.28    Radius:97.10
+.Tower angle :    Tx:+1.49  Ty:-0.02  Tz:+0.00
+
+...
+
+Iteration : 09                                    std dev:0.015
+.Height:329.71    Ex:+0.00  Ey:-1.09  Ez:-0.22    Radius:97.30
+.Tower angle :    Tx:+2.61  Ty:+0.37  Tz:+0.00
+Calibration OK                                    rolling back.
+.Height:329.71    Ex:+0.00  Ey:-1.07  Ez:-0.22    Radius:97.28
+.Tower angle :    Tx:+2.54  Ty:+0.34  Tz:+0.00
+Save with M500 and/or copy to Configuration.h
+```
+
+不错。然后我对设计进行了微调，再次打印：
+
+Which is fine. Then I changed my design slightly and printed again:
+
+![](pulley_new_design2.jpg)
+
+我用白色箭头标出了每组螺丝对弯月形部分施加的作用力。
+
+I marked the force applied to the moon-shaped piece by each set of screws with white arrows.
+
+![](pulley_new2_explained.jpg)
+
+然后安装到另一条立柱上：
+
+Then installed it on another rail:
+
+![](pulley_new2_installed.jpg)
+
+这次的设计需要用三颗螺丝紧固，能够非常精确地调节每个尼龙轮的受力的大小和方向，确保上下均匀，不内嵌不外翻。最终效果非常好，滑车上下滑动如丝般顺滑，但左右摇则纹丝不动，彻底消除回差。
+
+This new design requires 3 screws, could precisely adjust the direction and magnitude of force on each of the wheels, and make sure they are even in every direction. The result is fantastic, the pulley could slide up and down freely, but could barely wiggle horizontally. The backlash is now completely eliminated.
+
+![](backlash_reduced.jpg)
+
+打印结果：所有的圆孔都圆了。由于定位精度提高，打印的稳定性也得到了提高。现在这台打印机可以以很高的速度、很高的精度进行打印了。
+
+Result: all the holes are round now. Stability of printing increased as a result of the increased positioning accuracy. Now the printer can print very fast and accurately.
+
+最终我把三个滑车全换成了这种新设计的滑车。我把滑车的STL文件附在下方，供各位下载。
+
+Finally I replaced all three pulleys with my new design. You can download the STEP file for the pulley below.
+
+[pulley_for_kossel_new_design.stl](pulley_for_kossel_new_design.stl) (for 20mm*20mm aluminum rail and nylon wheels)
