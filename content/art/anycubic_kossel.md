@@ -458,6 +458,6 @@ Result: all the holes are round now. Stability of printing increased as a result
 
 最终我把三个滑车全换成了这种新设计的滑车。我把滑车的STL文件附在下方，供各位下载。
 
-Finally I replaced all three pulleys with my new design. You can download the STEP file for the pulley below.
+Finally I replaced all three pulleys with my new design. You can download the STL file for the pulley below.
 
 [pulley_for_kossel_new_design.zip](pulley_for_kossel_new_design.zip) (for 20mm*20mm aluminum rail and nylon wheels)
