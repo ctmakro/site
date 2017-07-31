@@ -460,4 +460,4 @@ Result: all the holes are round now. Stability of printing increased as a result
 
 Finally I replaced all three pulleys with my new design. You can download the STEP file for the pulley below.
 
-[pulley_for_kossel_new_design.stl](pulley_for_kossel_new_design.stl) (for 20mm*20mm aluminum rail and nylon wheels)
+[pulley_for_kossel_new_design.zip](pulley_for_kossel_new_design.zip) (for 20mm*20mm aluminum rail and nylon wheels)
