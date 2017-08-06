@@ -135,7 +135,7 @@
 <p data-sourcepos="5:1-5:22"><img src="kossel_taobao.jpg" alt="" /></p>
 <p data-sourcepos="7:1-7:91">淘宝上最便宜的3d打印机，深圳anycubic公司出品。很多同学看到价格居然比2d打印机还便宜之后都想买，所以我就在这里把注意事项跟大家写一下吧，毕竟国货，光看说明书肯定是要出事的。</p>
 <p data-sourcepos="9:1-9:20"><img src="kossel_tall.jpg" alt="" /></p>
-<ol data-sourcepos="11:1-131:0" start="0">
+<ol data-sourcepos="11:1-133:0" start="0">
 <li data-sourcepos="11:1-16:0">
 <p data-sourcepos="11:4-11:8">滑车的问题</p>
 <p data-sourcepos="13:5-13:148">anycubic kossel（下称AK）有滑车版和线轨版，一个是用塑料滑车作为轨道，一个是用线性滑轨作为轨道。滑车因为是塑料+橡胶，用力掰就会变形，所以打印的速度、加速度一高，滑车受力、抖动就大，精度就会下降。线性滑轨由于是金属的，刚度很高，就没有这个问题。因此价格差几百块钱可以理解。</p>
@@ -222,86 +222,87 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 <p data-sourcepos="120:5-120:134">在模型周围一定要加衬线（skirt），它会在模型周围画一圈（也可以设成几圈）没有任何用途的线，可以使打印头送料通畅，把打印头上残留的PLA丝留在模型外边；最重要的是，如果出了任何问题（比如打印头刮台面，或者PLA不粘台面），可以在打印模型本身之前就发现并终止。</p>
 <p data-sourcepos="122:5-122:25"><img src="kossel_skirt.jpg" alt="" /></p>
 </li>
-<li data-sourcepos="124:1-131:0">
+<li data-sourcepos="124:1-133:0">
 <p data-sourcepos="124:4-124:8">温度的问题</p>
 <p data-sourcepos="126:5-126:93">这个得根据实际耗材和速度,以及床面附着力设定。我热床设65度，这个温度下第一层略柔软，附着力增强。设成50度我的床面附着力不足。基本原则是，在床面能够附着的情况下，温度越低越好。</p>
 <p data-sourcepos="128:5-128:144">挤出设成200度，设180度的话还没挤出来就被旁边的风扇吹冷了。PLA用180度（最低温度）的前提是挤出头的温度和显示器上的温度一致，实际上挤出头的温度会低一些，所以应该设定得高一些。一般来说，打印速度越快，温度也应该越高，避免流量大的时候挤出头被PLA过度冷却，导致细丝、断丝。</p>
 <p data-sourcepos="130:5-130:163">PLA的性质类似玻璃，没有固定的熔点，在100度附近可以抽丝，在60度以上失去刚性，50度左右恢复刚性。每次作品打印完我会命令打印头移到台面上方，风扇开启，帮助台面降温；降到45度的时候就可以把打印好的作品拔下来了。因为PLA导热差，所以台面温度低于50度的时候，内部温度可能还很高。如果太早拔下来会造成作品底部变形。</p>
+<p data-sourcepos="132:5-132:277">20170806更新：实测本机器0.4mm挤出头配1.75mm耗材，最大挤出速度是350mm/min，超过这个速度后挤出阻力会变得极大，马达会丢步（即便驱动电流已经调到最大）。切片时设定的打印速度如果超出最大挤出速度，就会造成挤出不足（underextrusion），打出废品，必须严格控制。我试过在新Marlin固件（见下文）中通过M203（设置最大进给速度）限制挤出速度，效果虽然有，但同时也会对反拉（retraction）速度造成影响，所以最好还是在切片的时候就限制住速度。很多软件都有最大挤出率的限制，单位是立方毫米/秒，做相应换算即可。</p>
 </li>
 </ol>
-<h2 data-sourcepos="132:1-132:6">风扇叶</h2>
-<p data-sourcepos="134:1-134:26">扇叶厚度不到0.5mm，利用支撑打出来的，强度很好。</p>
-<p data-sourcepos="136:1-136:15"><img src="blade1.jpg" alt="" /></p>
-<p data-sourcepos="138:1-138:15"><img src="blade2.jpg" alt="" /></p>
-<p data-sourcepos="140:1-140:21"><img src="blade_sketch.jpg" alt="" /></p>
-<h2 data-sourcepos="142:1-142:6">球轴承</h2>
-<p data-sourcepos="144:1-144:31">终于为尘封多年的6mmABS塑料小球（你懂的）找到用途了。。。</p>
-<p data-sourcepos="146:1-146:25"><img src="bearing_inventor.jpg" alt="" /></p>
-<p data-sourcepos="148:1-148:28"><img src="bearing_pronterface.jpg" alt="" /></p>
-<p data-sourcepos="150:1-150:6">这个是滚珠架</p>
-<p data-sourcepos="152:1-153:32"><img src="bearing_holder.jpg" alt="" />
+<h2 data-sourcepos="134:1-134:6">风扇叶</h2>
+<p data-sourcepos="136:1-136:26">扇叶厚度不到0.5mm，利用支撑打出来的，强度很好。</p>
+<p data-sourcepos="138:1-138:15"><img src="blade1.jpg" alt="" /></p>
+<p data-sourcepos="140:1-140:15"><img src="blade2.jpg" alt="" /></p>
+<p data-sourcepos="142:1-142:21"><img src="blade_sketch.jpg" alt="" /></p>
+<h2 data-sourcepos="144:1-144:6">球轴承</h2>
+<p data-sourcepos="146:1-146:31">终于为尘封多年的6mmABS塑料小球（你懂的）找到用途了。。。</p>
+<p data-sourcepos="148:1-148:25"><img src="bearing_inventor.jpg" alt="" /></p>
+<p data-sourcepos="150:1-150:28"><img src="bearing_pronterface.jpg" alt="" /></p>
+<p data-sourcepos="152:1-152:6">这个是滚珠架</p>
+<p data-sourcepos="154:1-155:32"><img src="bearing_holder.jpg" alt="" />
 <img src="bearing_holder_printing.jpg" alt="" /></p>
-<p data-sourcepos="155:1-155:18">这个设计可以同时承受轴向和径向载荷:</p>
-<p data-sourcepos="157:1-158:26"><img src="bearing_assembly.jpg" alt="" />
+<p data-sourcepos="157:1-157:18">这个设计可以同时承受轴向和径向载荷:</p>
+<p data-sourcepos="159:1-160:26"><img src="bearing_assembly.jpg" alt="" />
 <img src="bearing_assembly2.jpg" alt="" /></p>
 <div id="firmware"></div>
-<h2 data-sourcepos="162:1-162:33">Marlin bugfix-1.1.4 版固件 for AK</h2>
-<p data-sourcepos="164:1-164:10">20170728更新</p>
-<p data-sourcepos="166:1-166:157">因为商家提供的旧版Marlin固件缺很多功能，无法满足我对精确打印的要求，所以这两天我上Github找了最新版的Marlin，修改后用在AK上。修改后的固件放在我的Github上，也就是<a href="https://github.com/ctmakro/Marlin/">这里</a>。用最新版Arduino(1.8.3)可以烧写。</p>
-<p data-sourcepos="168:1-168:19">下面所提到的内容，都需要新固件的支持。</p>
-<ol data-sourcepos="170:1-362:0">
-<li data-sourcepos="170:1-212:0">
-<p data-sourcepos="170:4-170:16">Z轴探头（Z Probe）</p>
-<p data-sourcepos="172:5-172:23"><img src="zprobe_cad.jpg" alt="" /></p>
-<p data-sourcepos="174:5-174:27"><img src="zprobe_printed.jpg" alt="" /></p>
-<p data-sourcepos="176:5-176:29"><img src="zprobe_installed.jpg" alt="" /></p>
-<p data-sourcepos="178:5-178:84">支架是打印的，用M3螺丝拧在挤出头旁边，开关是普通的6*6mm微动开关，找了一个触发压力很小的，用新版固件的M48（测试机械开关的重复精度）命令测试，效果很好：</p>
-<pre><code data-sourcepos="180:5-187:32" class="language-text">&gt;&gt;&gt; M48
+<h2 data-sourcepos="164:1-164:33">Marlin bugfix-1.1.4 版固件 for AK</h2>
+<p data-sourcepos="166:1-166:10">20170728更新</p>
+<p data-sourcepos="168:1-168:157">因为商家提供的旧版Marlin固件缺很多功能，无法满足我对精确打印的要求，所以这两天我上Github找了最新版的Marlin，修改后用在AK上。修改后的固件放在我的Github上，也就是<a href="https://github.com/ctmakro/Marlin/">这里</a>。用最新版Arduino(1.8.3)可以烧写。</p>
+<p data-sourcepos="170:1-170:19">下面所提到的内容，都需要新固件的支持。</p>
+<ol data-sourcepos="172:1-364:0">
+<li data-sourcepos="172:1-214:0">
+<p data-sourcepos="172:4-172:16">Z轴探头（Z Probe）</p>
+<p data-sourcepos="174:5-174:23"><img src="zprobe_cad.jpg" alt="" /></p>
+<p data-sourcepos="176:5-176:27"><img src="zprobe_printed.jpg" alt="" /></p>
+<p data-sourcepos="178:5-178:29"><img src="zprobe_installed.jpg" alt="" /></p>
+<p data-sourcepos="180:5-180:84">支架是打印的，用M3螺丝拧在挤出头旁边，开关是普通的6*6mm微动开关，找了一个触发压力很小的，用新版固件的M48（测试机械开关的重复精度）命令测试，效果很好：</p>
+<pre><code data-sourcepos="182:5-189:32" class="language-text">&gt;&gt;&gt; M48
 SENDING:M48
 M48 Z-Probe Repeatability Test
 Finished!
 Mean: -79.754615 Min: -79.763 Max: -79.751 Range: 0.013
 Standard Deviation: 0.005730
 </code></pre>
-<p data-sourcepos="189:5-189:46">经过多次测量，最大误差只有0.013，标准差0.005，比台面精度不知高到哪里去了。</p>
-<p data-sourcepos="191:5-191:157">因为探头比打印头要更长、更突出，所以通过探头测量到的距离，并不等于打印头和台面的实际距离。因此在使用这个探头前，要先测量探头和打印头的Z距离差，并用M851命令予以补偿（这些命令的具体使用，都请参考Marlin官网）。我的探头比打印头低1.09mm，所以我就M851 Z-1.09，然后M500、M501。</p>
-<p data-sourcepos="193:5-193:85">探头和打印头的Z距离差是这样测量的：在装好探头的情况下，先G28归位，然后用G30让测量探头向下运动，测量碰到台面上某个固定高度的物体（比如一把尺子）时的Z高度：</p>
-<pre><code data-sourcepos="195:5-199:35" class="language-text">&gt;&gt;&gt; G30
+<p data-sourcepos="191:5-191:46">经过多次测量，最大误差只有0.013，标准差0.005，比台面精度不知高到哪里去了。</p>
+<p data-sourcepos="193:5-193:157">因为探头比打印头要更长、更突出，所以通过探头测量到的距离，并不等于打印头和台面的实际距离。因此在使用这个探头前，要先测量探头和打印头的Z距离差，并用M851命令予以补偿（这些命令的具体使用，都请参考Marlin官网）。我的探头比打印头低1.09mm，所以我就M851 Z-1.09，然后M500、M501。</p>
+<p data-sourcepos="195:5-195:85">探头和打印头的Z距离差是这样测量的：在装好探头的情况下，先G28归位，然后用G30让测量探头向下运动，测量碰到台面上某个固定高度的物体（比如一把尺子）时的Z高度：</p>
+<pre><code data-sourcepos="197:5-201:35" class="language-text">&gt;&gt;&gt; G30
 SENDING:G30
 Bed X: 15.00 Y: -20.00 Z: 15.15
 </code></pre>
-<p data-sourcepos="201:5-201:128">然后将挤出头抬高，并移动到物体之前与探头接触的位置的正上方，以0.1mm为步长慢慢降低挤出头，直到挤出头刚好抵住物体表面（用一张A4纸垫在挤出头和物体之间，当纸的自由运动受阻时，说明挤出头和物体之间距离已小于0.1mm）。此时用M114读取Z高度：</p>
-<pre><code data-sourcepos="203:5-207:35" class="language-text">&gt;&gt;&gt; M114
+<p data-sourcepos="203:5-203:128">然后将挤出头抬高，并移动到物体之前与探头接触的位置的正上方，以0.1mm为步长慢慢降低挤出头，直到挤出头刚好抵住物体表面（用一张A4纸垫在挤出头和物体之间，当纸的自由运动受阻时，说明挤出头和物体之间距离已小于0.1mm）。此时用M114读取Z高度：</p>
+<pre><code data-sourcepos="205:5-209:35" class="language-text">&gt;&gt;&gt; M114
 SENDING:M114
 X:30.00 Y:-35.00 Z:14.01 E:0.00
 </code></pre>
-<p data-sourcepos="209:5-209:49">将两个Z高度相减(比如上面的14.01 - 15.15)，就得到了探头和打印头的Z距离差。</p>
-<blockquote data-sourcepos="211:5-211:42">
-<p data-sourcepos="211:7-211:42">打印机整体校准好之后，G30就可以当作卡尺，测量床面上放置的物体的高度。</p>
+<p data-sourcepos="211:5-211:49">将两个Z高度相减(比如上面的14.01 - 15.15)，就得到了探头和打印头的Z距离差。</p>
+<blockquote data-sourcepos="213:5-213:42">
+<p data-sourcepos="213:7-213:42">打印机整体校准好之后，G30就可以当作卡尺，测量床面上放置的物体的高度。</p>
 </blockquote>
 </li>
-<li data-sourcepos="213:1-324:0">
-<p data-sourcepos="213:4-213:12">三角洲参数自动校正</p>
-<blockquote data-sourcepos="215:5-217:100">
-<p data-sourcepos="215:7-215:69">注意：在各个 G2x/G3x 命令开始前，请务必先G28归位，因为有的命令可能自带bug，缺少这一步，导致非常恐怖的情况发生。</p>
-<p data-sourcepos="217:7-217:100">如果认为恐怖的情况即将发生（比如打印头即将/已经撞向平台），急停的最快方法是在pronterface界面上双击Disconnect按钮。第二次点击会让计算机重新连上打印机，导致打印机重启。</p>
+<li data-sourcepos="215:1-326:0">
+<p data-sourcepos="215:4-215:12">三角洲参数自动校正</p>
+<blockquote data-sourcepos="217:5-219:100">
+<p data-sourcepos="217:7-217:69">注意：在各个 G2x/G3x 命令开始前，请务必先G28归位，因为有的命令可能自带bug，缺少这一步，导致非常恐怖的情况发生。</p>
+<p data-sourcepos="219:7-219:100">如果认为恐怖的情况即将发生（比如打印头即将/已经撞向平台），急停的最快方法是在pronterface界面上双击Disconnect按钮。第二次点击会让计算机重新连上打印机，导致打印机重启。</p>
 </blockquote>
-<p data-sourcepos="219:5-219:82">探头就位后，就可以通过G33命令进行多次自动测量，校正打印机的各种参数（包括工作半径、各塔的角度偏差等等），非常方便。不过，先别急着G33，读完下面的内容：</p>
-<p data-sourcepos="221:5-221:16">G33校正的是这些参数：</p>
-<p data-sourcepos="223:5-223:30"><img src="delta_calibration.png" alt="" /></p>
-<p data-sourcepos="225:5-225:98">这些参数，机器组装好之后校正一次，往后只要没有再拆装，就不需要再进行校正。这些参数也可以通过手动方法校正，然后通过M666、M665等命令写入，但是过程麻烦，精度也有限，还是自动的方法好。</p>
-<blockquote data-sourcepos="227:5-227:164">
-<p data-sourcepos="227:7-227:164">注意：三条立柱组装时必须严格相互平行！因为这个误差是没办法校正的。另外鱼眼距离（碳纤维杆的长度）也是测量得到的，作为其他一切校准的基础，如果这个长度测量不准确，就会造成打印件比例正确，但所有方向上的尺寸均有百分误差。anycubic在这一点上做得不错，鱼眼杆的长度就是217mm，非常精确，作为硬参数已经写到固件里。</p>
+<p data-sourcepos="221:5-221:82">探头就位后，就可以通过G33命令进行多次自动测量，校正打印机的各种参数（包括工作半径、各塔的角度偏差等等），非常方便。不过，先别急着G33，读完下面的内容：</p>
+<p data-sourcepos="223:5-223:16">G33校正的是这些参数：</p>
+<p data-sourcepos="225:5-225:30"><img src="delta_calibration.png" alt="" /></p>
+<p data-sourcepos="227:5-227:98">这些参数，机器组装好之后校正一次，往后只要没有再拆装，就不需要再进行校正。这些参数也可以通过手动方法校正，然后通过M666、M665等命令写入，但是过程麻烦，精度也有限，还是自动的方法好。</p>
+<blockquote data-sourcepos="229:5-229:164">
+<p data-sourcepos="229:7-229:164">注意：三条立柱组装时必须严格相互平行！因为这个误差是没办法校正的。另外鱼眼距离（碳纤维杆的长度）也是测量得到的，作为其他一切校准的基础，如果这个长度测量不准确，就会造成打印件比例正确，但所有方向上的尺寸均有百分误差。anycubic在这一点上做得不错，鱼眼杆的长度就是217mm，非常精确，作为硬参数已经写到固件里。</p>
 </blockquote>
-<p data-sourcepos="229:5-229:99">除了打印面的凹凸，参数的误差还会造成打印面的倾斜，以及不同方向上尺寸不对称（圆不圆、方不方）等问题。因为我主要是打印各种机械零件，所以这些问题对我的影响尤其大。有多大？只要打印一个网格图案：</p>
-<p data-sourcepos="231:5-231:18"><img src="mesh1.jpg" alt="" /></p>
-<p data-sourcepos="233:5-233:41">把两次打印的结果，相隔90度叠在一起，就会发现两个轴的尺寸有1-2%误差：</p>
-<p data-sourcepos="235:5-235:18"><img src="mesh2.jpg" alt="" /></p>
-<p data-sourcepos="237:5-237:165">在G33过程中发现一个问题，因为Z探头和打印头横向距离大概20mm（加热部件体积大，没办法装得太靠近），所以在有的测试点，Z探头会点到台面之外，而打印头会戳到床上，根本停不下来，十分恐怖。解决方法是减小测试半径，让测试点不要太接近床面的边缘。方法：在一切开始之前，输入命令：M665 B75 即可将测试半径限制到75mm。</p>
-<p data-sourcepos="239:5-239:66">M665完了，再G33 P5（P5表示测量很多个点，并校准所有参数到较高精度），等待一个略微漫长的过程，看着探头上下运动……</p>
+<p data-sourcepos="231:5-231:99">除了打印面的凹凸，参数的误差还会造成打印面的倾斜，以及不同方向上尺寸不对称（圆不圆、方不方）等问题。因为我主要是打印各种机械零件，所以这些问题对我的影响尤其大。有多大？只要打印一个网格图案：</p>
+<p data-sourcepos="233:5-233:18"><img src="mesh1.jpg" alt="" /></p>
+<p data-sourcepos="235:5-235:41">把两次打印的结果，相隔90度叠在一起，就会发现两个轴的尺寸有1-2%误差：</p>
+<p data-sourcepos="237:5-237:18"><img src="mesh2.jpg" alt="" /></p>
+<p data-sourcepos="239:5-239:165">在G33过程中发现一个问题，因为Z探头和打印头横向距离大概20mm（加热部件体积大，没办法装得太靠近），所以在有的测试点，Z探头会点到台面之外，而打印头会戳到床上，根本停不下来，十分恐怖。解决方法是减小测试半径，让测试点不要太接近床面的边缘。方法：在一切开始之前，输入命令：M665 B75 即可将测试半径限制到75mm。</p>
+<p data-sourcepos="241:5-241:66">M665完了，再G33 P5（P5表示测量很多个点，并校准所有参数到较高精度），等待一个略微漫长的过程，看着探头上下运动……</p>
  <iframe width="560" height="315" src="https://www.youtube.com/embed/F2oLUJQs0Bs" frameborder="0" allowfullscreen></iframe>
-<p data-sourcepos="243:5-243:13">最终得到输出如下：</p>
-<pre><code data-sourcepos="245:5-283:47" class="language-text">&gt;&gt;&gt; G33 P5
+<p data-sourcepos="245:5-245:13">最终得到输出如下：</p>
+<pre><code data-sourcepos="247:5-285:47" class="language-text">&gt;&gt;&gt; G33 P5
 SENDING:G33 P5
 G33 Auto Calibrate
 Checking... AC
@@ -339,14 +340,14 @@ Save with M500 and/or copy to Configuration.h
 SENDING:M500
 echo:Settings Stored (465 bytes; crc 19351)
 </code></pre>
-<p data-sourcepos="285:5-285:159">G33完了一定要紧接着M500保存，把参数写入EEPROM。从上面的输出来看，随着迭代次数(Iteration)增加，标准差(std dev)越来越小，最终收敛到0.016。高度328.50毫米，也正好是我这台AK之前手动校正时得到的Z轴行程。这时输入M501命令，发现校准结果已经写入EEPROM并可以读到。</p>
-<p data-sourcepos="287:5-287:97">G33完了之后，先G28归位，再输入G1 Z5，看看挤出头是不是正好停在台面上方5毫米处。或者G28归位，再G30测量台面高度，看返回的Z值是不是在+-0.05mm以内。如是则校正成功。</p>
-<p data-sourcepos="289:5-289:122">因为这个校正跑一次时间比较长，所以如果仅仅是更换了床面，可以不用重新G33，而可以用G29专门对床面的倾斜和位移进行校正。不过这个功能在Marlin固件里面bug比较多，暂时不推荐大家用，以后如果确实要用到，我会再更新G29相关的内容。</p>
-<p data-sourcepos="291:5-291:39">校准之后，把探头拆掉，然后打印一个空心立方体，挤出头紧贴床面效果很好：</p>
-<p data-sourcepos="293:5-293:30"><img src="after_calibration.jpg" alt="" /></p>
-<p data-sourcepos="295:5-295:52">把网格图案拿出来打印了一遍，经测量，xy尺寸相等，误差在0.1%以下。终于脱离了沦为玩具的命运。</p>
-<p data-sourcepos="297:5-297:28"><img src="mesh_calibrated.jpg" alt="" /></p>
-<p data-sourcepos="299:5-299:18">总结：只要固件好，鸟枪当大炮</p>
+<p data-sourcepos="287:5-287:159">G33完了一定要紧接着M500保存，把参数写入EEPROM。从上面的输出来看，随着迭代次数(Iteration)增加，标准差(std dev)越来越小，最终收敛到0.016。高度328.50毫米，也正好是我这台AK之前手动校正时得到的Z轴行程。这时输入M501命令，发现校准结果已经写入EEPROM并可以读到。</p>
+<p data-sourcepos="289:5-289:97">G33完了之后，先G28归位，再输入G1 Z5，看看挤出头是不是正好停在台面上方5毫米处。或者G28归位，再G30测量台面高度，看返回的Z值是不是在+-0.05mm以内。如是则校正成功。</p>
+<p data-sourcepos="291:5-291:122">因为这个校正跑一次时间比较长，所以如果仅仅是更换了床面，可以不用重新G33，而可以用G29专门对床面的倾斜和位移进行校正。不过这个功能在Marlin固件里面bug比较多，暂时不推荐大家用，以后如果确实要用到，我会再更新G29相关的内容。</p>
+<p data-sourcepos="293:5-293:39">校准之后，把探头拆掉，然后打印一个空心立方体，挤出头紧贴床面效果很好：</p>
+<p data-sourcepos="295:5-295:30"><img src="after_calibration.jpg" alt="" /></p>
+<p data-sourcepos="297:5-297:52">把网格图案拿出来打印了一遍，经测量，xy尺寸相等，误差在0.1%以下。终于脱离了沦为玩具的命运。</p>
+<p data-sourcepos="299:5-299:28"><img src="mesh_calibrated.jpg" alt="" /></p>
+<p data-sourcepos="301:5-301:18">总结：只要固件好，鸟枪当大炮</p>
  <!---
    在床面中心测量，Z接近0；此时如果移动到床的边缘，测量到的Z仍然比较大。这是因为G33只校正了打印机参数，但是没有校正床面，床面的倾斜并没有得到补偿。所以下一步是床面调平。
 
@@ -371,10 +372,10 @@ echo:Settings Stored (465 bytes; crc 19351)
    2. G29
  --->
 </li>
-<li data-sourcepos="325:1-362:0">
-<p data-sourcepos="325:4-325:13">挤出头PID自动调节</p>
-<p data-sourcepos="327:5-327:12">这个不多说了，先</p>
-<pre><code data-sourcepos="329:5-357:29" class="language-text">&gt;&gt;&gt; m303 s180 e0 c8 u
+<li data-sourcepos="327:1-364:0">
+<p data-sourcepos="327:4-327:13">挤出头PID自动调节</p>
+<p data-sourcepos="329:5-329:12">这个不多说了，先</p>
+<pre><code data-sourcepos="331:5-359:29" class="language-text">&gt;&gt;&gt; m303 s180 e0 c8 u
 SENDING:M303 S180 E0 C8 U
 PID Autotune start
  bias: 94 d: 94 min: 177.36 max: 184.89
@@ -402,33 +403,33 @@ PID Autotune finished! Put the last Kp, Ki and Kd constants from below into Conf
 #define  DEFAULT_Ki 2.30
 #define  DEFAULT_Kd 77.77
 </code></pre>
-<p data-sourcepos="359:5-359:13">然后M500保存。</p>
-<p data-sourcepos="361:5-361:81">热床不是用PID，而是用ping pong大法控制的，所以不用校准。我试过热床用PID，效果不如ping pong（在固件里叫“bang bang”）好。</p>
+<p data-sourcepos="361:5-361:13">然后M500保存。</p>
+<p data-sourcepos="363:5-363:81">热床不是用PID，而是用ping pong大法控制的，所以不用校准。我试过热床用PID，效果不如ping pong（在固件里叫“bang bang”）好。</p>
 </li>
 </ol>
 <div id="pulley"></div>
-<h2 data-sourcepos="365:1-365:57">滑车改造消回差 Pulley Upgrade for Kossel Deltas with backlash</h2>
-<p data-sourcepos="367:1-367:24"><img src="original_pulley.jpg" alt="" /></p>
-<p data-sourcepos="369:1-369:37">原版的滑车个别回差比较大，会把比较小的圆画成椭圆，有些尖锐的角会画成圆角。</p>
-<p data-sourcepos="371:1-371:27"><img src="backlash_explained.jpg" alt="" /></p>
-<p data-sourcepos="373:1-373:39">误差可大至0.5毫米。所以就产生了一种印象：要提高精度，就必须把滑车换成线轨。</p>
-<p data-sourcepos="375:1-375:297">The original pulley design have severe backlash, causing the printer to draw small circles into ellipses, sharp edges into rounded edges. The error could be up to about 0.5mm. Thus we tend to believe that in order to increase the accuracy we must discard the pulley and use linear bearing instead.</p>
-<p data-sourcepos="377:1-377:82">其实只要用手去扳一下安装好的滑车，就会发现滑车的设计有很严重的问题，即便所有的螺丝都拧到最紧，滑车仍然会晃，挤出头仍然可以摇动。到底是什么问题？我画了一张图作说明：</p>
-<p data-sourcepos="379:1-379:237">Well actually if you move the installed pulley you will notice there are numerous design flaws present, that the pulley, and therefore the extrusion, could still wiggle even when all the screws are tightened. I drew a sketch to show why.</p>
-<p data-sourcepos="381:1-381:24"><img src="original_sketch.jpg" alt="" /></p>
-<p data-sourcepos="383:1-383:31">左上：理想状态 右上：实际情况 左下：理想状态 右下：实际情况</p>
-<p data-sourcepos="385:1-385:62">upleft: ideal upright: actual downleft:ideal downright: actual</p>
-<p data-sourcepos="387:1-387:37">一番分析之后，我决定设计一款能够让三个滑轮受力均衡，将轨道真正夹紧的滑车：</p>
-<p data-sourcepos="389:1-389:118">After some analysis I decided to design a pulley that could balance the forces between wheels and hold the rail tight:</p>
-<p data-sourcepos="391:1-391:26"><img src="pulley_new_design.jpg" alt="" /></p>
-<p data-sourcepos="393:1-393:28"><img src="pulley_new_prepared.jpg" alt="" /></p>
-<p data-sourcepos="395:1-395:29"><img src="pulley_new_installed.jpg" alt="" /></p>
-<p data-sourcepos="397:1-397:61">装好之后我发现我的新设计仍然有改进的空间。但即便这样，现在这个设计也已经比原版好很多了，从上下推拉滑车的手感就能感觉出来。</p>
-<p data-sourcepos="399:1-399:199">After installation I noticed that my design could be further improved. But even so my current design is much better than the original, you can tell from the feeling of pulling the pulley up and down.</p>
-<p data-sourcepos="401:1-401:62">由于我的设计比原版要矮1毫米，所以我把探头装上，运行一次 G33 P5 之后，机器的等效半径从96.95增加到了97.28。</p>
-<p data-sourcepos="403:1-403:143">Since my new design is 1mm thinner than the original, the z-probe is installed and a G33 P5 is ran, and my RADIUS has gone from 96.95 to 97.28:</p>
-<p data-sourcepos="405:1-405:31"><img src="pulley_new_calibrating.jpg" alt="" /></p>
-<pre><code data-sourcepos="407:1-427:45" class="language-text">&gt;&gt;&gt; g33p5
+<h2 data-sourcepos="367:1-367:57">滑车改造消回差 Pulley Upgrade for Kossel Deltas with backlash</h2>
+<p data-sourcepos="369:1-369:24"><img src="original_pulley.jpg" alt="" /></p>
+<p data-sourcepos="371:1-371:37">原版的滑车个别回差比较大，会把比较小的圆画成椭圆，有些尖锐的角会画成圆角。</p>
+<p data-sourcepos="373:1-373:27"><img src="backlash_explained.jpg" alt="" /></p>
+<p data-sourcepos="375:1-375:39">误差可大至0.5毫米。所以就产生了一种印象：要提高精度，就必须把滑车换成线轨。</p>
+<p data-sourcepos="377:1-377:297">The original pulley design have severe backlash, causing the printer to draw small circles into ellipses, sharp edges into rounded edges. The error could be up to about 0.5mm. Thus we tend to believe that in order to increase the accuracy we must discard the pulley and use linear bearing instead.</p>
+<p data-sourcepos="379:1-379:82">其实只要用手去扳一下安装好的滑车，就会发现滑车的设计有很严重的问题，即便所有的螺丝都拧到最紧，滑车仍然会晃，挤出头仍然可以摇动。到底是什么问题？我画了一张图作说明：</p>
+<p data-sourcepos="381:1-381:237">Well actually if you move the installed pulley you will notice there are numerous design flaws present, that the pulley, and therefore the extrusion, could still wiggle even when all the screws are tightened. I drew a sketch to show why.</p>
+<p data-sourcepos="383:1-383:24"><img src="original_sketch.jpg" alt="" /></p>
+<p data-sourcepos="385:1-385:31">左上：理想状态 右上：实际情况 左下：理想状态 右下：实际情况</p>
+<p data-sourcepos="387:1-387:62">upleft: ideal upright: actual downleft:ideal downright: actual</p>
+<p data-sourcepos="389:1-389:37">一番分析之后，我决定设计一款能够让三个滑轮受力均衡，将轨道真正夹紧的滑车：</p>
+<p data-sourcepos="391:1-391:118">After some analysis I decided to design a pulley that could balance the forces between wheels and hold the rail tight:</p>
+<p data-sourcepos="393:1-393:26"><img src="pulley_new_design.jpg" alt="" /></p>
+<p data-sourcepos="395:1-395:28"><img src="pulley_new_prepared.jpg" alt="" /></p>
+<p data-sourcepos="397:1-397:29"><img src="pulley_new_installed.jpg" alt="" /></p>
+<p data-sourcepos="399:1-399:61">装好之后我发现我的新设计仍然有改进的空间。但即便这样，现在这个设计也已经比原版好很多了，从上下推拉滑车的手感就能感觉出来。</p>
+<p data-sourcepos="401:1-401:199">After installation I noticed that my design could be further improved. But even so my current design is much better than the original, you can tell from the feeling of pulling the pulley up and down.</p>
+<p data-sourcepos="403:1-403:62">由于我的设计比原版要矮1毫米，所以我把探头装上，运行一次 G33 P5 之后，机器的等效半径从96.95增加到了97.28。</p>
+<p data-sourcepos="405:1-405:143">Since my new design is 1mm thinner than the original, the z-probe is installed and a G33 P5 is ran, and my RADIUS has gone from 96.95 to 97.28:</p>
+<p data-sourcepos="407:1-407:31"><img src="pulley_new_calibrating.jpg" alt="" /></p>
+<pre><code data-sourcepos="409:1-429:45" class="language-text">&gt;&gt;&gt; g33p5
 SENDING:G33P5
 G33 Auto Calibrate
 Checking... AC
@@ -448,28 +449,34 @@ Calibration OK                                    rolling back.
 .Tower angle :    Tx:+2.54  Ty:+0.34  Tz:+0.00
 Save with M500 and/or copy to Configuration.h
 </code></pre>
-<p data-sourcepos="429:1-429:20">不错。然后我对设计进行了微调，再次打印：</p>
-<p data-sourcepos="431:1-431:67">Which is fine. Then I changed my design slightly and printed again:</p>
+<p data-sourcepos="431:1-431:20">不错。然后我对设计进行了微调，再次打印：</p>
+<p data-sourcepos="433:1-433:67">Which is fine. Then I changed my design slightly and printed again:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SD7qccoEEdM" frameborder="0" allowfullscreen></iframe>
-<p data-sourcepos="435:1-435:27"><img src="pulley_new_design2.jpg" alt="" /></p>
-<p data-sourcepos="437:1-437:26">我用白色箭头标出了每组螺丝对弯月形部分施加的作用力。</p>
-<p data-sourcepos="439:1-439:92">I marked the force applied to the moon-shaped piece by each set of screws with white arrows.</p>
-<p data-sourcepos="441:1-441:30"><img src="pulley_new2_explained.jpg" alt="" /></p>
-<p data-sourcepos="443:1-443:12">然后安装到另一条立柱上：</p>
-<p data-sourcepos="445:1-445:34">Then installed it on another rail:</p>
-<p data-sourcepos="447:1-447:30"><img src="pulley_new2_installed.jpg" alt="" /></p>
-<p data-sourcepos="449:1-449:90">这次的设计需要用三颗螺丝紧固，能够非常精确地调节每个尼龙轮的受力的大小和方向，确保上下均匀，不内嵌不外翻。最终效果非常好，滑车上下滑动如丝般顺滑，但左右摇则纹丝不动，彻底消除回差。</p>
-<p data-sourcepos="451:1-451:314">This new design requires 3 screws, could precisely adjust the direction and magnitude of force on each of the wheels, and make sure they are even in every direction. The result is fantastic, the pulley could slide up and down freely, but could barely wiggle horizontally. The backlash is now completely eliminated.</p>
-<p data-sourcepos="453:1-453:25"><img src="backlash_reduced.jpg" alt="" /></p>
-<p data-sourcepos="455:1-455:63">打印结果：所有的圆孔都圆了。由于定位精度提高，打印的稳定性也得到了提高。现在这台打印机可以以很高的速度、很高的精度进行打印了。</p>
-<p data-sourcepos="457:1-457:171">Result: all the holes are round now. Stability of printing increased as a result of the increased positioning accuracy. Now the printer can print very fast and accurately.</p>
-<p data-sourcepos="459:1-459:42">最终我把三个滑车全换成了这种新设计的滑车。我把滑车的STL文件附在下方，供各位下载。</p>
-<p data-sourcepos="461:1-461:108">Finally I replaced all three pulleys with my new design. You can download the STL file for the pulley below.</p>
-<p data-sourcepos="463:1-463:115"><a href="pulley_for_kossel_new_design.zip">pulley_for_kossel_new_design.zip</a> (for 20mm*20mm aluminum rail and nylon wheels)</p>
+<p data-sourcepos="437:1-437:27"><img src="pulley_new_design2.jpg" alt="" /></p>
+<p data-sourcepos="439:1-439:26">我用白色箭头标出了每组螺丝对弯月形部分施加的作用力。</p>
+<p data-sourcepos="441:1-441:92">I marked the force applied to the moon-shaped piece by each set of screws with white arrows.</p>
+<p data-sourcepos="443:1-443:30"><img src="pulley_new2_explained.jpg" alt="" /></p>
+<p data-sourcepos="445:1-445:12">然后安装到另一条立柱上：</p>
+<p data-sourcepos="447:1-447:34">Then installed it on another rail:</p>
+<p data-sourcepos="449:1-449:30"><img src="pulley_new2_installed.jpg" alt="" /></p>
+<p data-sourcepos="451:1-451:92">这次的设计需要用三颗M3螺丝紧固，能够非常精确地调节每个尼龙轮的受力的大小和方向，确保上下均匀，不内嵌不外翻。最终效果非常好，滑车上下滑动如丝般顺滑，但左右摇则纹丝不动，彻底消除回差。</p>
+<p data-sourcepos="453:1-453:317">This new design requires 3 M3 screws, could precisely adjust the direction and magnitude of force on each of the wheels, and make sure they are even in every direction. The result is fantastic, the pulley could slide up and down freely, but could barely wiggle horizontally. The backlash is now completely eliminated.</p>
+<p data-sourcepos="455:1-455:25"><img src="backlash_reduced.jpg" alt="" /></p>
+<p data-sourcepos="457:1-457:63">打印结果：所有的圆孔都圆了。由于定位精度提高，打印的稳定性也得到了提高。现在这台打印机可以以很高的速度、很高的精度进行打印了。</p>
+<p data-sourcepos="459:1-459:171">Result: all the holes are round now. Stability of printing increased as a result of the increased positioning accuracy. Now the printer can print very fast and accurately.</p>
+<p data-sourcepos="461:1-461:42">最终我把三个滑车全换成了这种新设计的滑车。我把滑车的STL文件附在下方，供各位下载。</p>
+<p data-sourcepos="463:1-463:108">Finally I replaced all three pulleys with my new design. You can download the STL file for the pulley below.</p>
+<p data-sourcepos="465:1-465:115"><a href="pulley_for_kossel_new_design.zip">pulley_for_kossel_new_design.zip</a> (for 20mm*20mm aluminum rail and nylon wheels)</p>
+<p data-sourcepos="467:1-467:48">20170804 更新：我又重新设计了滑车，现在能把轨道抓得更牢了，运行更滑，上下翻动范围更小。</p>
+<p data-sourcepos="469:1-469:117">20170804 Update: I redesigned the pulley, now it grabs the rail even tighter, running more smoothly, and wiggle less.</p>
+<p data-sourcepos="471:1-471:25"><img src="pulley_newer_cad.jpg" alt="" /></p>
+<p data-sourcepos="473:1-473:26"><img src="pulley_newer_cad2.jpg" alt="" /></p>
+<p data-sourcepos="475:1-475:31"><img src="pulley_newer_installed.jpg" alt="" /></p>
+<p data-sourcepos="477:1-477:119"><a href="pulley_for_kossel_newer_design.zip">pulley_for_kossel_newer_design.zip</a> (for 20mm*20mm aluminum rail and nylon wheels)</p>
 </div>
     <div class="meta_string">
       <p>file: anycubic_kossel.md</p>
-      <p>last modified: 2017-07-31 15:27</p>
+      <p>last modified: 2017-08-06 15:36</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

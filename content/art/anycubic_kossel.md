@@ -129,6 +129,8 @@
 
     PLA的性质类似玻璃，没有固定的熔点，在100度附近可以抽丝，在60度以上失去刚性，50度左右恢复刚性。每次作品打印完我会命令打印头移到台面上方，风扇开启，帮助台面降温；降到45度的时候就可以把打印好的作品拔下来了。因为PLA导热差，所以台面温度低于50度的时候，内部温度可能还很高。如果太早拔下来会造成作品底部变形。
 
+    20170806更新：实测本机器0.4mm挤出头配1.75mm耗材，最大挤出速度是350mm/min，超过这个速度后挤出阻力会变得极大，马达会丢步（即便驱动电流已经调到最大）。切片时设定的打印速度如果超出最大挤出速度，就会造成挤出不足（underextrusion），打出废品，必须严格控制。我试过在新Marlin固件（见下文）中通过M203（设置最大进给速度）限制挤出速度，效果虽然有，但同时也会对反拉（retraction）速度造成影响，所以最好还是在切片的时候就限制住速度。很多软件都有最大挤出率的限制，单位是立方毫米/秒，做相应换算即可。
+
 ## 风扇叶
 
 扇叶厚度不到0.5mm，利用支撑打出来的，强度很好。
@@ -446,9 +448,9 @@ Then installed it on another rail:
 
 ![](pulley_new2_installed.jpg)
 
-这次的设计需要用三颗螺丝紧固，能够非常精确地调节每个尼龙轮的受力的大小和方向，确保上下均匀，不内嵌不外翻。最终效果非常好，滑车上下滑动如丝般顺滑，但左右摇则纹丝不动，彻底消除回差。
+这次的设计需要用三颗M3螺丝紧固，能够非常精确地调节每个尼龙轮的受力的大小和方向，确保上下均匀，不内嵌不外翻。最终效果非常好，滑车上下滑动如丝般顺滑，但左右摇则纹丝不动，彻底消除回差。
 
-This new design requires 3 screws, could precisely adjust the direction and magnitude of force on each of the wheels, and make sure they are even in every direction. The result is fantastic, the pulley could slide up and down freely, but could barely wiggle horizontally. The backlash is now completely eliminated.
+This new design requires 3 M3 screws, could precisely adjust the direction and magnitude of force on each of the wheels, and make sure they are even in every direction. The result is fantastic, the pulley could slide up and down freely, but could barely wiggle horizontally. The backlash is now completely eliminated.
 
 ![](backlash_reduced.jpg)
 
@@ -461,3 +463,15 @@ Result: all the holes are round now. Stability of printing increased as a result
 Finally I replaced all three pulleys with my new design. You can download the STL file for the pulley below.
 
 [pulley_for_kossel_new_design.zip](pulley_for_kossel_new_design.zip) (for 20mm*20mm aluminum rail and nylon wheels)
+
+20170804 更新：我又重新设计了滑车，现在能把轨道抓得更牢了，运行更滑，上下翻动范围更小。
+
+20170804 Update: I redesigned the pulley, now it grabs the rail even tighter, running more smoothly, and wiggle less.
+
+![](pulley_newer_cad.jpg)
+
+![](pulley_newer_cad2.jpg)
+
+![](pulley_newer_installed.jpg)
+
+[pulley_for_kossel_newer_design.zip](pulley_for_kossel_newer_design.zip) (for 20mm*20mm aluminum rail and nylon wheels)
