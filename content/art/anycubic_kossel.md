@@ -475,3 +475,44 @@ Finally I replaced all three pulleys with my new design. You can download the ST
 ![](pulley_newer_installed.jpg)
 
 [pulley_for_kossel_newer_design.zip](pulley_for_kossel_newer_design.zip) (for 20mm*20mm aluminum rail and nylon wheels)
+
+紧密配合的结果是极低的校正误差：
+
+Tight rail results in great calibration accuracy:
+
+```text
+>>> g33p5
+SENDING:G33P5
+G33 Auto Calibrate
+Checking... AC
+.Height:329.09    Ex:+0.00  Ey:-5.94  Ez:-0.35    Radius:98.44
+.Tower angle :    Tx:+0.69  Ty:-1.17  Tz:+0.00
+Iteration : 01                                    std dev:0.046
+.Height:329.07    Ex:+0.00  Ey:-5.93  Ez:-0.43    Radius:98.44
+.Tower angle :    Tx:+0.72  Ty:-1.04  Tz:+0.00
+Iteration : 02                                    std dev:0.026
+.Height:329.05    Ex:+0.00  Ey:-5.92  Ez:-0.47    Radius:98.44
+.Tower angle :    Tx:+0.75  Ty:-0.93  Tz:+0.00
+Iteration : 03                                    std dev:0.026
+.Height:329.02    Ex:+0.00  Ey:-5.93  Ez:-0.53    Radius:98.44
+.Tower angle :    Tx:+0.77  Ty:-0.87  Tz:+0.00
+Iteration : 04                                    std dev:0.017
+.Height:329.01    Ex:+0.00  Ey:-5.94  Ez:-0.56    Radius:98.43
+.Tower angle :    Tx:+0.79  Ty:-0.81  Tz:+0.00
+Iteration : 05                                    std dev:0.014
+.Height:329.01    Ex:+0.00  Ey:-5.97  Ez:-0.58    Radius:98.47
+.Tower angle :    Tx:+0.84  Ty:-0.77  Tz:+0.00
+Iteration : 06                                    std dev:0.014
+.Height:328.99    Ex:+0.00  Ey:-5.99  Ez:-0.58    Radius:98.47
+.Tower angle :    Tx:+0.87  Ty:-0.72  Tz:+0.00
+Iteration : 07                                    std dev:0.012
+.Height:328.98    Ex:+0.00  Ey:-6.01  Ez:-0.61    Radius:98.47
+.Tower angle :    Tx:+0.89  Ty:-0.71  Tz:+0.00
+Iteration : 08                                    std dev:0.006
+.Height:328.98    Ex:+0.00  Ey:-6.02  Ez:-0.61    Radius:98.49
+.Tower angle :    Tx:+0.92  Ty:-0.70  Tz:+0.00
+Calibration OK                                    rolling back.
+.Height:328.98    Ex:+0.00  Ey:-6.01  Ez:-0.61    Radius:98.47
+.Tower angle :    Tx:+0.89  Ty:-0.71  Tz:+0.00
+Save with M500 and/or copy to Configuration.h
+```
