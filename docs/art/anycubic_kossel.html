@@ -291,8 +291,8 @@ X:30.00 Y:-35.00 Z:14.01 E:0.00
 <p data-sourcepos="223:5-223:16">G33校正的是这些参数：</p>
 <p data-sourcepos="225:5-225:30"><img src="delta_calibration.png" alt="" /></p>
 <p data-sourcepos="227:5-227:98">这些参数，机器组装好之后校正一次，往后只要没有再拆装，就不需要再进行校正。这些参数也可以通过手动方法校正，然后通过M666、M665等命令写入，但是过程麻烦，精度也有限，还是自动的方法好。</p>
-<blockquote data-sourcepos="229:5-229:164">
-<p data-sourcepos="229:7-229:164">注意：三条立柱组装时必须严格相互平行！因为这个误差是没办法校正的。另外鱼眼距离（碳纤维杆的长度）也是测量得到的，作为其他一切校准的基础，如果这个长度测量不准确，就会造成打印件比例正确，但所有方向上的尺寸均有百分误差。anycubic在这一点上做得不错，鱼眼杆的长度就是217mm，非常精确，作为硬参数已经写到固件里。</p>
+<blockquote data-sourcepos="229:5-229:179">
+<p data-sourcepos="229:7-229:179">注意：三条立柱组装时必须严格相互平行，且必须与床面垂直！因为这些误差Marlin是没办法应付的。另外鱼眼距离（碳纤维杆的长度）也是测量得到的，作为其他一切校准的基础，如果这个长度测量不准确，就会造成打印件比例正确，但所有方向上的尺寸均有百分误差。anycubic在这一点上做得不错，鱼眼杆的长度就是217mm，非常精确，作为硬参数已经写到固件里。</p>
 </blockquote>
 <p data-sourcepos="231:5-231:99">除了打印面的凹凸，参数的误差还会造成打印面的倾斜，以及不同方向上尺寸不对称（圆不圆、方不方）等问题。因为我主要是打印各种机械零件，所以这些问题对我的影响尤其大。有多大？只要打印一个网格图案：</p>
 <p data-sourcepos="233:5-233:18"><img src="mesh1.jpg" alt="" /></p>
@@ -513,7 +513,7 @@ Save with M500 and/or copy to Configuration.h
 </div>
     <div class="meta_string">
       <p>file: anycubic_kossel.md</p>
-      <p>last modified: 2017-08-08 17:31</p>
+      <p>last modified: 2017-08-11 19:34</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
