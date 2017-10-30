@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title> Compiling TensorFlow</title>
+    <title>广州电信冚家铲</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -133,53 +133,43 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:56">Compiling TensorFlow r1.0+ from source, OS X, RMBP2015</h1>
-<p data-sourcepos="5:1-5:42">To support SSE3, 4.1, 4.2, AVX, AVX2, FMA.</p>
-<blockquote data-sourcepos="7:1-7:135">
-<p data-sourcepos="7:2-7:135">Since 1.0, TF removed support for acceleration instructions from their official build, due to complain from a couple old school users.</p>
-</blockquote>
-<p data-sourcepos="9:1-9:106">Prebuilt Python Wheels are available at <a href="https://github.com/ctmakro/tensorflow_custom_python_wheel_build">https://github.com/ctmakro/tensorflow_custom_python_wheel_build</a>.</p>
-<h2 data-sourcepos="11:1-11:8">Notes</h2>
-<p data-sourcepos="13:1-13:157">Building TF on my machine once took ~30min (building), ~20min (Downloading all the stuff), ~entire night (Googling Google, dealing with all kinds of issues).</p>
-<p data-sourcepos="15:1-15:275">Google did a great job with their Blaze (Bazel) build system -- a system specifically designed to do this one thing (build software), in world record speed. Yet still takes half an hour. Without Blaze it's hard to imagine Google engineers literally doing anything productive.</p>
-<h2 data-sourcepos="17:1-17:17">Detailed Steps</h2>
-<pre><code data-sourcepos="19:1-52:74" class="language-bash"># install JDK first
-
-# then install bazel, the open-source and possibly-censored version of Blaze
-$ brew install bazel
-
-# Assume you have all the python essentials (pip, six, wheel, numpy) installed.
-# I have miniconda3 installed as my main python.
-
-$ git clone https://github.com/tensorflow/tensorflow
-$ cd tensorflow
-$ git checkout r1.0
-$ ./configure
-
-# press enter enter enter enter
-# configure script start to download a lot of things, now go eat something
-
-# (!) per original instruction you are expected to run this command:
-$ bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
-
-# Turned out it didn't detect SSE and AVX on my CPU at all.
-# Following command worked for me (RMBP2015, Core i5):
-$ bazel build -c opt --copt=-mavx --copt=-mavx2 --copt=-msse4.2 --copt=-msse4.1 --copt=-msse3 --copt=-mfma -k //tensorflow/tools/pip_package:build_pip_package
-
-# after the build, generate a wheel:
-$ bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-
-# leave current directory
-# (important, otherwise python import will fail due to name clashing)
-$ cd ~
-
-# then install the wheel as usual
-pip install --upgrade /tmp/tensorflow_pkg/&lt;tensorflow_blahblah_x86_64.whl&gt;
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:17">广州电信冚家铲，生仔唔见屎忽眼</h1>
+<p data-sourcepos="5:1-5:21">(20171024)咩啊？当你系共产党啊？</p>
+<pre><code data-sourcepos="7:1-31:9" class="language-bash">$ traceroute mit.edu
+traceroute to mit.edu (23.77.14.148), 64 hops max, 52 byte packets
+ 1  pandorabox (192.168.1.1)  1.615 ms  1.164 ms  1.089 ms
+ 2  172.18.12.30 (172.18.12.30)  4.872 ms  2.999 ms  2.807 ms
+ 3  192.168.101.129 (192.168.101.129)  7.987 ms  2.717 ms  2.710 ms
+ 4  192.168.100.94 (192.168.100.94)  1.488 ms  1.445 ms  1.398 ms
+ 5  10.0.30.1 (10.0.30.1)  1.448 ms  1.474 ms  3.564 ms
+ 6  125.88.25.1 (125.88.25.1)  2.714 ms  4.616 ms  2.669 ms
+ 7  202.104.68.121 (202.104.68.121)  7.761 ms  2.051 ms  1.880 ms
+ 8  121.33.196.117 (121.33.196.117)  51.640 ms
+    121.33.196.113 (121.33.196.113)  2.096 ms
+    121.33.196.117 (121.33.196.117)  29.860 ms
+ 9  183.56.31.37 (183.56.31.37)  3.517 ms
+    121.8.195.233 (121.8.195.233)  2.351 ms
+    183.56.31.25 (183.56.31.25)  4.135 ms
+10  117.176.37.59.broad.dg.gd.dynamic.163data.com.cn (59.37.176.117)  2.512 ms  2.478 ms  2.307 ms
+11  59.43.70.1 (59.43.70.1)  1.935 ms  1.797 ms  1.946 ms
+12  59.43.18.242 (59.43.18.242)  2.633 ms  2.008 ms  3.560 ms
+13  * * *
+14  * * *
+15  * * *
+16  * * *
+17  * * *
 </code></pre>
+<pre><code data-sourcepos="33:1-39:15" class="language-text">您查询的IP:59.43.18.242
+
+本站数据：广东省广州市 华南地区电信骨干网 电信
+参考数据1：广东广州 电信
+参考数据2：中国电信 骨干网络
+</code></pre>
+<p data-sourcepos="41:1-41:34">(20171031)后来的事情大家都知道了：各省市试行了白名单制度。</p>
 </div>
     <div class="meta_string">
-      <p>file: tf1c.md</p>
-      <p>last modified: 2017-04-05 17:32</p>
+      <p>file: gd10000.md</p>
+      <p>last modified: 2017-10-31 02:30</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
