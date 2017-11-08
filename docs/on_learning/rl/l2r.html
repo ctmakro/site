@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <script>
+      (function() {
+      var method;
+      var methods = [
+          'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+          'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+          'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+          'timeline', 'timelineEnd', 'timeStamp', 'trace', 'warn'
+      ];
+      var length = methods.length;
+      var console = (window.console = window.console || {});
+      while (length--) {
+          method = methods[length];
+          // Only stub undefined methods.
+          if (!console[method]) {
+              console[method] = function () {};
+          }
+      }
+      }());
+      
+      
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./../../basic.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="./../../favicon.ico">
+    <title>Learning to Run</title>
+  </head>
+  <body id="body">
+    <div class="navigation_area">
+      <div class="navnode">
+              <div class="navnode_title">/</div>
+              <div class="navnode"><a href="./../../index.html">Index</a>
+              </div>
+              <div class="navnode"><a href="./../../bio.html">About</a>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/art</div>
+                      <div class="navnode"><a href="./../../art/anycubic_kossel.html"> Anycubic Kossel 心得</a>
+                      </div>
+                      <div class="navnode"><a href="./../../art/ferenova.html"> Make a Ferenova</a>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/lit</div>
+                      <div class="navnode"><a href="./../../lit/why_bad_idea.html">Why Smart People Have Bad Ideas</a>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_learning</div>
+                      <div class="navnode"><a href="./../../on_learning/tf1c.html"> Compiling TensorFlow</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/course_resources.html">Learning Resources</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/fast_gan_in_keras.html"> Fast DCGAN in Keras</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/gan.html">GAN 生成式对抗网络</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/gd.html">Gradient Descent 梯度下降法</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/artist.html">Training of Artists</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/how_to.html">Baby steps for ML</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_learning/resnet_keras.html">Residual Network in Keras</a>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/audio</div>
+                              <div class="navnode"><a href="./../../on_learning/audio/wavenet_arch.html"> Behind WaveNet</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/image</div>
+                              <div class="navnode"><a href="./../../on_learning/image/fast_lsgan.html">Fast LSGAN in Canton</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/image/style_transfer.html">On Style Transfer 风格转移</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/motor_model</div>
+                              <div class="navnode"><a href="./../../on_learning/motor_model/motor.html">Learn models of motors</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/npeg</div>
+                              <div class="navnode"><a href="./../../on_learning/npeg/npeg.html">NPEG图像压缩</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/activations</div>
+                              <div class="navnode"><a href="./../../on_learning/activations/index.html">Activation Functions</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/activations/relu.html">Rectified Linear Unit 整流线性单元</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/rl</div>
+                              <div class="navnode"><a href="./../../on_learning/rl/bipedal.html">BipedalWalker-v2</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/rl/ddpg.html">DDPG Method</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/rl/l2r.html">Learning to Run</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/rl/rl.html">RL is progressing rapidly</a>
+                              </div>
+                              <div class="navnode"><a href="./../../on_learning/rl/vrep.html">V-REP + Gym = RL</a>
+                              </div>
+                      </div>
+                      <div class="navnode">
+                              <div class="navnode_title">/on_learning/gru</div>
+                              <div class="navnode"><a href="./../../on_learning/gru/gru.html">GRU and Convolutional GRU</a>
+                              </div>
+                      </div>
+              </div>
+              <div class="navnode">
+                      <div class="navnode_title">/on_life</div>
+                      <div class="navnode"><a href="./../../on_life/beijing.html">北京收获</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/electrical.html">Power System Analysis</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/fanqiang.html">一起学翻墙</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/gd10000.html">广州电信冚家铲</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/lang.html"> 编程语言的选择</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/nocode.html"> 不写码 No Code</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/numjs.html">NumJs</a>
+                      </div>
+                      <div class="navnode"><a href="./../../on_life/reprod.html"> 确定性</a>
+                      </div>
+              </div>
+      </div>
+    </div>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:33">The Learning to Run Competition</h1>
+<p data-sourcepos="5:1-5:61">The first RL competition with actual prizes as far as I know.</p>
+<p data-sourcepos="7:1-7:72">Homepage: <a href="https://www.crowdai.org/challenges/nips-2017-learning-to-run">https://www.crowdai.org/challenges/nips-2017-learning-to-run</a></p>
+<h2 data-sourcepos="9:1-9:8">Brief</h2>
+<p data-sourcepos="11:1-11:224">You are given a physics simulation environment (namely OpenSim) with a human musculoskeletal model (known as the &quot;skeleton&quot; or &quot;agent&quot; in RL terms), where the muscles can be activated with real numbers ranging between [0,1].</p>
+<p data-sourcepos="13:1-13:579">For each of the 1000 simulation steps of an &quot;episode&quot;, you can observe the state of the skeleton in the form of 41 real numbers describing the location/rotation of body parts and other misc info, then you can make the skeleton move by activating the 18 muscles with 18 real numbers chosen by you, after which you will receive a reward whose value is exactly the delta-distance the skeleton's pelvis has moved in the x(forward)-direction, during this single step. The goal is to obtain as much reward as possible within those 1000 steps, in other words to run as fast as possible.</p>
+<p data-sourcepos="15:1-15:71">There's going to be obstacles on the way to try to slow the agent down.</p>
+<p data-sourcepos="17:1-17:63">You can take a look at the leaderboard for some examples of it.</p>
+<h2 data-sourcepos="19:1-19:13">Submission</h2>
+<p data-sourcepos="21:1-21:84">run your agent against the environment running on a grading server with an HTTP API.</p>
+<h2 data-sourcepos="23:1-23:26">In order to participate</h2>
+<p data-sourcepos="25:1-25:142">Let's assume you already learned the basics of RL from Professor Sutton's book: <a href="http://incompleteideas.net/sutton/book/bookdraft2017june.pdf">http://incompleteideas.net/sutton/book/bookdraft2017june.pdf</a></p>
+<p data-sourcepos="27:1-27:82">There's a lot to take care of in this competition. I will address them one by one.</p>
+<ol data-sourcepos="29:1-30:0">
+<li data-sourcepos="29:1-30:0"><strong>You should not use the observations directly as the input to whatever algorithm you're using.</strong></li>
+</ol>
+<p data-sourcepos="31:3-31:297">The &quot;state&quot; have to be derived from the &quot;observation&quot;, for example the velocity of the body parts can be calculated by differentiating two consecutive obsevations. Without the velocity of the body parts, your &quot;observation&quot; is far from having Markov property, which will degrade your performance.</p>
+<p data-sourcepos="33:3-33:260">Also the position observations are given in absolute coordinates. For a running agent, the absolute position is both irrelevant and harmful(because it's unbounded), and therefore should be converted to relative coorinates with zero at the agent's say pelvis.</p>
+<p data-sourcepos="35:3-35:176">Theoretically your neural network can be trained to do arbitary math, so there's no need to ... but in reality, with finite and non-i.i.d. samples, it's literally impossible.</p>
+<p data-sourcepos="37:3-37:109">Recap: Eliminating the absolute positions from your observation vector is CRITICAL for sucesseful training.</p>
+<p data-sourcepos="39:3-39:130">A good intuition on what a neural network is good for fitting is important for deciding how you should process your observation.</p>
+<ol data-sourcepos="41:1-42:0" start="2">
+<li data-sourcepos="41:1-42:0"><strong>There's no feeling from the feet.</strong></li>
+</ol>
+<p data-sourcepos="43:3-43:300">You will not be able to observe how hard your feet hit the ground, which is VERY CRITICAL for human to run or even walk properly. The organizer refused to add that sensor, making the competition unnecessarily hard. You can still run without feeling from feet, just not that easy, and not that fast.</p>
+<ol data-sourcepos="45:1-46:0" start="3">
+<li data-sourcepos="45:1-46:0"><strong>The presence of obstacles is only represented with a distance value (to the closest obstacle in front of you), where 100.0 means no obstacles ahead.</strong></li>
+</ol>
+<p data-sourcepos="47:3-47:167">Which means you will have to clamp it, from neural network perspective; also, you will not be able to see any obstacles behind that(even if it's close and gigantic).</p>
+<ol data-sourcepos="49:1-50:0" start="4">
+<li data-sourcepos="49:1-50:0"><strong>Yes all instructions/hints above were not provided by the organizer.</strong></li>
+</ol>
+<p data-sourcepos="51:3-51:341">Which means they haven't train the model(at least not to the level of running) themselves before hosting the competition. It's then literally up to the participants to debug all the quirk and weirdness of the environment. I took part in many of those debug activities; sometimes it's a typo, sometimes it's a misconception, sometimes both.</p>
+<ol data-sourcepos="53:1-54:0" start="5">
+<li data-sourcepos="53:1-54:0"><strong>You cannot use evolutional strategies, tabular RL or DQN.</strong></li>
+</ol>
+<p data-sourcepos="55:3-55:273">The &quot;state&quot; an agent can be in is high-dimensional and continuous, thus cannot be represented with a look-up table, which means it's impossible to quantize the states and evaluate the value function Monte-Carlo-y. Similar reason for evolutional strategies (CEM and such).</p>
+<p data-sourcepos="57:3-57:105">Also, DQN or any algorithms that deals with discrete choices per step were also ruled out for the task.</p>
+<p data-sourcepos="59:3-59:69">As of now, most of the likely-to-win entries are trained with DDPG.</p>
+<ol data-sourcepos="61:1-66:0" start="6">
+<li data-sourcepos="61:1-62:0">
+<p data-sourcepos="61:4-61:161"><strong>I wrote the only get-running tutorial for the entire fucking competition</strong> <a href="https://www.crowdai.org/topics/tutorial-getting-the-skeleton-to-walk/discussion">https://www.crowdai.org/topics/tutorial-getting-the-skeleton-to-walk/discussion</a></p>
+</li>
+<li data-sourcepos="63:1-64:0">
+<p data-sourcepos="63:4-63:91"><strong>Then they extended the competition for one fucking month.</strong> This is both good and bad.</p>
+</li>
+<li data-sourcepos="65:1-66:0">
+<p data-sourcepos="65:4-65:50"><strong>The simulation environment is slow as fuck.</strong></p>
+</li>
+</ol>
+<p data-sourcepos="67:3-67:661">The organizer chose OpenSim, which is open-source, and did not check it for performance. The skeleton itself is easy to simulate at about 2-5fps, but once high forces were exerted by the muscles, the foot stomps hard into the ground surface, at which point the RK4 solver can take up to about 3 minutes to solve a single timestep. When the agent is running slow enough, the simulation speed is still bearable; once the agent have learned to run fast, the simulation will slow down by orders of magnitude. Of course the organizer did not expect that at all, being frustrated when they find some of the submissions took longer than hell to run on their servers.</p>
+<p data-sourcepos="69:3-69:119">The OpenAI folks were also amazed by how slow the environment is: <a href="https://github.com/stanfordnmbl/osim-rl/issues/78">https://github.com/stanfordnmbl/osim-rl/issues/78</a></p>
+<ol data-sourcepos="71:1-72:0" start="9">
+<li data-sourcepos="71:1-72:0"><strong>The submission process has a (badly designed) time limit.</strong></li>
+</ol>
+<p data-sourcepos="73:3-73:615">Which means if your submission have been going on for longer than a certain period of time, the server will stop the submission and throw you an error. At first it's 10 minutes; then after some blaming they changed it to 20 minutes; finally after more repetitive blaming they changed it to 90 minutes. The time limit has been super-fucking annoying for most of the participants for about a month, since the time it takes to submit is determined by the simulation environment ran on the server, and it often takes longer than 90 minutes for 3 episodes when the skeleton was running at a speed of &gt;30meters/episode.</p>
+<p data-sourcepos="75:3-75:217">Interestingly(sadly also), it took a long time for the organizer to realize that all those annoying ServerErrors reported by the participants were actually caused by the simulation environment simply being too slow.</p>
+<ol data-sourcepos="77:1-78:0" start="10">
+<li data-sourcepos="77:1-78:0"><strong>Your efforts might be wasted...</strong></li>
+</ol>
+<p data-sourcepos="79:3-79:870">What made the situation even worse: the speed of simulation increases significantly if the number of obstacles goes up (obviously this is an implementation problem). The organizer knew all these problems but only admitted when asked by participants. To alleviate the problem, they decided to use 3 obstacles for leaderboard submission, but 10 obstacles for final round evaluation. They simply assume that the 10-obstacle environment is a subset of the 3-obstacle environment, which is correct observation-wise, and completely wrong state-wise. During the 10-obstacle environment, the skeleton will run much faster when meeting the obstacles appeared later in its way, a case won't happen in the 3-obstacle environment. Thus eventually, every participant have to retrain their model for the 10-obstacle environment, if they want better performance for final evaluation.</p>
+<p data-sourcepos="81:3-81:400">It takes on average about 15 seconds/step on a modern CPU core to run the simulation, when the average speed of running of the skeleton is 40meter/episode. For all those deep reinforcement learning algorithms we knew to this date, DQN for example, require 1M steps to train for each of the games, which means 15M seconds for L2R. ~170days/run is not an acceptable schedule for a learning algorithm.</p>
+<ol data-sourcepos="83:1-84:0" start="11">
+<li data-sourcepos="83:1-84:0"><strong>Paramilitary is fucking expensive</strong></li>
+</ol>
+<p data-sourcepos="85:3-85:92">So I (and eventually almost every participant) came up with a solution: Parallelized DDPG.</p>
+<p data-sourcepos="87:3-87:417">DDPG is an off-policy algorithm, allowing it to learn from experiences regardless of where those experiences came from. So we can play a lot of episodes simutaneously and collect experience at a much faster rate. So I wrote some farming code to allow anyone to host a bunch of L2R environments across their network, and play them as if they're local. <a href="https://github.com/ctmakro/stanford-osrl/#parallelism--farming">https://github.com/ctmakro/stanford-osrl/#parallelism--farming</a></p>
+<p data-sourcepos="89:3-89:500">Many participants benefited from the code. Later in August, Amazon AWS sponsored $1100 worth of credits for each of the participants. At some point I spread my 10-obstacle environments across a maximum of 20 c4.4xlarge(16 cores each) instances, only to be able to reduce the time needed for each &quot;run&quot; down to about half a day. And at this rate of spending, even with spot instances of $0.5/h per machine, my account blew up after not more than a few dozen runs. I'm now about $1000 in debt to AWS.</p>
+<ol data-sourcepos="91:1-92:0" start="12">
+<li data-sourcepos="91:1-92:0"><strong>More Cores or Lose</strong></li>
+</ol>
+<p data-sourcepos="93:3-94:471">For anyone familiar with Deep RL or just Deep Learning, It usually takes more than a dozen runs to optimize the hyperparameters of any model/algorithm.
+Since I'm already in debt to AWS at this point, without the help of the 320-core rig, It's almost impossible to perform any trial-and-error within the less-than-half-month period after the organizer announced the existence of the 10-obstacle environment. Right now the only ones with chances to win are those with company/academic computing power (true story). And there's no point to spend my OWN money on a competition just to win by outnumbering in processing power.</p>
+<ol data-sourcepos="96:1-97:0" start="13">
+<li data-sourcepos="96:1-97:0"><strong>Docker? Now?</strong></li>
+</ol>
+<p data-sourcepos="98:3-98:363">Now they decide to let every participant use docker to submit their model to avoid potential overfit of data on final round submission. The 4GB docker image with an I-wrote-myself Redis-as-RPC framework embedded in it was handed to the participants, and the participants are expected to help test the whole thing including debug, one week before final deadline.</p>
+<h2 data-sourcepos="100:1-100:24">Ditch the competition</h2>
+<p data-sourcepos="102:1-102:93">Enough of all this. My time is more valuable than both the DGX workstation and the NIPS trip.</p>
+<p data-sourcepos="104:1-104:110">Today(20171108) I decided to ditch the competition. Prediction: The top-3 winners are all going to be Chinese.</p>
+</div>
+    <div class="meta_string">
+      <p>file: l2r.md</p>
+      <p>last modified: 2017-11-08 19:57</p>
+    </div>
+    <script>
+      //if(window.HighlightEverything){window.HighlightEverything()}
+      
+    </script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+      
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  </body>
+</html>

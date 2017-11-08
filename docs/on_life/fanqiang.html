@@ -28,7 +28,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./../basic.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="./../favicon.ico">
-    <title>Baby steps for ML</title>
+    <title>一起学翻墙</title>
   </head>
   <body id="body">
     <div class="navigation_area">
@@ -137,62 +137,49 @@
               </div>
       </div>
     </div>
-    <div class="markdown_content"><h1 data-sourcepos="3:1-3:19">Baby steps for ML</h1>
-<p data-sourcepos="5:1-5:38">怎样学习机器学习？吴恩达曾经给出过他的答案：不断复现他人paper中的成果。</p>
-<p data-sourcepos="7:1-7:30">以下是我自接触机器学习(尤其是深度学习)以来的一些经验总结。</p>
-<h2 data-sourcepos="9:1-9:28">1. Know what you're doing</h2>
-<ul data-sourcepos="11:1-20:0">
-<li data-sourcepos="11:1-11:61">
-<p data-sourcepos="11:3-11:61">ML = optimize parameters of some function to minimize error</p>
-</li>
-<li data-sourcepos="12:1-12:68">
-<p data-sourcepos="12:3-12:68">DL = optimize parameters of some <em>deep</em> function to minimize error</p>
-</li>
-<li data-sourcepos="13:1-16:0">
-<p data-sourcepos="13:3-13:62">RL = optimize parameters of some function to maximize reward</p>
-</li>
-<li data-sourcepos="17:1-17:99">
-<p data-sourcepos="17:3-17:99">ML Research = optimize parameters of one's brain to fit experiment results and minimize confusion</p>
-</li>
-<li data-sourcepos="18:1-18:86">
-<p data-sourcepos="18:3-18:86">DL Research = optimize ML algorithms and (occasionally) find out how the brain works</p>
-</li>
-<li data-sourcepos="19:1-20:0">
-<p data-sourcepos="19:3-19:80">RL Research = solve real-world problems by converting them into simulated ones</p>
-</li>
-</ul>
-<h2 data-sourcepos="21:1-21:34">2. Repeat what others have done</h2>
-<p data-sourcepos="23:1-23:7">必须虚心学习。</p>
-<p data-sourcepos="25:1-25:149">ML is not about imagination. Your imagination suck when compared to what others had done. They suck when compared to what natural selection had done.</p>
-<h2 data-sourcepos="27:1-27:20">3. Data Synthesis</h2>
-<p data-sourcepos="29:1-29:129">机器学习最适合解决那些【数据很便宜，逻辑很复杂】的问题，比如机器学习在图像识别上的大规模应用，就是基于我们获取图像的成本，远远低于我们编写图像识别逻辑的成本。因此低成本地获取数据对机器学习是非常重要的，比如现在有很多研究者通过CG方法合成图像来训练视觉应用。</p>
-<p data-sourcepos="31:1-31:130">可能有人说计算机生成的数据集，与真实世界收集的数据相比，必然会有比较大的bias。实际上这完全取决于研究者对具体领域的了解。以视觉为例，如今的主流游戏引擎可以轻而易举地渲染照片级的画面，而DeepMind最近开源的DeepMindLab也不过就是一个游戏引擎。</p>
-<p data-sourcepos="33:1-33:29"><em>Update: OpenAI刚刚开源了Universe</em></p>
-<p data-sourcepos="35:1-35:185">对于各类RL应用，数据合成则更是不可或缺的：由于时间、能耗和安全性的限制，我们不可能真的让一条 random-initialized 的机械臂帮我们实现运动控制的 training loop。我们仍将大量地依赖软件仿真（比如<a href="https://drive.google.com/file/d/0B4nMjK_Q9AcRODlmZGd4QUVXVG8/view">这样</a>）。</p>
-<blockquote data-sourcepos="37:1-37:95">
-<p data-sourcepos="37:3-37:95">If you want to solve Computer Vision, you have to solve Computer Graphics. -- Geoffrey Hinton</p>
-</blockquote>
-<h2 data-sourcepos="39:1-39:24">4. 最小化 Mnistification</h2>
-<p data-sourcepos="41:1-41:46">在尝试一个新的方法/架构之前，总是先将其最小化。这其实是各种paper中最常用的trick。</p>
-<blockquote data-sourcepos="43:1-43:35">
-<p data-sourcepos="43:3-43:35">ImageNet wasn't built in one day.</p>
-</blockquote>
-<p data-sourcepos="45:1-45:60">最小化的数据集，最小化的网络架构……可以帮助我们更快地评估一个方法的 performance 和 robustness.</p>
-<h2 data-sourcepos="47:1-47:31">5. 善于品味 Acquire a good taste</h2>
-<img class="plot" src="how_to_plot_0.svg" title="plot 0" />
-<h2 data-sourcepos="51:1-51:27">6. Signs of danger (IMO)</h2>
-<ul data-sourcepos="53:1-58:28">
-<li data-sourcepos="53:1-53:30">Heavily relied on frameworks</li>
-<li data-sourcepos="54:1-54:47">Addicted to reading &amp; posting things on Zhihu</li>
-<li data-sourcepos="55:1-55:54">Repeatedly looking for data and challenges on Kaggle</li>
-<li data-sourcepos="56:1-56:46">Playing with hyper-parameters for over a day</li>
-<li data-sourcepos="57:1-57:34">Highlighting error% in bold font</li>
-<li data-sourcepos="58:1-58:28">Imagining pure ML startups</li>
-</ul>
+    <div class="markdown_content"><h1 data-sourcepos="3:1-3:7">一起学翻墙</h1>
+<p data-sourcepos="5:1-5:95">我是学理科的，在那些连导数都不懂的文科生面前，就显得特别的高深。然而从历史的角度来看，理科生不过是近几百年来，尤其是牛顿爵士之后才兴起的一种学生。在这之前，世界似乎完完全全掌握在文科生手里。</p>
+<p data-sourcepos="7:1-7:60">不过要我说，在中国历史上，文科生们不过是统治思想的提供者和践行者，他们权力的最终来源，其实还是那些擅长砍杀的武装贵族们。</p>
+<p data-sourcepos="9:1-9:96">问题在于，我们今天面对的这个墙呢，既不是文科生建的，也不是武装贵族们建的，而是由理科生们建的。终于，理科生们也尝到了成为统治工具的强烈优越感。所谓翻墙，就是一帮理科生跟另一帮理科生战斗的过程。</p>
+<p data-sourcepos="11:1-11:43">面对墙，文科生们失去了生气。失去了发声的渠道，一纸文采又有何用？公知无口，不如要饭的。</p>
+<p data-sourcepos="13:1-13:40">面对墙，武装贵族们争抢着加固。若无这高耸入云的碉堡，岂不让老百姓把家丑都看遍了？</p>
+<p data-sourcepos="15:1-15:82">在这场以墙为中心的政治斗争中，理科生成为了决定双方命运的裁判兼运动员。那个叫什么计算机科学的玩意儿，武装贵族不屑学，文科生们学不会，最后还是把焦点挪到了理科生身上。</p>
+<h2 data-sourcepos="17:1-17:6">数据包</h2>
+<p data-sourcepos="19:1-19:15">英语所谓packet者，包也。</p>
+<p data-sourcepos="21:1-21:48">以访问油管(youtube)为例，你的电脑要向油管发起一个http请求，告诉油管你需要它的主页。</p>
+<p data-sourcepos="23:1-23:189">所谓http请求，就是将一段具有规定格式（即http格式）的、里面记载了你希望油管返回给你的具体页面等一系列相关的信息的文字，发送给目标服务器（即此例中的油管的服务器）。油管收到这些文字后，按照http协议规范进行读取，就可以取得这些信息，并根据你的要求，把相应的网页（比如此例中的主页）以http响应（同样具有规定格式）的形式传送给你。这一来一回的过程，就是一次http通信。</p>
+<p data-sourcepos="25:1-25:71">http通信在逻辑上（概念上、形式上）是一来一回，它底下却是把需要发送和接收的文字，切分成一个一个的字节，再通过TCP协议传送给目标服务器的。</p>
+<p data-sourcepos="27:1-27:64">TCP协议在逻辑上是接收和发送字节，它底下却是把需要发送/接收的字节，打包成一个一个的数据包，再通过IP协议传送给目标服务器的。</p>
+<p data-sourcepos="29:1-29:10">IP协议在逻辑上……</p>
+<p data-sourcepos="31:1-31:146">如果再往下说下去，难免涉及具体的操作系统、网卡驱动、网卡硬件是怎么处理IP和MAC协议、怎么通过在铜导线中传送高低电平来表示0和1……甚至连麦克斯韦方程都要出来跳一段。总之，像上网这种明明很简单的事情，被理科生搞得很复杂，普通人只有懵逼的份。这也是为什么网络工程在大学里要设成一个独立的专业。</p>
+<p data-sourcepos="33:1-33:26">别急，急也没用；你大学计算机基础多少分啊？在这儿急？</p>
+<p data-sourcepos="35:1-35:90">从你的电脑到油管的服务器，中间要经历几十台不同的设备，几千公里的网线（其中大部分是光纤）。这些设备在正常情况下，会把由你送去的数据包，按照包里所写的要求，向它们认为正确的方向转发。</p>
+<p data-sourcepos="37:1-37:14">看，这是你发出的IP数据包：</p>
+<pre><code data-sourcepos="39:1-42:22" class="language-text">请把我送去：77.153.128.46（油管服务器）
+内容：请把你们（即油管）的主页返回给我，谢谢
+</code></pre>
+<p data-sourcepos="44:1-44:20">正常的设备看到这个数据包，是这么反应的：</p>
+<pre><code data-sourcepos="45:1-47:58" class="language-text">你要去77.153.128.46是吧？好，我看看走哪条路线到77.153.128.46最快，帮你把包送（转发）过去。
+</code></pre>
+<p data-sourcepos="48:1-48:96">于是下一个设备就会收到你的数据包，并作出类似的反应。经过几十台这样的设备，你的数据包最终抵达了油管；而来自油管的数据包又会走一条类似的路径，辗转抵达你的电脑。于是你就可以欣赏郭先生的脱口秀啦！</p>
+<p data-sourcepos="50:1-50:19">当然，这一切都是北京奥运之前的事情了。</p>
+<h2 data-sourcepos="52:1-52:7">路由设备</h2>
+<p data-sourcepos="54:1-54:68">帮你转发数据包的设备，一般统称路由器，它们的工作就是像上面说的那样，按照数据包里所指定的目标地址，把数据包从它认为最合适的路线转发出去。</p>
+<p data-sourcepos="56:1-56:83">不过，上文说的是正常的设备，这种设备在正常的国家见得比较多。而中国是一个不太正常的国家，所以自然也就会有一些不太正常的路由设备，它们看到你的数据包之后，是这么反应的：</p>
+<pre><code data-sourcepos="58:1-60:52" class="language-text">你要去77.153.128.46是吧？等等，这好像是油管的IP地址，你这完全不符合社会主义核心价值观呀。
+</code></pre>
+<p data-sourcepos="61:1-61:51">然后转手就把你的包丢进了垃圾桶，造成这次http请求石沉大海，也就是常见的timeout（超时）错误。</p>
+<p data-sourcepos="63:1-63:58">如果这个路由设备参加过政府组织的网评员培训，那么它除了把你送来的包扔掉，还可能会伪装成油管，把一个新的包给你送回去：</p>
+<pre><code data-sourcepos="65:1-68:26" class="language-text">请把我送去：（你的IP地址）
+内容：不好意思，今天油管遇到了技术故障，必须终止服务
+</code></pre>
+<p data-sourcepos="70:1-70:36">于是你的电脑信以为真，也就是常见的conn_reset（连接重置）错误。</p>
+<p data-sourcepos="72:1-72:30">在出国的路线上布置这些不太正常的路由设备，就组成了所谓的墙。</p>
+<h2 data-sourcepos="74:1-74:2"></h2>
 </div>
     <div class="meta_string">
-      <p>file: how_to.md</p>
-      <p>last modified: 2017-03-05 06:55</p>
+      <p>file: fanqiang.md</p>
+      <p>last modified: 2017-10-31 04:13</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}
