@@ -52,6 +52,8 @@ A while ago I wrote a program which paints realistic oil brush strokes. Using me
 
 ![](200_0009.jpg)
 
+Update 20171201: The code/script to place strokes on canvas wherever the MSE is large, and adjust parameters of the stroke via local gradient descent, to produce an oil-brush styled painting, is available at <https://github.com/ctmakro/opencv_playground>.
+
 So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.
 
 Since VGG16 is trained for image classification, it sure knows what features in images are important for human activities.
