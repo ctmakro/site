@@ -7,6 +7,7 @@ var colors = require('colors')
 var print = console.log
 var range = (n)=>{var a =[];for(var i=0;i<n;i++){a.push(i)}return a}
 var pr = __projectroot
+print(pr)
 
 function jade(data){
   var html = jr(templdir,data)
@@ -192,19 +193,22 @@ var preproc_mdtree = treewalker(filetree,leaf=>leaf.ext=='md'?preprocess_markdow
 
 var mdtree = treewalker(preproc_mdtree,process_markdown)
 
-var copytree = treewalker(filetree,leaf=>{
-  if('mp4.svg.py.html.htm.js.css.png.jpg.gif.stl.zip'.split('.').indexOf(leaf.ext)>=0){
-    print('justCopy:'.green,leaf.fname.red)
-    var fr = contentdir+leaf.pathpad+leaf.fname
-    var to = destdir+leaf.pathpad+leaf.fname
-    fs.copy(fr,to,{
-      replace: true
-    }, err=>err?console.error(err):null)
+//before final copy, wait a few secs to allow graphviz do its job...
+setTimeout(function(){
+  var copytree = treewalker(filetree,leaf=>{
+    if('mp4.svg.py.html.htm.js.css.png.jpg.gif.stl.zip'.split('.').indexOf(leaf.ext)>=0){
+      print('justCopy:'.green,leaf.fname.red)
+      var fr = contentdir+leaf.pathpad+leaf.fname
+      var to = destdir+leaf.pathpad+leaf.fname
+      fs.copy(fr,to,{
+        replace: true
+      }, err=>err?console.error(err):null)
 
-    return leaf
-  }
-})
+      return leaf
+    }
+  })
 
-print('copytree:'.red, ui(copytree))
+  print('copytree:'.red, ui(copytree))
 
-print('done'.cyan)
+  print('done'.cyan)
+},5000)

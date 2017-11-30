@@ -195,27 +195,28 @@
 <li data-sourcepos="51:1-52:0">But the perceptive difference is decreasing too slowly. The painting looked flat and boring.</li>
 </ul>
 <p data-sourcepos="53:1-53:17"><img src="200_0009.jpg" alt="" /></p>
-<p data-sourcepos="55:1-55:167">So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.</p>
-<p data-sourcepos="57:1-57:122">Since VGG16 is trained for image classification, it sure knows what features in images are important for human activities.</p>
-<p data-sourcepos="59:1-59:18">Here's what I got:</p>
-<p data-sourcepos="61:1-61:40"><img src="../flower_neural_loss_embossed_.jpg" alt="" /></p>
-<p data-sourcepos="63:1-63:5">Cool.</p>
-<ul data-sourcepos="65:1-70:0">
-<li data-sourcepos="65:1-66:0">
-<p data-sourcepos="65:3-65:246">But now the algorithm slows down. Neural networks are 1000x slower than mean-square; the gradients calculated by numerical differentiation (since the stroke process is not differentiable) on 8 parameters evaluate the neural network for 9 times.</p>
-</li>
+<p data-sourcepos="55:1-55:255">Update 20171201: The code/script to place strokes on canvas wherever the MSE is large, and adjust parameters of the stroke via local gradient descent, to produce an oil-brush styled painting, is available at <a href="https://github.com/ctmakro/opencv_playground">https://github.com/ctmakro/opencv_playground</a>.</p>
+<p data-sourcepos="57:1-57:167">So I ran an instance of VGG16 to calculate the perceptive difference of two images from one of the intermediate layers' activations, instead of mean-square difference.</p>
+<p data-sourcepos="59:1-59:122">Since VGG16 is trained for image classification, it sure knows what features in images are important for human activities.</p>
+<p data-sourcepos="61:1-61:18">Here's what I got:</p>
+<p data-sourcepos="63:1-63:40"><img src="../flower_neural_loss_embossed_.jpg" alt="" /></p>
+<p data-sourcepos="65:1-65:5">Cool.</p>
+<ul data-sourcepos="67:1-72:0">
 <li data-sourcepos="67:1-68:0">
-<p data-sourcepos="67:3-67:94">Good news: perceptive difference can be estimated with a neural network trained on ImageNet.</p>
+<p data-sourcepos="67:3-67:246">But now the algorithm slows down. Neural networks are 1000x slower than mean-square; the gradients calculated by numerical differentiation (since the stroke process is not differentiable) on 8 parameters evaluate the neural network for 9 times.</p>
 </li>
 <li data-sourcepos="69:1-70:0">
-<p data-sourcepos="69:3-69:111">Bad news: although gradient descent is 1e7 times more efficient than Monte-Carlo, still not efficient enough.</p>
+<p data-sourcepos="69:3-69:94">Good news: perceptive difference can be estimated with a neural network trained on ImageNet.</p>
+</li>
+<li data-sourcepos="71:1-72:0">
+<p data-sourcepos="71:3-71:111">Bad news: although gradient descent is 1e7 times more efficient than Monte-Carlo, still not efficient enough.</p>
 </li>
 </ul>
-<p data-sourcepos="71:1-71:280">Upcoming: I'm going to train a network that predicts optimal parameters for K very accurately based on current C and S. If this succeeds we may achieve a speed gain of about 50x. With RL techniques the network may even learn how to plan the strokes ahead to form special patterns.</p>
+<p data-sourcepos="73:1-73:280">Upcoming: I'm going to train a network that predicts optimal parameters for K very accurately based on current C and S. If this succeeds we may achieve a speed gain of about 50x. With RL techniques the network may even learn how to plan the strokes ahead to form special patterns.</p>
 </div>
     <div class="meta_string">
       <p>file: artist.md</p>
-      <p>last modified: 2017-02-08 03:37</p>
+      <p>last modified: 2017-12-01 06:13</p>
     </div>
     <script>
       //if(window.HighlightEverything){window.HighlightEverything()}

@@ -38,6 +38,14 @@ function dot(command,fpath){
   gv.stdout.on('data',data=>{
     out+=data
   })
+  gv.stdout.on('end',()=>{
+    // if we dont register a callback here, the process will die early
+    console.log('graphviz dot ended')
+  })
+  gv.stderr.on('end',()=>{
+    // if we dont register a callback here, the process will die early
+    console.log('graphviz dot ended')
+  })
   gv.stderr.on('data',data=>{
     err+=data
   })
