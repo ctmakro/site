@@ -209,6 +209,8 @@ setTimeout(function(){
   })
 
   print('copytree:'.red, ui(copytree))
-
-  print('done'.cyan)
+  setTimeout(function(){
+    // wait some more
+    print('done'.cyan)
+  },5000)
 },5000)
